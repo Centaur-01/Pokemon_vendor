@@ -3,61 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Verification</title>
+    <title>Couples Collective | Price Check</title>
     <style>
-        :root { --bg: #1a1a1a; --card: #2d2d2d; --text: #ffffff; --accent: #2e7d32; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { background: var(--card); width: 100%; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        
-        /* THE PICTURE PLACEHOLDER */
-        .img-placeholder { width: 100%; aspect-ratio: 2.5/3.5; background: #3d3d3d; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-bottom: 1px solid #444; }
-        
-        .content { padding: 24px; }
-        .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; font-weight: 700; margin-bottom: 4px; }
-        .title { font-size: 22px; margin: 0 0 15px 0; line-height: 1.2; font-weight: 800; }
-        
-        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .spec-item { background: #3d3d3d; padding: 12px; border-radius: 8px; }
-        .spec-val { font-weight: 600; font-size: 14px; }
-        
-        .price-section { background: var(--accent); padding: 20px; border-radius: 12px; text-align: center; }
-        .asking-price { font-size: 42px; font-weight: 900; display: block; margin: 5px 0; }
+        :root { --bg: #121212; --card: #1e1e1e; --accent: #2ecc71; --text: #ffffff; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
+        .container { background: var(--card); width: 100%; max-width: 400px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid #333; }
+        .img-slot { width: 100%; aspect-ratio: 2.5/3.5; background: #252525; display: flex; align-items: center; justify-content: center; color: #444; font-size: 12px; letter-spacing: 2px; }
+        .content { padding: 25px; }
+        .label { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1.5px; margin-bottom: 4px; font-weight: 700; }
+        .title { font-size: 24px; margin: 0 0 15px 0; font-weight: 800; line-height: 1.1; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .box { background: #2a2a2a; padding: 12px; border-radius: 12px; border: 1px solid #333; }
+        .val { font-weight: 600; font-size: 14px; margin-top: 2px; }
+        .price-box { background: var(--accent); padding: 25px; border-radius: 16px; text-align: center; color: #000; }
+        .price-val { font-size: 48px; font-weight: 900; display: block; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="img-placeholder">IMAGE PENDING</div>
-
+        <div class="img-slot">NO IMAGE DATA</div>
         <div class="content">
             <div class="label">Product Name</div>
-            <h1 id="ui-name" class="title">Loading...</h1>
-
-            <div class="spec-grid">
-                <div class="spec-item">
-                    <div class="label">Number | Set</div>
-                    <div id="ui-number" class="spec-val">--</div>
-                </div>
-                <div class="spec-item">
-                    <div class="label">Grade | Condition</div>
-                    <div id="ui-condition" class="spec-val">--</div>
-                </div>
+            <h1 id="ui-name" class="title">Syncing...</h1>
+            <div class="grid">
+                <div class="box"><div class="label">Number | Set</div><div id="ui-set" class="val">--</div></div>
+                <div class="box"><div class="label">Grade | Condition</div><div id="ui-grade" class="val">--</div></div>
             </div>
-
-            <div class="price-section">
-                <div class="label" style="color: #e8f5e9;">Asking Price</div>
-                <span id="ui-price" class="asking-price">--</span>
-            </div>
-            
-            <div style="margin-top:20px; font-size: 12px; color: #888; text-align: center;">
-                Internal ID: <span id="ui-id">--</span>
+            <div class="price-box">
+                <div class="label" style="color: #064d26;">Current Price</div>
+                <span id="ui-price" class="price-val">--</span>
             </div>
         </div>
     </div>
-
     <script>
         const params = new URLSearchParams(window.location.search);
         const cardId = params.get('id');
-
         fetch('card_data.json')
             .then(res => res.json())
             .then(data => {
+                // Critical Fix: Decode the URL ID (turns %2F back to /)
+                const searchId = decodeURIComponent(cardId).trim();
+                const card = data.find(c => String(c['Unique Code']).trim() === searchId);
+                if (card) {
+                    document.getElementById('ui-name').innerText = card['Product Name'];
+                    document.getElementById('ui-set').innerText = `#${card['Card Number']} | ${card['Set']}`;
+                    document.getElementById('ui-grade').innerText = `${card['Grade']} | ${card['Card Condition']}`;
+                    const price = (card['My Sales Price'] && card['My Sales Price'] !== "TBD") ? card['My Sales Price'] : card['Suggested Selling Price (Fair Market)'];
+                    document.getElementById('ui-price').innerText = price;
+                } else {
+                    document.getElementById('ui-name').innerText = "Card Not Found";
+                }
+            });
+    </script>
+</body>
+</html>
