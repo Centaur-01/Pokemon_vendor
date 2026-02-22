@@ -1,31 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor MVP</title>
+    <title>Price Verification</title>
     <style>
-        body { font-family: -apple-system, sans-serif; padding: 20px; background: #fff; line-height: 1.5; }
-        .box { border: 1px solid #ddd; padding: 20px; border-radius: 12px; }
-        .price-label { font-size: 12px; font-weight: bold; color: #666; text-transform: uppercase; }
-        .price-big { font-size: 36px; font-weight: 800; color: #2e7d32; display: block; margin: 5px 0; }
-        .market-price { color: #0288d1; font-weight: bold; }
-        .error { color: red; font-size: 12px; margin-top: 10px; }
+        :root { --bg: #1a1a1a; --card: #2d2d2d; --text: #ffffff; --accent: #2e7d32; }
+        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { background: var(--card); width: 100%; max-width: 400px; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        
+        /* THE PICTURE PLACEHOLDER */
+        .img-placeholder { width: 100%; aspect-ratio: 2.5/3.5; background: #3d3d3d; display: flex; align-items: center; justify-content: center; color: #666; font-weight: bold; border-bottom: 1px solid #444; }
+        
+        .content { padding: 24px; }
+        .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #aaa; font-weight: 700; margin-bottom: 4px; }
+        .title { font-size: 22px; margin: 0 0 15px 0; line-height: 1.2; font-weight: 800; }
+        
+        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+        .spec-item { background: #3d3d3d; padding: 12px; border-radius: 8px; }
+        .spec-val { font-weight: 600; font-size: 14px; }
+        
+        .price-section { background: var(--accent); padding: 20px; border-radius: 12px; text-align: center; }
+        .asking-price { font-size: 42px; font-weight: 900; display: block; margin: 5px 0; }
     </style>
 </head>
 <body>
-    <div id="main-content">
-        <div class="box">
-            <h1 id="card-name" style="margin:0 0 10px 0;">Loading...</h1>
-            <div id="card-details" style="color:#666; margin-bottom:15px;">--</div>
-            
-            <div style="margin-bottom:20px;">
-                <span class="price-label">Asking Price</span>
-                <span id="andy-price" class="price-big">--</span>
+    <div class="container">
+        <div class="img-placeholder">IMAGE PENDING</div>
+
+        <div class="content">
+            <div class="label">Product Name</div>
+            <h1 id="ui-name" class="title">Loading...</h1>
+
+            <div class="spec-grid">
+                <div class="spec-item">
+                    <div class="label">Number | Set</div>
+                    <div id="ui-number" class="spec-val">--</div>
+                </div>
+                <div class="spec-item">
+                    <div class="label">Grade | Condition</div>
+                    <div id="ui-condition" class="spec-val">--</div>
+                </div>
             </div>
 
-            <div style="background:#f1f9ff; padding:15px; border-radius:8px;">
-                <span class="price-label">Live Market (TCGPlayer)</span><br>
-                <span id="market-price" class="market-price">Searching...</span>
+            <div class="price-section">
+                <div class="label" style="color: #e8f5e9;">Asking Price</div>
+                <span id="ui-price" class="asking-price">--</span>
+            </div>
+            
+            <div style="margin-top:20px; font-size: 12px; color: #888; text-align: center;">
+                Internal ID: <span id="ui-id">--</span>
             </div>
         </div>
     </div>
@@ -34,47 +58,6 @@
         const params = new URLSearchParams(window.location.search);
         const cardId = params.get('id');
 
-        // Step 1: Load Spreadsheet Data
         fetch('card_data.json')
-            .then(r => r.json())
+            .then(res => res.json())
             .then(data => {
-                const card = data.find(c => String(c['Unique Code']).trim() === String(cardId).trim());
-                
-                if (!card) {
-                    document.getElementById('card-name').innerText = "Card Not Found";
-                    return;
-                }
-
-                // Show Spreadsheet Data Immediately
-                document.getElementById('card-name').innerText = card['Product Name'];
-                document.getElementById('card-details').innerText = `${card['Card Number']} | ${card['Grade']} | ${card['Card Condition']}`;
-                document.getElementById('andy-price').innerText = `$${parseFloat(card['Suggested Selling Price (Fair Market)']).toFixed(2)}`;
-
-                // Step 2: Sequential API Call (wrapped in try/catch to prevent white screen)
-                try {
-                    // We only use the Name for the API search to keep it "Simple & Safe"
-                    const searchName = card['Product Name'].split('(')[0].trim(); 
-                    const apiUrl = `https://api.pokemontcg.io/v2/cards?q=name:"${searchName}"`;
-
-                    fetch(apiUrl)
-                        .then(apiRes => apiRes.json())
-                        .then(apiData => {
-                            if (apiData.data && apiData.data[0]) {
-                                const tcg = apiData.data[0].tcgplayer?.prices;
-                                const livePrice = (tcg?.holofoil || tcg?.reverseHolofoil || tcg?.normal || {}).market;
-                                document.getElementById('market-price').innerText = livePrice ? `$${livePrice.toFixed(2)}` : "Price Not Available";
-                            } else {
-                                document.getElementById('market-price').innerText = "Market Data Missing";
-                            }
-                        })
-                        .catch(e => { document.getElementById('market-price').innerText = "API Error"; });
-                } catch (e) {
-                    console.error("API Search failed", e);
-                }
-            })
-            .catch(e => {
-                document.body.innerHTML = `<div class="error">CRITICAL ERROR: Failed to load card_data.json. Check filename and path.</div>`;
-            });
-    </script>
-</body>
-</html>
