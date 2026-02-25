@@ -3,57 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couples Collective | Price Check</title>
+    <title>DEV | Safe Mode</title>
     <style>
-        :root { --bg: #121212; --card: #1e1e1e; --accent: #2ecc71; --text: #ffffff; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-        .container { background: var(--card); width: 100%; max-width: 400px; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.6); border: 1px solid #333; }
-        .img-slot { width: 100%; aspect-ratio: 2.5/3.5; background: #252525; display: flex; align-items: center; justify-content: center; color: #444; font-size: 12px; letter-spacing: 2px; }
-        .content { padding: 25px; }
-        .label { font-size: 10px; text-transform: uppercase; color: #888; letter-spacing: 1.5px; margin-bottom: 4px; font-weight: 700; }
-        .title { font-size: 24px; margin: 0 0 15px 0; font-weight: 800; line-height: 1.1; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-        .box { background: #2a2a2a; padding: 12px; border-radius: 12px; border: 1px solid #333; }
-        .val { font-weight: 600; font-size: 14px; margin-top: 2px; }
-        .price-box { background: var(--accent); padding: 25px; border-radius: 16px; text-align: center; color: #000; }
-        .price-val { font-size: 48px; font-weight: 900; display: block; }
+        body { background: #000; color: #fff; font-family: monospace; padding: 20px; text-align: center; }
+        #console { text-align: left; background: #111; border: 1px solid #333; padding: 10px; height: 300px; overflow-y: scroll; margin-top: 20px; color: #aaa; font-size: 11px; }
+        .log-err { color: #ff4757; font-weight: bold; }
+        .log-ok { color: #2ecc71; }
+        img { max-width: 100%; margin-top: 20px; border: 1px solid #333; display: none; }
+        button { background: #ff4757; color: white; padding: 15px; border: none; width: 100%; font-size: 16px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="img-slot">NO IMAGE DATA</div>
-        <div class="content">
-            <div class="label">Product Name</div>
-            <h1 id="ui-name" class="title">Syncing...</h1>
-            <div class="grid">
-                <div class="box"><div class="label">Number | Set</div><div id="ui-set" class="val">--</div></div>
-                <div class="box"><div class="label">Grade | Condition</div><div id="ui-grade" class="val">--</div></div>
-            </div>
-            <div class="price-box">
-                <div class="label" style="color: #064d26;">Current Price</div>
-                <span id="ui-price" class="price-val">--</span>
-            </div>
-        </div>
-    </div>
+
+    <h1>SAFE MODE DIAGNOSTIC</h1>
+    <h2 id="status">INITIALIZING...</h2>
+    <div id="card-info" style="color: #2ecc71; font-size: 18px; margin: 10px 0;"></div>
+    <img id="card-img" src="" />
+    
+    <button onclick="copyLogs()">COPY LOGS</button>
+    <div id="console">Waiting for logs...</div>
+
     <script>
+        // GLOBAL ERROR CATCHER (Must be first)
+        window.onerror = function(msg, url, line) {
+            const errBox = document.getElementById('console');
+            errBox.innerHTML += `<div class="log-err">⛔ CRITICAL ERROR: ${msg} (Line ${line})</div>`;
+            document.getElementById('status').innerText = "CRASHED";
+            return false;
+        };
+
+        // LOGGER
+        function log(msg, type='') {
+            const box = document.getElementById('console');
+            const time = new Date().toLocaleTimeString();
+            box.innerHTML += `<div class="${type}">[${time}] ${msg}</div>`;
+            console.log(msg);
+        }
+
+        // COPY FUNCTION
+        function copyLogs() {
+            const txt = document.getElementById('console').innerText;
+            navigator.clipboard.writeText(txt).then(() => alert("Logs Copied!"));
+        }
+
+        // MAIN LOGIC
+        log("System started.");
+        
         const params = new URLSearchParams(window.location.search);
-        const cardId = params.get('id');
-        fetch('card_data.json')
-            .then(res => res.json())
-            .then(data => {
-                // Critical Fix: Decode the URL ID (turns %2F back to /)
-                const searchId = decodeURIComponent(cardId).trim();
-                const card = data.find(c => String(c['Unique Code']).trim() === searchId);
-                if (card) {
-                    document.getElementById('ui-name').innerText = card['Product Name'];
-                    document.getElementById('ui-set').innerText = `#${card['Card Number']} | ${card['Set']}`;
-                    document.getElementById('ui-grade').innerText = `${card['Grade']} | ${card['Card Condition']}`;
-                    const price = (card['My Sales Price'] && card['My Sales Price'] !== "TBD") ? card['My Sales Price'] : card['Suggested Selling Price (Fair Market)'];
-                    document.getElementById('ui-price').innerText = price;
-                } else {
-                    document.getElementById('ui-name').innerText = "Card Not Found";
-                }
-            });
+        const rawId = params.get('id');
+        
+        if (!rawId) {
+            log("❌ No ID found in URL.", "log-err");
+            document.getElementById('status').innerText = "NO ID";
+        } else {
+            // 1. NORMALIZE ID
+            const searchId = decodeURIComponent(rawId).trim().toUpperCase();
+            log(`✅ Scanning for ID: ${searchId}`, "log-ok");
+            document.getElementById('status').innerText = "LOADING DATA...";
+
+            // 2. FETCH JSON
+            fetch('card_data.json')
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.json();
+                })
+                .then(data => {
+                    log(`✅ Database loaded (${data.length} records)`, "log-ok");
+
+                    // 3. FIND CARD
+                    const card = data.find(c => String(c['Unique Code']).trim().toUpperCase() === searchId);
+
+                    if (card) {
+                        const name = card['Product Name'];
+                        log(`✅ Match: ${name}`, "log-ok");
+                        document.getElementById('status').innerText = "FETCHING ART...";
+                        document.getElementById('card-info').innerText = `${name} - ${card['My Sales Price']}`;
+
+                        // 4. PREPARE API (Handle Special Characters)
+                        const cleanName = name.split('(')[0].trim();
+                        const cleanNum = String(card['Card Number']).split('/')[0].trim();
+                        
+                        // SAFE QUERY CONSTRUCTION
+                        const query = `name:"${cleanName}" number:"${cleanNum}"`;
+                        log(`Query: ${query}`);
+                        
+                        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`;
+                        
+                        fetch(apiUrl)
+                            .then(r => r.json())
+                            .then(apiData => {
+                                if (apiData.data && apiData.data.length > 0) {
+                                    const imgUrl = apiData.data[0].images.large;
+                                    document.getElementById('card-img').src = imgUrl;
+                                    document.getElementById('card-img').style.display = 'block';
+                                    document.getElementById('status').innerText = "READY";
+                                    log("✅ Image Loaded", "log-ok");
+                                } else {
+                                    log("⚠️ No image in TCG database", "log-err");
+                                    document.getElementById('status').innerText = "NO IMAGE";
+                                }
+                            })
+                            .catch(e => log(`API Error: ${e.message}`, "log-err"));
+
+                    } else {
+                        log(`❌ ID ${searchId} not found in JSON`, "log-err");
+                        document.getElementById('status').innerText = "NOT FOUND";
+                    }
+                })
+                .catch(err => {
+                    log(`❌ JSON Error: ${err.message}`, "log-err");
+                    log("Did you upload card_data.json?", "log-err");
+                });
+        }
     </script>
 </body>
 </html>
