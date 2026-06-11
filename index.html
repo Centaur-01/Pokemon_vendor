@@ -233,8 +233,21 @@ function imgBlock(c, big){
         <span style="left:69%;top:19%;font-size:21px;animation-delay:1.4s">z</span>
       </div>
       <div>
-        <div class="sleeper" style="font-size:${big?'68px':'42px'}">😴</div>
-        <div class="text-[10px] md:text-xs text-amber-700/70 mt-1.5 font-semibold">Image unavailable</div>
+        <svg class="sleeper" viewBox="0 0 100 100" style="width:${big?'120px':'72px'};height:auto" aria-hidden="true">
+          <g stroke="#eab308" stroke-width="2" stroke-linejoin="round">
+            <path d="M34 40 L22 10 Q30 26 44 34 Z" fill="#fde047"/>
+            <path d="M66 40 L78 10 Q70 26 56 34 Z" fill="#fde047"/>
+            <circle cx="50" cy="56" r="28" fill="#fde047"/>
+          </g>
+          <path d="M22 10 L20 18 L28 20 Z" fill="#3f3f46"/>
+          <path d="M78 10 L80 18 L72 20 Z" fill="#3f3f46"/>
+          <circle cx="30" cy="62" r="6" fill="#f87171"/>
+          <circle cx="70" cy="62" r="6" fill="#f87171"/>
+          <path d="M38 52 q5 -6 10 0" fill="none" stroke="#3f3f46" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M52 52 q5 -6 10 0" fill="none" stroke="#3f3f46" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M47 64 q3 3 6 0" fill="none" stroke="#3f3f46" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <div class="text-[10px] md:text-xs text-amber-700/80 mt-1.5 font-semibold">Image unavailable</div>
       </div>
     </div>`;
 }
@@ -280,6 +293,7 @@ function openCard(id){
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
         </div>
+        <button onclick="printCard('${c.id}')" class="w-full mb-5 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition flex items-center justify-center gap-2">🖨️ Print this sticker</button>
         <div class="grid grid-cols-2 gap-3 text-sm border-t border-gray-100 pt-4">
           ${row('Grade', c.Grade||'—')}
           ${row('Condition', c['Card Condition']||'—')}
@@ -302,15 +316,19 @@ function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.o
 // --- Print QR stickers for the current filtered view --------------------------
 const BASE = (location.origin + location.pathname).replace(/index\.html$/, '');
 function qrDataURL(text){ const qr = qrcode(0, 'M'); qr.addData(text); qr.make(); return qr.createDataURL(4, 2); }
-function printStickers(){
-  if(!view.length){ alert('No cards to print — adjust your filters first.'); return; }
-  if(view.length > 250 && !confirm(`That's ${view.length} stickers. Print them all? Tip: filter first to print just the batch you're holding.`)) return;
-  $('#printArea').innerHTML = view.map(c => {
+function renderStickers(list){
+  $('#printArea').innerHTML = list.map(c => {
     const url = BASE + '#' + c.id;
     return `<div class="sticker"><img src="${qrDataURL(url)}" alt="QR"><div class="nm">${c['Product Name']}</div><div class="meta">${c.Set}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}</div></div>`;
   }).join('');
   window.print();
 }
+function printStickers(){
+  if(!view.length){ alert('No cards to print — adjust your filters first.'); return; }
+  if(view.length > 250 && !confirm(`That's ${view.length} stickers. Print them all? Tip: filter first to print just the batch you're holding.`)) return;
+  renderStickers(view);
+}
+function printCard(id){ const c = ALL.find(x => x.id === id); if(c) renderStickers([c]); }
 
 init();
 </script>
