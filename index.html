@@ -1,120 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEV | Safe Mode</title>
-    <style>
-        body { background: #000; color: #fff; font-family: monospace; padding: 20px; text-align: center; }
-        #console { text-align: left; background: #111; border: 1px solid #333; padding: 10px; height: 300px; overflow-y: scroll; margin-top: 20px; color: #aaa; font-size: 11px; }
-        .log-err { color: #ff4757; font-weight: bold; }
-        .log-ok { color: #2ecc71; }
-        img { max-width: 100%; margin-top: 20px; border: 1px solid #333; display: none; }
-        button { background: #ff4757; color: white; padding: 15px; border: none; width: 100%; font-size: 16px; cursor: pointer; margin-top: 10px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Couples Collective TCG — Live Price Lookup</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .gradient-text { background:linear-gradient(90deg,#e11d48,#9333ea); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .card:hover .card-img { transform:scale(1.06); }
+    .card-img { transition:transform .5s ease; }
+    ::-webkit-scrollbar { width:10px; height:10px; } ::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:6px; }
+  </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
 
-    <h1>SAFE MODE DIAGNOSTIC</h1>
-    <h2 id="status">INITIALIZING...</h2>
-    <div id="card-info" style="color: #2ecc71; font-size: 18px; margin: 10px 0;"></div>
-    <img id="card-img" src="" />
-    
-    <button onclick="copyLogs()">COPY LOGS</button>
-    <div id="console">Waiting for logs...</div>
+  <!-- Hero -->
+  <header class="border-b border-gray-200/70 bg-white/70 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 grid place-items-center text-white text-lg shadow">💎</div>
+        <div>
+          <h1 class="text-base md:text-lg font-bold leading-tight">Couples Collective <span class="gradient-text">TCG</span></h1>
+          <p class="text-[11px] md:text-xs text-gray-500" id="tagline">Live price lookup</p>
+        </div>
+      </div>
+      <div class="text-right">
+        <p class="text-lg md:text-2xl font-bold gradient-text" id="statValue">—</p>
+        <p class="text-[10px] md:text-xs text-gray-500 -mt-1">cards listed</p>
+      </div>
+    </div>
+    <!-- Reference-image disclaimer -->
+    <div class="bg-amber-50 border-t border-amber-200 text-amber-800 text-[11px] md:text-xs text-center px-4 py-1.5">
+      📷 Images are <b>stock reference photos for identification only</b> — <b>not</b> the exact card you'll receive. Condition & grade are listed per card.
+    </div>
+  </header>
 
-    <script>
-        // GLOBAL ERROR CATCHER (Must be first)
-        window.onerror = function(msg, url, line) {
-            const errBox = document.getElementById('console');
-            errBox.innerHTML += `<div class="log-err">⛔ CRITICAL ERROR: ${msg} (Line ${line})</div>`;
-            document.getElementById('status').innerText = "CRASHED";
-            return false;
-        };
+  <!-- Controls -->
+  <div class="sticky top-[73px] z-20 bg-white/85 backdrop-blur border-b border-gray-200/70">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 space-y-3">
+      <!-- Region tabs -->
+      <div class="flex items-center gap-2" id="regionTabs"></div>
+      <div class="flex flex-col md:flex-row gap-3 md:items-center">
+        <div class="relative flex-1">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
+          <input id="search" type="search" placeholder="Search name, set, or number…"
+                 class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100 outline-none text-sm" />
+        </div>
+        <select id="era" class="py-2.5 px-3 rounded-xl border border-gray-300 text-sm bg-white focus:border-rose-400 outline-none"></select>
+        <select id="sort" class="py-2.5 px-3 rounded-xl border border-gray-300 text-sm bg-white focus:border-rose-400 outline-none">
+          <option value="price-desc">Price: High → Low</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="name">Name: A → Z</option>
+          <option value="set">Set: A → Z</option>
+        </select>
+      </div>
+      <p class="text-xs text-gray-500" id="count">Loading…</p>
+    </div>
+  </div>
 
-        // LOGGER
-        function log(msg, type='') {
-            const box = document.getElementById('console');
-            const time = new Date().toLocaleTimeString();
-            box.innerHTML += `<div class="${type}">[${time}] ${msg}</div>`;
-            console.log(msg);
-        }
+  <!-- Grid -->
+  <main class="max-w-7xl mx-auto px-4 md:px-8 py-6">
+    <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-5"></div>
+    <div class="text-center py-10">
+      <button id="loadMore" class="hidden px-8 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 text-white font-semibold shadow hover:shadow-lg transition">Load more</button>
+      <p id="empty" class="hidden text-gray-500 py-16">No cards match your filters.</p>
+    </div>
+  </main>
 
-        // COPY FUNCTION
-        function copyLogs() {
-            const txt = document.getElementById('console').innerText;
-            navigator.clipboard.writeText(txt).then(() => alert("Logs Copied!"));
-        }
+  <footer class="border-t border-gray-200/70 py-8 text-center text-xs text-gray-400">
+    Prices update from inventory exports · Images for reference only · Couples Collective TCG
+  </footer>
 
-        // MAIN LOGIC
-        log("System started.");
-        
-        const params = new URLSearchParams(window.location.search);
-        const rawId = params.get('id');
-        
-        if (!rawId) {
-            log("❌ No ID found in URL.", "log-err");
-            document.getElementById('status').innerText = "NO ID";
-        } else {
-            // 1. NORMALIZE ID
-            const searchId = decodeURIComponent(rawId).trim().toUpperCase();
-            log(`✅ Scanning for ID: ${searchId}`, "log-ok");
-            document.getElementById('status').innerText = "LOADING DATA...";
+  <!-- Card Modal -->
+  <div id="modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm p-4 overflow-y-auto" onclick="if(event.target===this)closeCard()">
+    <div class="max-w-3xl mx-auto my-6 bg-white rounded-2xl overflow-hidden shadow-2xl" id="modalBody"></div>
+  </div>
 
-            // 2. FETCH JSON
-            fetch('card_data.json')
-                .then(res => {
-                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                    return res.json();
-                })
-                .then(data => {
-                    log(`✅ Database loaded (${data.length} records)`, "log-ok");
+<script>
+const $ = s => document.querySelector(s);
+let ALL = [], view = [], shown = 0, PAGE = 60;
+const state = { region:'all', era:'all', q:'', sort:'price-desc' };
 
-                    // 3. FIND CARD
-                    const card = data.find(c => String(c['Unique Code']).trim().toUpperCase() === searchId);
+const ERA_ORDER = ["Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White",
+  "HeartGold & SoulSilver","Platinum","Diamond & Pearl","EX","e-Card","Neo","Gym","Base",
+  "POP","NP","Other","Japanese"];
 
-                    if (card) {
-                        const name = card['Product Name'];
-                        log(`✅ Match: ${name}`, "log-ok");
-                        document.getElementById('status').innerText = "FETCHING ART...";
-                        document.getElementById('card-info').innerText = `${name} - ${card['My Sales Price']}`;
+const money = n => '$' + (Number(n)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+const hasPrice = c => Number(c.sale_price) > 0;
+const isGraded = c => c.Grade && !/ungraded/i.test(c.Grade);
 
-                        // 4. PREPARE API (Handle Special Characters)
-                        const cleanName = name.split('(')[0].trim();
-                        const cleanNum = String(card['Card Number']).split('/')[0].trim();
-                        
-                        // SAFE QUERY CONSTRUCTION
-                        const query = `name:"${cleanName}" number:"${cleanNum}"`;
-                        log(`Query: ${query}`);
-                        
-                        const apiUrl = `https://api.pokemontcg.io/v2/cards?q=${encodeURIComponent(query)}`;
-                        
-                        fetch(apiUrl)
-                            .then(r => r.json())
-                            .then(apiData => {
-                                if (apiData.data && apiData.data.length > 0) {
-                                    const imgUrl = apiData.data[0].images.large;
-                                    document.getElementById('card-img').src = imgUrl;
-                                    document.getElementById('card-img').style.display = 'block';
-                                    document.getElementById('status').innerText = "READY";
-                                    log("✅ Image Loaded", "log-ok");
-                                } else {
-                                    log("⚠️ No image in TCG database", "log-err");
-                                    document.getElementById('status').innerText = "NO IMAGE";
-                                }
-                            })
-                            .catch(e => log(`API Error: ${e.message}`, "log-err"));
+async function init(){
+  try {
+    const data = await (await fetch('inventory.json',{cache:'no-cache'})).json();
+    ALL = data.cards || [];
+  } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
-                    } else {
-                        log(`❌ ID ${searchId} not found in JSON`, "log-err");
-                        document.getElementById('status').innerText = "NOT FOUND";
-                    }
-                })
-                .catch(err => {
-                    log(`❌ JSON Error: ${err.message}`, "log-err");
-                    log("Did you upload card_data.json?", "log-err");
-                });
-        }
-    </script>
+  $('#statValue').textContent = ALL.length.toLocaleString();
+
+  buildRegionTabs();
+  buildEraOptions();
+
+  $('#search').addEventListener('input', e => { state.q = e.target.value.toLowerCase().trim(); apply(); });
+  $('#era').addEventListener('change', e => { state.era = e.target.value; apply(); });
+  $('#sort').addEventListener('change', e => { state.sort = e.target.value; apply(); });
+  $('#loadMore').addEventListener('click', () => { shown += PAGE; render(); });
+  window.addEventListener('keydown', e => { if(e.key==='Escape') closeCard(); });
+
+  apply();
+  if(location.hash.length>1) openCard(decodeURIComponent(location.hash.slice(1)));
+}
+
+function buildRegionTabs(){
+  const counts = { all:ALL.length, EN:ALL.filter(c=>c.region==='EN').length, JP:ALL.filter(c=>c.region==='JP').length };
+  const tabs = [['all','All',''],['EN','English','🇺🇸'],['JP','Japanese','🇯🇵']];
+  $('#regionTabs').innerHTML = tabs.map(([val,label,flag])=>`
+    <button data-region="${val}" class="region-tab px-4 py-2 rounded-full text-sm font-semibold border transition
+      ${state.region===val ? 'bg-gradient-to-r from-rose-600 to-purple-600 text-white border-transparent shadow' : 'bg-white text-gray-600 border-gray-300 hover:border-rose-400'}">
+      ${flag} ${label} <span class="opacity-70">${counts[val]}</span></button>`).join('');
+  document.querySelectorAll('.region-tab').forEach(b => b.onclick = () => {
+    state.region = b.dataset.region; buildRegionTabs(); apply();
+  });
+}
+
+function buildEraOptions(){
+  const present = [...new Set(ALL.map(c=>c.era).filter(Boolean))];
+  present.sort((a,b)=> (ERA_ORDER.indexOf(a)+1||99) - (ERA_ORDER.indexOf(b)+1||99));
+  $('#era').innerHTML = '<option value="all">All eras</option>' +
+    present.map(e=>`<option value="${e}">${e}</option>`).join('');
+}
+
+function apply(){
+  view = ALL.filter(c => {
+    if(state.region!=='all' && c.region!==state.region) return false;
+    if(state.era!=='all' && c.era!==state.era) return false;
+    if(state.q){
+      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']).toLowerCase();
+      if(!hay.includes(state.q)) return false;
+    }
+    return true;
+  });
+  const s = state.sort;
+  view.sort((a,b)=>{
+    if(s==='price-desc') return (b.sale_price||0)-(a.sale_price||0);
+    if(s==='price-asc')  return (a.sale_price||0)-(b.sale_price||0);
+    if(s==='name') return (a['Product Name']||'').localeCompare(b['Product Name']||'');
+    if(s==='set')  return (a.Set||'').localeCompare(b.Set||'') || (a['Product Name']||'').localeCompare(b['Product Name']||'');
+    return 0;
+  });
+  shown = PAGE;
+  render();
+}
+
+function render(){
+  const slice = view.slice(0, shown);
+  $('#grid').innerHTML = slice.map(cardHTML).join('');
+  document.querySelectorAll('[data-card]').forEach(el => el.onclick = () => openCard(el.dataset.card));
+  $('#count').textContent = `${view.length.toLocaleString()} card${view.length===1?'':'s'}` +
+    (view.length>shown ? ` · showing ${shown}` : '');
+  $('#loadMore').classList.toggle('hidden', view.length <= shown);
+  $('#empty').classList.toggle('hidden', view.length !== 0);
+}
+
+function imgBlock(c, big){
+  if(c.Image_URL) return `
+    <div class="relative ${big?'':'aspect-[3/4]'} bg-gray-100 overflow-hidden">
+      <img src="${c.Image_URL}" alt="${c['Product Name']}" loading="lazy"
+           class="card-img w-full ${big?'h-auto':'h-full object-cover'}" />
+      <span class="absolute bottom-1.5 left-1.5 bg-black/55 text-white text-[9px] px-1.5 py-0.5 rounded">REF IMG</span>
+    </div>`;
+  return `<div class="${big?'h-80':'aspect-[3/4]'} bg-gradient-to-br from-gray-50 to-gray-100 grid place-items-center text-center">
+      <div><div class="text-3xl">🃏</div><div class="text-[10px] text-gray-400 mt-1">No reference image</div></div></div>`;
+}
+
+function cardHTML(c){
+  const graded = isGraded(c);
+  const priced = hasPrice(c);
+  return `<div data-card="${c.id}" class="card group bg-white rounded-xl border ${priced?'border-gray-200':'border-amber-300'} overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col">
+    ${imgBlock(c,false)}
+    <div class="p-2.5 md:p-3 flex flex-col flex-1">
+      <div class="flex items-start gap-1 justify-between">
+        <h3 class="text-[12px] md:text-sm font-semibold leading-tight line-clamp-2">${c['Product Name']}</h3>
+        ${c.region==='JP'?'<span class="text-[10px] shrink-0">🇯🇵</span>':''}
+      </div>
+      <p class="text-[10px] md:text-[11px] text-gray-500 mt-0.5 line-clamp-1">${c.Set} · #${c['Card Number']||'—'}</p>
+      <div class="mt-1 flex gap-1 flex-wrap">
+        ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
+        ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
+      </div>
+      <div class="mt-auto pt-2">
+        ${priced
+          ? `<p class="text-base md:text-lg font-bold gradient-text">${money(c.sale_price)}</p>`
+          : `<p class="text-sm font-bold text-amber-600">Price TBD</p>`}
+      </div>
+    </div>
+  </div>`;
+}
+
+function openCard(id){
+  const c = ALL.find(x=>x.id===id); if(!c) return;
+  history.replaceState(null,'','#'+id);
+  const graded = isGraded(c), priced = hasPrice(c);
+  $('#modalBody').innerHTML = `
+    <div class="grid md:grid-cols-2">
+      <div class="bg-gray-50">${imgBlock(c,true)}</div>
+      <div class="p-6 md:p-8">
+        <div class="flex justify-between items-start gap-3">
+          <h2 class="text-2xl font-bold">${c['Product Name']}</h2>
+          <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
+        </div>
+        <p class="text-gray-500 mt-1">${c.Set} · #${c['Card Number']||'—'} ${c.region==='JP'?' · 🇯🇵 Japanese':''}</p>
+        <div class="my-5">
+          ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
+                   : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
+        </div>
+        <div class="grid grid-cols-2 gap-3 text-sm border-t border-gray-100 pt-4">
+          ${row('Grade', c.Grade||'—')}
+          ${row('Condition', c['Card Condition']||'—')}
+          ${row('Variant', c.Variance||'—')}
+          ${row('Rarity', c.Rarity||'—')}
+          ${row('Era', c.era||'—')}
+          ${row('Qty available', c.quantity)}
+        </div>
+        <p class="mt-5 text-[11px] text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+          📷 Image is a stock reference for identification — not a photo of the actual card. Grade & condition above describe the item.
+        </p>
+      </div>
+    </div>`;
+  $('#modal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font-semibold">${v}</p></div>`;
+function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
+
+init();
+</script>
 </body>
 </html>
