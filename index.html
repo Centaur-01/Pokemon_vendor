@@ -6,17 +6,50 @@
   <title>Couples Collective TCG — Live Price Lookup</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <style>
     .gradient-text { background:linear-gradient(90deg,#e11d48,#9333ea); -webkit-background-clip:text; background-clip:text; color:transparent; }
     .card:hover .card-img { transform:scale(1.06); }
     .card-img { transition:transform .5s ease; }
     ::-webkit-scrollbar { width:10px; height:10px; } ::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:6px; }
+    #printArea { display:none; grid-template-columns:repeat(3,1fr); gap:10px; padding:10px; }
+    .sticker { border:1px solid #e5e7eb; border-radius:8px; padding:8px; text-align:center; break-inside:avoid; }
+    .sticker img { width:130px; height:130px; image-rendering:pixelated; }
+    .sticker .nm { font-size:10px; font-weight:700; margin-top:4px; line-height:1.15; }
+    .sticker .meta { font-size:8px; color:#6b7280; margin-top:2px; }
+    @media print { #topbar, main, footer, #modal { display:none !important; } #printArea { display:grid !important; } }
+    @keyframes floatZ { 0%{transform:translateY(2px) scale(.7);opacity:0} 25%{opacity:.95} 100%{transform:translateY(-26px) scale(1.15);opacity:0} }
+    .zzz span { position:absolute; font-weight:800; color:#f59e0b; animation:floatZ 2.6s ease-in-out infinite; }
+    @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(3px) rotate(3deg)} }
+    .sleeper { display:inline-block; animation:bob 3s ease-in-out infinite; }
+    #bgart { position:fixed; inset:0; width:100%; height:100%; z-index:0; opacity:.5; pointer-events:none; }
   </style>
 </head>
 <body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
 
+  <!-- Dainty kawaii Pokémon line-art backdrop -->
+  <svg id="bgart" aria-hidden="true">
+    <defs>
+      <pattern id="kawaii" width="150" height="150" patternUnits="userSpaceOnUse">
+        <g fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <g stroke="#f9a8d4">
+            <circle cx="34" cy="40" r="15"/><line x1="19" y1="40" x2="49" y2="40"/><circle cx="34" cy="40" r="3.5"/>
+          </g>
+          <path stroke="#c4b5fd" d="M116 30 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5 z"/>
+          <path stroke="#f9a8d4" d="M92 102 c-3.5 -5 -12 -1.5 -12 4.5 c0 5.5 12 12 12 12 c0 0 12 -6.5 12 -12 c0 -6 -8.5 -9.5 -12 -4.5 z"/>
+          <path stroke="#c4b5fd" d="M30 112 l2 4.5 5 .3 -3.8 3.2 1.3 4.8 -4.5 -2.7 -4.5 2.7 1.3 -4.8 -3.8 -3.2 5 -.3 z"/>
+          <g stroke="#fbcfe8">
+            <circle cx="120" cy="116" r="9"/><line x1="111" y1="116" x2="129" y2="116"/><circle cx="120" cy="116" r="2.2"/>
+          </g>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#kawaii)"/>
+  </svg>
+
   <!-- Hero -->
-  <header class="border-b border-gray-200/70 bg-white/70 backdrop-blur sticky top-0 z-30">
+  <div id="topbar" class="sticky top-0 z-30 transition-transform duration-300 will-change-transform">
+  <header class="border-b border-gray-200/70 bg-white/70 backdrop-blur">
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 grid place-items-center text-white text-lg shadow">💎</div>
@@ -27,8 +60,9 @@
       </div>
       <div class="flex items-center gap-3 md:gap-5">
         <a href="https://instagram.com/couples_collectivetcg" target="_blank" rel="noopener noreferrer"
-           class="flex items-center gap-1.5 text-sm font-semibold text-rose-600 hover:text-purple-600 transition">
-          <span class="text-lg">📸</span><span class="hidden sm:inline">@couples_collectivetcg</span>
+           class="flex items-center gap-1.5 text-sm font-semibold text-rose-600 hover:text-purple-600 transition" title="Contact us on Instagram">
+          <svg viewBox="0 0 24 24" class="w-5 h-5 fill-current" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0044 11.977.0018 8.718.008 8.31.0223 7.0301.084m.1408 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9 1.3787.1655.4217.3617 1.056.4169 2.2263.0602 1.2645.0739 1.6444.0796 4.848.0058 3.2036-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.7708-6.1559-6.174-6.1492-3.403.0065-6.156 2.771-6.1496 6.1732M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>
+          <span class="hidden sm:inline">Contact us</span>
         </a>
         <div class="text-right">
           <p class="text-lg md:text-2xl font-bold gradient-text" id="statValue">—</p>
@@ -43,7 +77,7 @@
   </header>
 
   <!-- Controls -->
-  <div class="sticky top-[73px] z-20 bg-white/85 backdrop-blur border-b border-gray-200/70">
+  <div id="controls" class="bg-white/85 backdrop-blur border-b border-gray-200/70">
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 space-y-3">
       <!-- Region tabs -->
       <div class="flex items-center gap-2" id="regionTabs"></div>
@@ -61,12 +95,17 @@
           <option value="set">Set: A → Z</option>
         </select>
       </div>
-      <p class="text-xs text-gray-500" id="count">Loading…</p>
+      <div class="flex items-center justify-between gap-3">
+        <p class="text-xs text-gray-500" id="count">Loading…</p>
+        <button id="printBtn" class="shrink-0 text-sm font-semibold px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-700 transition">🖨️ Print stickers</button>
+      </div>
     </div>
   </div>
 
   <!-- Grid -->
-  <main class="max-w-7xl mx-auto px-4 md:px-8 py-6">
+  </div><!-- /topbar -->
+
+  <main class="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-6">
     <div id="grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-5"></div>
     <div class="text-center py-10">
       <button id="loadMore" class="hidden px-8 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 text-white font-semibold shadow hover:shadow-lg transition">Load more</button>
@@ -74,8 +113,10 @@
     </div>
   </main>
 
-  <footer class="border-t border-gray-200/70 py-8 text-center text-xs text-gray-400 space-y-2">
-    <p>Questions or to buy → <a href="https://instagram.com/couples_collectivetcg" target="_blank" rel="noopener noreferrer" class="font-semibold text-rose-500 hover:text-purple-600">DM @couples_collectivetcg on Instagram</a> 📸</p>
+  <div id="printArea"></div>
+
+  <footer class="relative z-10 border-t border-gray-200/70 py-8 text-center text-xs text-gray-400 space-y-2">
+    <p class="flex items-center justify-center gap-1.5">Questions or to buy — <a href="https://instagram.com/couples_collectivetcg" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-semibold text-rose-500 hover:text-purple-600"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-current" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0044 11.977.0018 8.718.008 8.31.0223 7.0301.084m.1408 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9 1.3787.1655.4217.3617 1.056.4169 2.2263.0602 1.2645.0739 1.6444.0796 4.848.0058 3.2036-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.7708-6.1559-6.174-6.1492-3.403.0065-6.156 2.771-6.1496 6.1732M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Contact us on Instagram</a></p>
     <p>Prices update from inventory exports · Images for reference only · Couples Collective TCG</p>
   </footer>
 
@@ -112,7 +153,15 @@ async function init(){
   $('#era').addEventListener('change', e => { state.era = e.target.value; apply(); });
   $('#sort').addEventListener('change', e => { state.sort = e.target.value; apply(); });
   $('#loadMore').addEventListener('click', () => { shown += PAGE; render(); });
+  $('#printBtn').addEventListener('click', printStickers);
   window.addEventListener('keydown', e => { if(e.key==='Escape') closeCard(); });
+  // Hide the top bar on scroll-down, bring it back on scroll-up (mobile breathing room).
+  let lastY = 0;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    $('#topbar').style.transform = (y > lastY && y > 120) ? 'translateY(-100%)' : '';
+    lastY = y;
+  }, { passive: true });
 
   apply();
   if(location.hash.length>1) openCard(decodeURIComponent(location.hash.slice(1)));
@@ -165,6 +214,7 @@ function render(){
   document.querySelectorAll('[data-card]').forEach(el => el.onclick = () => openCard(el.dataset.card));
   $('#count').textContent = `${view.length.toLocaleString()} card${view.length===1?'':'s'}` +
     (view.length>shown ? ` · showing ${shown}` : '');
+  $('#printBtn').textContent = view.length ? `🖨️ Print stickers (${view.length})` : '🖨️ Print stickers';
   $('#loadMore').classList.toggle('hidden', view.length <= shown);
   $('#empty').classList.toggle('hidden', view.length !== 0);
 }
@@ -176,8 +226,17 @@ function imgBlock(c, big){
            class="card-img w-full ${big?'h-auto':'h-full object-cover'}" />
       <span class="absolute bottom-1.5 left-1.5 bg-black/55 text-white text-[9px] px-1.5 py-0.5 rounded">REF IMG</span>
     </div>`;
-  return `<div class="${big?'h-80':'aspect-[3/4]'} bg-gradient-to-br from-gray-50 to-gray-100 grid place-items-center text-center">
-      <div><div class="text-3xl">🃏</div><div class="text-[10px] text-gray-400 mt-1">No reference image</div></div></div>`;
+  return `<div class="${big?'h-80':'aspect-[3/4]'} bg-gradient-to-br from-amber-50 to-yellow-100 grid place-items-center text-center relative overflow-hidden">
+      <div class="zzz" aria-hidden="true">
+        <span style="left:57%;top:32%;font-size:13px;animation-delay:0s">z</span>
+        <span style="left:63%;top:26%;font-size:17px;animation-delay:.7s">z</span>
+        <span style="left:69%;top:19%;font-size:21px;animation-delay:1.4s">z</span>
+      </div>
+      <div>
+        <div class="sleeper" style="font-size:${big?'68px':'42px'}">😴</div>
+        <div class="text-[10px] md:text-xs text-amber-700/70 mt-1.5 font-semibold">Image unavailable</div>
+      </div>
+    </div>`;
 }
 
 function cardHTML(c){
@@ -239,6 +298,19 @@ function openCard(id){
 }
 const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font-semibold">${v}</p></div>`;
 function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
+
+// --- Print QR stickers for the current filtered view --------------------------
+const BASE = (location.origin + location.pathname).replace(/index\.html$/, '');
+function qrDataURL(text){ const qr = qrcode(0, 'M'); qr.addData(text); qr.make(); return qr.createDataURL(4, 2); }
+function printStickers(){
+  if(!view.length){ alert('No cards to print — adjust your filters first.'); return; }
+  if(view.length > 250 && !confirm(`That's ${view.length} stickers. Print them all? Tip: filter first to print just the batch you're holding.`)) return;
+  $('#printArea').innerHTML = view.map(c => {
+    const url = BASE + '#' + c.id;
+    return `<div class="sticker"><img src="${qrDataURL(url)}" alt="QR"><div class="nm">${c['Product Name']}</div><div class="meta">${c.Set}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}</div></div>`;
+  }).join('');
+  window.print();
+}
 
 init();
 </script>
