@@ -14,10 +14,10 @@
     ::-webkit-scrollbar { width:10px; height:10px; } ::-webkit-scrollbar-thumb { background:#d1d5db; border-radius:6px; }
     #printArea { display:none; grid-template-columns:repeat(3,1fr); gap:10px; padding:10px; }
     .sticker { border:1px solid #e5e7eb; border-radius:8px; padding:8px; text-align:center; break-inside:avoid; }
-    .sticker img { width:130px; height:130px; image-rendering:pixelated; }
+    .sticker svg, .sticker img { width:120px; height:120px; }
     .sticker .nm { font-size:10px; font-weight:700; margin-top:4px; line-height:1.15; }
     .sticker .meta { font-size:8px; color:#6b7280; margin-top:2px; }
-    @media print { #topbar, main, footer, #modal { display:none !important; } #printArea { display:grid !important; } }
+    @media print { #topbar, main, footer, #modal, #bgart { display:none !important; } #printArea { display:grid !important; } }
     @keyframes floatZ { 0%{transform:translateY(2px) scale(.7);opacity:0} 25%{opacity:.95} 100%{transform:translateY(-26px) scale(1.15);opacity:0} }
     .zzz span { position:absolute; font-weight:800; color:#f59e0b; animation:floatZ 2.6s ease-in-out infinite; }
     @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(3px) rotate(3deg)} }
@@ -315,13 +315,13 @@ function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.o
 
 // --- Print QR stickers for the current filtered view --------------------------
 const BASE = (location.origin + location.pathname).replace(/index\.html$/, '');
-function qrDataURL(text){ const qr = qrcode(0, 'M'); qr.addData(text); qr.make(); return qr.createDataURL(4, 2); }
+function qrSvgTag(text){ const qr = qrcode(0, 'M'); qr.addData(text); qr.make(); return qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true }); }
 function renderStickers(list){
   $('#printArea').innerHTML = list.map(c => {
     const url = BASE + '#' + c.id;
-    return `<div class="sticker"><img src="${qrDataURL(url)}" alt="QR"><div class="nm">${c['Product Name']}</div><div class="meta">${c.Set}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}</div></div>`;
+    return `<div class="sticker">${qrSvgTag(url)}<div class="nm">${c['Product Name']}</div><div class="meta">${c.Set}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}</div></div>`;
   }).join('');
-  window.print();
+  setTimeout(() => window.print(), 80);
 }
 function printStickers(){
   if(!view.length){ alert('No cards to print — adjust your filters first.'); return; }
