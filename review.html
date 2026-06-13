@@ -104,7 +104,7 @@
 const JACK_EMAIL = "j.fung1668@gmail.com";
 const STORE = "pkmn_review_v1";
 const $ = s => document.querySelector(s);
-let cards = [], i = 0, verdicts = {}, top = null, drag = null;
+let cards = [], i = 0, verdicts = {}, topCard = null, drag = null;
 
 // resume from last session
 try { verdicts = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e) { verdicts = {}; }
@@ -169,14 +169,14 @@ function renderDeck(){
     if (k > i){ el.style.transform = 'scale(.96) translateY(8px)'; el.style.filter = 'brightness(.9)'; }
     $('#deck').appendChild(el);
   }
-  top = $('#deck').lastElementChild;
-  if (top) attachDrag(top);
+  topCard = $('#deck').lastElementChild;
+  if (topCard) attachDrag(topCard);
 }
 
 function setStamp(dx){
-  if (!top) return;
-  top.querySelector('.stamp.yes').style.opacity = dx > 20 ? Math.min(1, dx/120) : 0;
-  top.querySelector('.stamp.no').style.opacity  = dx < -20 ? Math.min(1, -dx/120) : 0;
+  if (!topCard) return;
+  topCard.querySelector('.stamp.yes').style.opacity = dx > 20 ? Math.min(1, dx/120) : 0;
+  topCard.querySelector('.stamp.no').style.opacity  = dx < -20 ? Math.min(1, -dx/120) : 0;
 }
 
 function attachDrag(el){
@@ -221,13 +221,13 @@ function addCorrectUrl(){
   if (url === null) return;
   verdicts[c.slug] = Object.assign({ v:'no', name:c.name, set:c.set, number:c.number }, verdicts[c.slug], { correct_url: url.trim(), v:'no' });
   save(); refreshCounts();
-  if (top){ top.querySelector('.badge').textContent = url.trim() ? 'fix added ✓' : top.querySelector('.badge').textContent; }
+  if (topCard){ topCard.querySelector('.badge').textContent = url.trim() ? 'fix added ✓' : topCard.querySelector('.badge').textContent; }
 }
 
 function save(){ localStorage.setItem(STORE, JSON.stringify(verdicts)); }
 
-$('#bYes').onclick = () => { if (top && i < cards.length) fly(top, 1, 'ok'); };
-$('#bNo').onclick  = () => { if (top && i < cards.length) fly(top, -1, 'no'); };
+$('#bYes').onclick = () => { if (topCard && i < cards.length) fly(topCard, 1, 'ok'); };
+$('#bNo').onclick  = () => { if (topCard && i < cards.length) fly(topCard, -1, 'no'); };
 $('#bUndo').onclick = () => {
   if (i === 0) return; i--;
   delete verdicts[cards[i].slug]; save(); renderDeck(); refreshCounts();
