@@ -89,11 +89,12 @@
     <h2>🎉 Thanks!</h2>
     <div class="big" id="doneMsg"></div>
     <div class="send">
-      <button class="primary" id="sendEmail">✉️ Email the fix-list to Jack</button>
-      <button class="alt" id="copy">📋 Copy the fix-list</button>
-      <button class="alt" id="dl">⬇️ Download fix-list (.json)</button>
+      <button class="primary" id="copy">📋 Copy full list — paste into a text to Jack</button>
+      <button class="alt" id="dl">⬇️ Download full list (.txt)</button>
+      <button class="alt" id="sendEmail">✉️ Email Jack <small style="opacity:.7">(short lists only — long ones get cut off)</small></button>
       <button class="alt" id="resume">↩ Keep reviewing</button>
     </div>
+    <div style="margin-top:12px;font-size:12px;color:#22c55e">✓ Your progress is saved on this phone — you can close this and come back anytime; it resumes where you left off.</div>
     <div class="list" id="listPreview"></div>
     <textarea id="payload" readonly></textarea>
   </div>
@@ -261,8 +262,12 @@ function showDone(){
 }
 $('#sendEmail').onclick = () => {
   const { txt, wrong } = buildPayload();
-  const sub = encodeURIComponent(`Pokémon image fixes — ${wrong.length} cards`);
-  const body = encodeURIComponent(txt.length > 1800 ? txt.slice(0,1800)+'\n…(truncated — use Download instead)' : txt);
+  const tooLong = txt.length > 1500;
+  if (tooLong && !confirm('Heads up: this list is long and email will CUT IT OFF — not everything will send.\n\nTap Cancel, then use “Copy full list” instead (nothing is lost — your work is saved).\n\nSend the partial email anyway?')) return;
+  const sub = encodeURIComponent(`Pokémon image fixes — ${wrong.length} cards${tooLong ? ' (PARTIAL)' : ''}`);
+  // warning FIRST so it's never cut off the bottom
+  const warn = tooLong ? '⚠️ THIS EMAIL IS TRUNCATED — it does NOT contain all cards.\nAsk for the full “Copy” list instead.\n\n' : '';
+  const body = encodeURIComponent((warn + txt).slice(0, 1800));
   location.href = `mailto:${JACK_EMAIL}?subject=${sub}&body=${body}`;
 };
 $('#copy').onclick = async () => {
