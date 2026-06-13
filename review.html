@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Card Image Check — swipe</title>
+<style>
+  :root { --ok:#22c55e; --no:#ef4444; }
+  * { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body { margin:0; height:100%; overflow:hidden; font-family:-apple-system,system-ui,sans-serif;
+    background:#0e1116; color:#e9edf4; user-select:none; }
+  #app { display:flex; flex-direction:column; height:100%; max-width:520px; margin:0 auto; }
+
+  header { padding:10px 14px 6px; }
+  .ttl { font-size:16px; font-weight:800; }
+  .bar { height:6px; background:#222936; border-radius:99px; margin-top:7px; overflow:hidden; }
+  .bar > i { display:block; height:100%; width:0; background:linear-gradient(90deg,#6366f1,#22c55e); transition:width .25s; }
+  .counts { display:flex; gap:12px; font-size:12px; color:#9aa6b6; margin-top:6px; }
+  .counts b { color:#e9edf4; }
+
+  #deck { position:relative; flex:1; margin:8px 12px; }
+  .card { position:absolute; inset:0; background:#fff; color:#111; border-radius:18px; overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.45); display:flex; flex-direction:column; will-change:transform;
+    touch-action:none; }  /* let JS own the gesture so mobile swipe isn't stolen by scroll */
+  .card .imgwrap { flex:1; background:#fff; display:flex; align-items:center; justify-content:center; position:relative; min-height:0; }
+  .card img.main { max-width:100%; max-height:100%; object-fit:contain; pointer-events:none; }
+  .badge { position:absolute; top:10px; left:10px; font-size:11px; font-weight:800; padding:4px 9px;
+    border-radius:99px; color:#fff; }
+  .badge.wc { background:#dc2626; } .badge.ws { background:#d97706; }
+  .info { padding:11px 14px 13px; background:#fff; border-top:1px solid #eee; }
+  .nm { font-size:18px; font-weight:800; line-height:1.15; color:#111; }
+  .meta { font-size:13px; color:#555; margin-top:2px; }
+  .hint { font-size:12.5px; color:#92400e; background:#fef3c7; border-radius:8px; padding:6px 9px; margin-top:8px; }
+  .hint b { color:#7c2d12; }
+  .links { margin-top:8px; display:flex; gap:14px; font-size:12.5px; }
+  .links a { color:#2563eb; text-decoration:none; font-weight:600; }
+
+  /* swipe stamps */
+  .stamp { position:absolute; top:18px; font-size:30px; font-weight:900; padding:5px 14px; border:4px solid;
+    border-radius:12px; opacity:0; transition:opacity .08s; }
+  .stamp.yes { right:16px; color:var(--ok); border-color:var(--ok); transform:rotate(12deg); }
+  .stamp.no  { left:16px;  color:var(--no); border-color:var(--no); transform:rotate(-12deg); }
+
+  .controls { display:flex; align-items:center; justify-content:center; gap:18px; padding:12px 0 18px; }
+  .btn { border:none; border-radius:50%; width:62px; height:62px; font-size:26px; font-weight:800;
+    box-shadow:0 6px 16px rgba(0,0,0,.35); cursor:pointer; color:#fff; }
+  .btn.no { background:var(--no); } .btn.yes { background:var(--ok); }
+  .btn.sm { width:46px; height:46px; font-size:18px; background:#2b3340; color:#cdd6e4; }
+  .hintbar { text-align:center; font-size:12px; color:#7e8a9b; padding-bottom:8px; }
+
+  /* end / send screen */
+  #done { display:none; flex:1; flex-direction:column; padding:18px; overflow:auto; }
+  #done h2 { margin:6px 0; }
+  .big { font-size:15px; color:#c7d0dd; line-height:1.5; }
+  .send { display:flex; flex-direction:column; gap:10px; margin-top:16px; }
+  .send button { padding:14px; border-radius:13px; border:none; font-size:15px; font-weight:800; cursor:pointer; }
+  .send .primary { background:#22c55e; color:#06210f; }
+  .send .alt { background:#2b3340; color:#e9edf4; }
+  .list { margin-top:16px; font-size:12.5px; color:#9aa6b6; }
+  .list div { padding:4px 0; border-bottom:1px solid #1c2330; }
+  textarea { width:100%; height:120px; margin-top:10px; background:#0b0e13; color:#cdd6e4; border:1px solid #28303d;
+    border-radius:10px; padding:10px; font-family:ui-monospace,monospace; font-size:11px; }
+  .empty { padding:40px 18px; text-align:center; color:#9aa6b6; }
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="ttl">🃏 Card Image Check</div>
+    <div class="bar"><i id="prog"></i></div>
+    <div class="counts">
+      <span>Done <b id="cDone">0</b>/<b id="cTotal">0</b></span>
+      <span style="color:#22c55e">✓ ok <b id="cOk">0</b></span>
+      <span style="color:#ef4444">✗ wrong <b id="cNo">0</b></span>
+      <span style="margin-left:auto"><a id="finish" href="#" style="color:#8aa0ff;text-decoration:none">finish ▸</a></span>
+    </div>
+  </header>
+
+  <div id="deck"></div>
+
+  <div class="controls" id="controls">
+    <button class="btn no"  id="bNo"  title="Wrong image">✗</button>
+    <button class="btn sm"  id="bUndo" title="Undo">↩</button>
+    <button class="btn yes" id="bYes" title="Looks correct">✓</button>
+  </div>
+  <div class="hintbar">Swipe <b style="color:#ef4444">left = wrong</b> · <b style="color:#22c55e">right = correct</b> · tap card to add the right image</div>
+
+  <div id="done">
+    <h2>🎉 Thanks!</h2>
+    <div class="big" id="doneMsg"></div>
+    <div class="send">
+      <button class="primary" id="sendEmail">✉️ Email the fix-list to Jack</button>
+      <button class="alt" id="copy">📋 Copy the fix-list</button>
+      <button class="alt" id="dl">⬇️ Download fix-list (.json)</button>
+      <button class="alt" id="resume">↩ Keep reviewing</button>
+    </div>
+    <div class="list" id="listPreview"></div>
+    <textarea id="payload" readonly></textarea>
+  </div>
+</div>
+
+<script>
+const JACK_EMAIL = "j.fung1668@gmail.com";
+const STORE = "pkmn_review_v1";
+const $ = s => document.querySelector(s);
+let cards = [], i = 0, verdicts = {}, top = null, drag = null;
+
+// resume from last session
+try { verdicts = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e) { verdicts = {}; }
+
+fetch('./review_queue.json').then(r => r.json()).then(d => {
+  cards = d.cards || [];
+  // start at the first card without a verdict (resume)
+  i = 0; while (i < cards.length && verdicts[cards[i].slug]) i++;
+  $('#cTotal').textContent = cards.length;
+  renderDeck(); refreshCounts();
+}).catch(() => { $('#deck').innerHTML = '<div class="empty">Could not load the card list.<br>Make sure review_queue.json is next to this page.</div>'; });
+
+function refreshCounts(){
+  const done = Object.keys(verdicts).length;
+  const ok = Object.values(verdicts).filter(v => v.v === 'ok').length;
+  const no = Object.values(verdicts).filter(v => v.v === 'no').length;
+  $('#cDone').textContent = done; $('#cOk').textContent = ok; $('#cNo').textContent = no;
+  $('#prog').style.width = (cards.length ? done/cards.length*100 : 0) + '%';
+}
+
+function cardHTML(c){
+  const cls = c.verdict === 'WRONG_CARD' ? 'wc' : 'ws';
+  const tag = c.verdict === 'WRONG_CARD' ? 'maybe wrong card' : 'maybe wrong set';
+  const q = encodeURIComponent(`${c.name} ${c.set} ${c.number} pokemon card`);
+  const hint = c.depicts ? `Our scan thinks this picture is <b>${c.depicts}</b>.` : '';
+  return `<div class="imgwrap">
+      <span class="badge ${cls}">${tag}</span>
+      <img class="main" src="${c.current_img}" alt="" onerror="this.style.opacity=.25">
+      <div class="stamp yes">CORRECT</div><div class="stamp no">WRONG</div>
+    </div>
+    <div class="info">
+      <div class="nm">${c.name}</div>
+      <div class="meta">${c.set} · #${c.number}</div>
+      ${hint ? `<div class="hint">${hint} Does the picture match <b>${c.name}</b>?</div>` : ''}
+      <div class="links">
+        <a href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener">look it up ↗</a>
+        <a href="${c.store_url}" target="_blank" rel="noopener">on the store ↗</a>
+      </div>
+    </div>`;
+}
+
+function renderDeck(){
+  $('#deck').innerHTML = '';
+  if (i >= cards.length) return showDone();
+  // render up to 2 stacked (top + next)
+  for (let k = Math.min(i+1, cards.length-1); k >= i; k--){
+    const el = document.createElement('div');
+    el.className = 'card'; el.innerHTML = cardHTML(cards[k]);
+    el.style.zIndex = 100 - (k - i);
+    if (k > i){ el.style.transform = 'scale(.96) translateY(8px)'; el.style.filter = 'brightness(.9)'; }
+    $('#deck').appendChild(el);
+  }
+  top = $('#deck').lastElementChild;
+  if (top) attachDrag(top);
+}
+
+function setStamp(dx){
+  if (!top) return;
+  top.querySelector('.stamp.yes').style.opacity = dx > 20 ? Math.min(1, dx/120) : 0;
+  top.querySelector('.stamp.no').style.opacity  = dx < -20 ? Math.min(1, -dx/120) : 0;
+}
+
+function attachDrag(el){
+  let sx=0, sy=0, dx=0, dy=0, dragging=false, moved=false, dtarget=null;
+  const down = e => { dragging=true; moved=false; dtarget=e.target; const p=pt(e); sx=p.x; sy=p.y; el.style.transition='none'; };
+  const move = e => {
+    if (!dragging) return; const p=pt(e); dx=p.x-sx; dy=p.y-sy;
+    if (Math.abs(dx)>6) moved=true;
+    el.style.transform = `translate(${dx}px,${dy}px) rotate(${dx*0.06}deg)`;
+    setStamp(dx);
+  };
+  const up = () => {
+    if (!dragging) return; dragging=false;
+    el.style.transition='transform .28s ease';
+    if (dx > 120) return fly(el, 1, 'ok');
+    if (dx < -120) return fly(el, -1, 'no');
+    el.style.transform=''; setStamp(0);
+    if (!moved && !(dtarget && dtarget.closest('a'))) addCorrectUrl();  // tap (not a link) = add right image
+  };
+  el.addEventListener('pointerdown', down);
+  el.addEventListener('pointermove', move);
+  el.addEventListener('pointerup', up);
+  el.addEventListener('pointercancel', up);
+}
+function pt(e){ return { x: e.clientX, y: e.clientY }; }
+
+function fly(el, dir, v){
+  el.style.transition='transform .3s ease, opacity .3s';
+  el.style.transform = `translate(${dir*700}px,${-40}px) rotate(${dir*25}deg)`;
+  el.style.opacity = 0;
+  const slug = cards[i].slug;
+  verdicts[slug] = { v, name: cards[i].name, set: cards[i].set, number: cards[i].number,
+                     correct_url: (verdicts[slug]||{}).correct_url || '' };
+  save();
+  setTimeout(() => { i++; renderDeck(); refreshCounts(); }, 180);
+}
+
+function addCorrectUrl(){
+  const c = cards[i];
+  const cur = (verdicts[c.slug]||{}).correct_url || '';
+  const url = prompt(`If you know the correct image URL for:\n${c.name} — ${c.set} #${c.number}\n\npaste it here (leave blank to skip):`, cur);
+  if (url === null) return;
+  verdicts[c.slug] = Object.assign({ v:'no', name:c.name, set:c.set, number:c.number }, verdicts[c.slug], { correct_url: url.trim(), v:'no' });
+  save(); refreshCounts();
+  if (top){ top.querySelector('.badge').textContent = url.trim() ? 'fix added ✓' : top.querySelector('.badge').textContent; }
+}
+
+function save(){ localStorage.setItem(STORE, JSON.stringify(verdicts)); }
+
+$('#bYes').onclick = () => { if (top && i < cards.length) fly(top, 1, 'ok'); };
+$('#bNo').onclick  = () => { if (top && i < cards.length) fly(top, -1, 'no'); };
+$('#bUndo').onclick = () => {
+  if (i === 0) return; i--;
+  delete verdicts[cards[i].slug]; save(); renderDeck(); refreshCounts();
+};
+$('#finish').onclick = e => { e.preventDefault(); showDone(); };
+$('#resume').onclick = () => { $('#done').style.display='none'; $('#deck').style.display=''; $('#controls').style.display='';
+  i = 0; while (i < cards.length && verdicts[cards[i].slug]) i++; renderDeck(); };
+
+// ---- results / send ----
+function buildPayload(){
+  const wrong = [], ok = [];
+  for (const [slug, d] of Object.entries(verdicts)){
+    (d.v === 'no' ? wrong : ok).push(Object.assign({ slug }, d));
+  }
+  // machine block = drop straight into image_overrides.json (url if given, else "" = placeholder)
+  const patch = {}; wrong.forEach(w => patch[w.slug] = w.correct_url || "");
+  let txt = `POKEMON IMAGE FIXES — ${wrong.length} marked wrong (of ${Object.keys(verdicts).length} reviewed)\n`;
+  txt += `Send this to Jack to patch.\n\nWRONG:\n`;
+  wrong.forEach(w => { txt += `- ${w.slug} | ${w.name} — ${w.set} #${w.number}${w.correct_url ? `  ➜ correct: ${w.correct_url}` : ''}\n`; });
+  txt += `\n--- machine (paste into image_overrides.json) ---\n` + JSON.stringify(patch, null, 2) + `\n`;
+  return { txt, wrong, ok };
+}
+function showDone(){
+  $('#deck').style.display='none'; $('#controls').style.display='none'; $('#done').style.display='flex';
+  const { txt, wrong } = buildPayload();
+  $('#doneMsg').innerHTML = `You reviewed <b>${Object.keys(verdicts).length}</b> of ${cards.length}. ` +
+    `Marked <b style="color:#ef4444">${wrong.length}</b> as wrong.<br><br>Now send the list back so we can fix them:`;
+  $('#payload').value = txt;
+  $('#listPreview').innerHTML = wrong.slice(0,40).map(w => `<div>✗ ${w.name} — ${w.set} #${w.number}</div>`).join('')
+    + (wrong.length>40 ? `<div>…and ${wrong.length-40} more</div>` : '');
+}
+$('#sendEmail').onclick = () => {
+  const { txt, wrong } = buildPayload();
+  const sub = encodeURIComponent(`Pokémon image fixes — ${wrong.length} cards`);
+  const body = encodeURIComponent(txt.length > 1800 ? txt.slice(0,1800)+'\n…(truncated — use Download instead)' : txt);
+  location.href = `mailto:${JACK_EMAIL}?subject=${sub}&body=${body}`;
+};
+$('#copy').onclick = async () => {
+  try { await navigator.clipboard.writeText($('#payload').value); $('#copy').textContent='✓ Copied!'; }
+  catch(e){ $('#payload').select(); document.execCommand('copy'); $('#copy').textContent='✓ Copied!'; }
+  setTimeout(()=>$('#copy').textContent='📋 Copy the fix-list',1500);
+};
+$('#dl').onclick = () => {
+  const { txt } = buildPayload();
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([txt], {type:'text/plain'}));
+  a.download = 'pokemon-image-fixes.txt'; a.click();
+};
+</script>
+</body>
+</html>
