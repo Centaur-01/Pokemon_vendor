@@ -278,6 +278,7 @@ function cardHTML(c){
 
 function openCard(id){
   const c = ALL.find(x=>x.id===id); if(!c) return;
+  CURRENT = c;
   history.replaceState(null,'','#'+id);
   const graded = isGraded(c), priced = hasPrice(c);
   $('#modalBody').innerHTML = `
@@ -293,7 +294,28 @@ function openCard(id){
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
         </div>
-        <button onclick="printCard('${c.id}')" class="w-full mb-5 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition flex items-center justify-center gap-2">🖨️ Print this sticker</button>
+        <button onclick="printCard('${c.id}')" class="w-full mb-3 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition flex items-center justify-center gap-2">🖨️ Print this sticker</button>
+        <button onclick="toggleReport()" class="w-full mb-3 py-2.5 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">🛠️ Suggest a fix</button>
+        <div id="reportForm" class="hidden mb-5 p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-3">
+          <div>
+            <label class="text-xs text-gray-500 font-semibold">What's wrong with this card?</label>
+            <select id="rIssue" class="w-full mt-1 rounded-lg border border-gray-300 p-2 text-sm bg-white">
+              <option>Wrong price</option>
+              <option>Wrong image</option>
+              <option>Wrong card details (set/number/grade)</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 font-semibold">Suggested price (optional, $)</label>
+            <input id="rPrice" type="number" step="0.01" placeholder="e.g. 5" class="w-full mt-1 rounded-lg border border-gray-300 p-2 text-sm">
+          </div>
+          <div>
+            <label class="text-xs text-gray-500 font-semibold">Details — what's wrong & how to fix it</label>
+            <textarea id="rText" rows="3" placeholder="Say whatever you need to…" class="w-full mt-1 rounded-lg border border-gray-300 p-2 text-sm"></textarea>
+          </div>
+          <button onclick="sendReport()" class="w-full py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-700 transition">✉️ Send to Jack</button>
+        </div>
         <div class="grid grid-cols-2 gap-3 text-sm border-t border-gray-100 pt-4">
           ${row('Grade', c.Grade||'—')}
           ${row('Condition', c['Card Condition']||'—')}
@@ -312,6 +334,38 @@ function openCard(id){
 }
 const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font-semibold">${v}</p></div>`;
 function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
+
+// --- "Suggest a fix" — free-text card report emailed to Jack -----------------
+// Subject is tagged [CARD-FIX] and the body carries a YAML block so the inbox can
+// auto-file these (Gmail filter on the subject) and a script can parse them.
+let CURRENT = null;
+function toggleReport(){ const f=$('#reportForm'); if(f) f.classList.toggle('hidden'); }
+function sendReport(){
+  const c = CURRENT; if(!c) return;
+  const issue = ($('#rIssue')||{}).value || 'Other';
+  const sp = (($('#rPrice')||{}).value || '').trim();
+  const txt = (($('#rText')||{}).value || '').trim();
+  const body =
+`A card fix was suggested from the storefront.
+
+---
+type: card-fix
+card_id: ${c.id}
+name: ${c['Product Name']}
+set: ${c.Set}
+number: ${c['Card Number']||''}
+issue: ${issue}
+current_price: ${c.sale_price||''}
+suggested_price: ${sp}
+current_image: ${c.Image_URL||'(none)'}
+url: ${location.origin+location.pathname}#${c.id}
+---
+
+${txt || '(no details provided)'}
+`;
+  const subj = `[CARD-FIX] ${issue} — ${c['Product Name']} (${c.id})`;
+  location.href = `mailto:j.fung1668@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+}
 
 // --- Print QR stickers for the current filtered view --------------------------
 const BASE = (location.origin + location.pathname).replace(/index\.html$/, '');

@@ -110,6 +110,9 @@ let cards = [], i = 0, verdicts = {}, topCard = null, drag = null;
 
 // resume from last session
 try { verdicts = JSON.parse(localStorage.getItem(STORE)) || {}; } catch(e) { verdicts = {}; }
+// price notes are kept separate so they never affect image-review resume/counts
+let priceNotes = {};
+try { priceNotes = JSON.parse(localStorage.getItem(STORE + '_prices')) || {}; } catch(e) { priceNotes = {}; }
 
 $('#deck').innerHTML = '<div class="empty">Loading cards…</div>';
 // Prefer data embedded in this file (window.QUEUE) so there's no network fetch to
@@ -159,6 +162,7 @@ function cardHTML(c){
       <div class="links">
         <a href="https://www.google.com/search?tbm=isch&q=${q}" target="_blank" rel="noopener">look it up ↗</a>
         <a href="${c.store_url}" target="_blank" rel="noopener">on the store ↗</a>
+        <a href="#" onclick="event.preventDefault();window.addPriceNote()">💲 price note</a>
       </div>
     </div>`;
 }
@@ -229,6 +233,18 @@ function addCorrectUrl(){
   if (topCard){ topCard.querySelector('.badge').textContent = url.trim() ? 'fix added ✓' : topCard.querySelector('.badge').textContent; }
 }
 
+function addPriceNote(){
+  const c = cards[i]; if (!c) return;
+  const cur = (priceNotes[c.slug]||{}).note || '';
+  const note = prompt(`Price note for:\n${c.name} — ${c.set} #${c.number}\n\nWhat should the price be / why? (e.g. "TCG last sold ~$4, list $4")`, cur);
+  if (note === null) return;
+  if (note.trim()) priceNotes[c.slug] = { name:c.name, set:c.set, number:c.number, note:note.trim() };
+  else delete priceNotes[c.slug];
+  localStorage.setItem(STORE + '_prices', JSON.stringify(priceNotes));
+  if (topCard) topCard.querySelector('.badge').textContent = note.trim() ? '💲 price noted' : topCard.querySelector('.badge').textContent;
+}
+window.addPriceNote = addPriceNote;
+
 function save(){ localStorage.setItem(STORE, JSON.stringify(verdicts)); }
 
 $('#bYes').onclick = () => { if (topCard && i < cards.length) fly(topCard, 1, 'ok'); };
@@ -247,19 +263,28 @@ function buildPayload(){
   for (const [slug, d] of Object.entries(verdicts)){
     (d.v === 'no' ? wrong : ok).push(Object.assign({ slug }, d));
   }
+  const pnotes = Object.entries(priceNotes).map(([slug,d]) => ({ slug, ...d }));
   // machine block = drop straight into image_overrides.json (url if given, else "" = placeholder)
   const patch = {}; wrong.forEach(w => patch[w.slug] = w.correct_url || "");
-  let txt = `POKEMON IMAGE FIXES — ${wrong.length} marked wrong (of ${Object.keys(verdicts).length} reviewed)\n`;
-  txt += `Send this to Jack to patch.\n\nWRONG:\n`;
+  let txt = `[CARD-FIX] BATCH REVIEW\n`;
+  txt += `${wrong.length} wrong image(s), ${pnotes.length} price note(s) (of ${Object.keys(verdicts).length} reviewed)\n`;
+  txt += `\nWRONG IMAGES:\n`;
   wrong.forEach(w => { txt += `- ${w.slug} | ${w.name} — ${w.set} #${w.number}${w.correct_url ? `  ➜ correct: ${w.correct_url}` : ''}\n`; });
-  txt += `\n--- machine (paste into image_overrides.json) ---\n` + JSON.stringify(patch, null, 2) + `\n`;
-  return { txt, wrong, ok };
+  if (pnotes.length){
+    txt += `\nPRICE NOTES:\n`;
+    pnotes.forEach(p => { txt += `- ${p.slug} | ${p.name} — ${p.set} #${p.number}: ${p.note}\n`; });
+  }
+  txt += `\n---\ntype: card-fix-batch\nimage_overrides: ` + JSON.stringify(patch) +
+         `\nprice_notes: ` + JSON.stringify(Object.fromEntries(pnotes.map(p=>[p.slug,p.note]))) + `\n---\n`;
+  return { txt, wrong, ok, pnotes };
 }
 function showDone(){
   $('#deck').style.display='none'; $('#controls').style.display='none'; $('#done').style.display='flex';
-  const { txt, wrong } = buildPayload();
+  const { txt, wrong, pnotes } = buildPayload();
   $('#doneMsg').innerHTML = `You reviewed <b>${Object.keys(verdicts).length}</b> of ${cards.length}. ` +
-    `Marked <b style="color:#ef4444">${wrong.length}</b> as wrong.<br><br>Now send the list back so we can fix them:`;
+    `Marked <b style="color:#ef4444">${wrong.length}</b> wrong` +
+    (pnotes.length ? `, <b style="color:#f59e0b">${pnotes.length}</b> price note(s)` : '') +
+    `.<br><br>Now send it back so we can fix them:`;
   $('#payload').value = txt;
   $('#listPreview').innerHTML = wrong.slice(0,40).map(w => `<div>✗ ${w.name} — ${w.set} #${w.number}</div>`).join('')
     + (wrong.length>40 ? `<div>…and ${wrong.length-40} more</div>` : '');
@@ -268,7 +293,7 @@ $('#sendEmail').onclick = () => {
   const { txt, wrong } = buildPayload();
   const tooLong = txt.length > 1500;
   if (tooLong && !confirm('Heads up: this list is long and email will CUT IT OFF — not everything will send.\n\nTap Cancel, then use “Copy full list” instead (nothing is lost — your work is saved).\n\nSend the partial email anyway?')) return;
-  const sub = encodeURIComponent(`Pokémon image fixes — ${wrong.length} cards${tooLong ? ' (PARTIAL)' : ''}`);
+  const sub = encodeURIComponent(`[CARD-FIX] Batch review — ${wrong.length} images${tooLong ? ' (PARTIAL)' : ''}`);
   // warning FIRST so it's never cut off the bottom
   const warn = tooLong ? '⚠️ THIS EMAIL IS TRUNCATED — it does NOT contain all cards.\nAsk for the full “Copy” list instead.\n\n' : '';
   const body = encodeURIComponent((warn + txt).slice(0, 1800));
