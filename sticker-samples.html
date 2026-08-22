@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sticker samples — 3 QR sizes on 50×33</title>
+<style>
+  @page { size: 50mm 33mm; margin: 0; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #f4f4f5; padding: 12px; }
+  .howto { max-width: 420px; margin: 0 auto 14px; font-size: 14px; line-height: 1.45;
+            background: #fff; border-radius: 10px; padding: 12px 14px; }
+  .caption { max-width: 420px; margin: 14px auto 4px; font-size: 13px; font-weight: 600; }
+  .caption small { font-weight: 400; color: #555; }
+  .label { position: relative; width: 50mm; height: 33mm; background: #fff;
+            border: 1px dashed #bbb; margin: 0 auto; padding: 1.5mm;
+            display: flex; align-items: center; gap: 1.5mm; overflow: hidden;
+            page-break-after: always; break-after: page; }
+  .qr { flex: 0 0 auto; image-rendering: pixelated; }
+  .txt { flex: 1 1 auto; min-width: 0; }
+  .name { font-size: 8.5pt; font-weight: 700; line-height: 1.15; overflow-wrap: break-word; }
+  .sub { font-size: 6pt; color: #333; margin-top: 1mm; }
+  .price { font-size: 8pt; font-weight: 700; margin-top: 1mm; }
+  .mark { position: absolute; bottom: 0.5mm; right: 1mm; font-size: 6pt; color: #999; }
+  .print-btn { display: block; margin: 16px auto; padding: 12px 26px; font-size: 16px;
+                font-weight: 700; color: #fff; background: #e3350d; border: 0;
+                border-radius: 10px; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .howto, .caption, .print-btn { display: none !important; }
+    .label { border: 0; margin: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="howto">
+  <b>3 sticker samples — one tap to print all 3.</b><br>
+  Each prints on its own 50×33 label: <b>A</b> big QR, <b>B</b> medium, <b>C</b> compact.
+  Scan each with a phone — every QR opens that card's real page. Then just say
+  which letter looked/scanned best.
+</div>
+
+  <div class="caption">Sample A — BIG — QR nearly fills the label height<br><small>Togepi & Cleffa & Igglybuff GX</small></div>
+  <div class="label">
+    <img class="qr" style="width:29mm;height:29mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC70lEQVR42u2dW2okMQxFxWyg9r9L78DJdFzWvXINNHR+Bh0TCnen63wYLnpYlmN+PkYAAQIECBAg70Nij+vvN9/PNZ9rsp7lm3zlT/zCAALk/4K8tHMtJa3JSF3o35LV/rhfQTtAGmtHlbIs2v3cqtFvzBihHSBoZztjr8mPh5Ze3Gu+3Dy0AwTtnHZHvDizOKfK0A4Q4p0tDY9uNA5KG0S8AwRI1Dzbu3/yCtoB0lY7OlakM+5/jRXjPNqj269jYYH0jncido46RTSnRTcRtiV0oR0g7bVzzSIKdcwsL11+gM8GpLfPts1KTspGzy2rTB1c+GxA0E5u36hXdqfRohqma+6ACLsDpLV2xCVTFy51dH/UvR7RFAsLpK92tGBgyyTzA2WLRwfaAdJeOyV1YLVtEhNZ4nq9zsICaaqdbVxyKyeO8javCA3dGEI7QBrnCjJ+uTPS6sjpSZ+0O3lmgYUF0j1XkHoZx+84+wYEyOmzxVO8cyfZ8jky3kk3D7sDpHe8owkBS7hJAdu2OBYioR0gvX22PKrjJQR7l0dL3azRAT4bkN65gvCC6vB6g6WReZS0oR0g2J1ZT7Q9NDEYVUH4bECIdzSNVrZHzX/bVaBWh8DCAumdK9A02s68SSmO7fioqUI7QJrnCjze0dxaVk2HTwbxDhDsTrY01PMF1ilU0td27BrtAGlrd3xb52yiq92ltMoauwMEu2P5gaNorfQ2POIjFhZIX+2cbpumBUp6zQZ2Bwh2R8N/705ggvLLEbA7QLrbnQi76SBC2+qenQq8WJSFBdLa7tSuuZJJMF9OCnXIswFprp3SF7Qchau9QD38Id4B0truWOCfFQX1pqpR/TrsDhB8NrsipNRUP94qMtnfAYJ26q06/4qALGkQaZvQDhC083Daehz1bJddjoDPBgTt1HMHuh86q6b2D9AOEOKd0n36+WaEcq8i+ztAmmvH45coTd0vq8Ypt12jHSCdtfPpGECAAAECBMibkC8WQVWMU8m69QAAAABJRU5ErkJggg==" alt="QR A">
+    <div class="txt">
+      <div class="name">Togepi & Cleffa & Igglybuff GX</div>
+      <div class="sub">Alternate Art Promos · 143a/236 · Ungraded</div>
+      <div class="price">$237</div>
+    </div>
+    <div class="mark">A</div>
+  </div>
+  <div class="caption">Sample B — MEDIUM — QR + roomier text<br><small>Gyarados (21)</small></div>
+  <div class="label">
+    <img class="qr" style="width:24mm;height:24mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC7klEQVR42u2dW27EIAxFrW6A/e+SHaTTJuBrm0ojtT+VD8pHZpLcD6QjPwG7fj+mIYIIIogggsj7IrbHeP583bx+fT1d19fP15vj9Mn8sD8YiCDyv0QWEd/jvrnB8afmsOg7/gnsINKYnduC6KUG6DE32x7FT2AHEdh5ruWtbWQeakaxTbCDCOxsduyJbtxVW7amvgk7iMCOo7G9NeXltjXmBoh4BxHYSUmzdy/5BHYQacuOjpwuqOZm2n60Et1MLCK9453HiFig5rpCdHOnES55H3YQ6Wx3Fg7PzbiSL+d2R4enr5lYRBr7bPP0aJo2MITcgnpusINI51zBEEZyCtpvlCBvCoIdRBr7bKb9Nmp3kre2q6WXMsXEItLX7mj/gPISukZncfBgBxFyBTMUST1pUPMDqWkHnw2R3rkCjWh86cEVegwsJeXoK0AEduayKZo6SDcrAgpVHnw2RJrHOzG02S1tungnp6lNCqmwg0hnuzMCGjnkGdl5i/8zsYg0zhWIcck/T0WfYKpgB5G2PluKX1JH6IqGwj4JUz03JhaRvvGOrxLdntuu9cQ+6vw97CDSPN4pGYBQJJX9CnJCG58NEdiZsto6pKB/SCl4cw4Ti0hXdpLbNn8IiFLNlHgHEdgJCwpK1/SITp3VmIiJRaRrrmBF/QeH7Qq7HabFcfhsiHRnZ5TNcMx0HzbdXSrl32AHkeZ2J9V0UlknwFJ6RGEHkdbsSP7ZI6C6ia60g25PD3YQ6eyzheVs+6asEg35BGP9DiKwU5ptRi7uVKtk9LMhAjuaFphlzU5MFNRHsINIW3Zyv7TuLnXqNEhHIcAOIp1zBRL4H3Y4PC/ewWdDBHZKDdRin5vF7HQ6FgF2EOnMjluT03ki6eyqbaTYrwAR2FEWPMCRPUBMK0EW96SCHURgpxz9lmqjXuvRPAPsIEK8M8KJb3pAfD3J1+hnQwR2LFiZtFFbWDdqZTNq2EGkMTu/HRMRRBBBBBFE3hT5BIh3PrLetovrAAAAAElFTkSuQmCC" alt="QR B">
+    <div class="txt">
+      <div class="name">Gyarados (21)</div>
+      <div class="sub">Ancient Origins · 21 · PSA 9.0 MINT</div>
+      <div class="price">$240.2</div>
+    </div>
+    <div class="mark">B</div>
+  </div>
+  <div class="caption">Sample C — COMPACT — smallest QR, biggest text<br><small>Beedrill V (Alternate Full Art)</small></div>
+  <div class="label">
+    <img class="qr" style="width:17mm;height:17mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC8UlEQVR42u2dW0oAMQxFgxvo/nfZHdRXm9ykIwr6IzlFZBxn7kfhkEeTjK3fr2mIIIIIIogg8nMR8zXW/nOs9+u5b779en9y2r458ivzxf5gIYLI/xL5YGdskvbFzP+a5/rAssnyV2AHkcbsFFuzCXJMZjzmyMgrbCwisBPWR1wyU6v0hBsbiwjsrM+4JkhxS3TiHb8PO4jAjgYvnhzYDpvAtbGaV4gEO4i0ZcfXCXC+/5FXYAeRtuzUrPVJXGtSWv03NzrnFTYWkcY+m4czkh+I5IBkrdVzgx1EutsdB0EOQyMtkFPWfngaNgh2EOkc75wQJioN/Jx0pAqEUmCA3UEEny2SzyOFP2pl0n1/EnYQac7OsTuRnZ7JEillKSaCHUQ6+2zCUQ2C1kNJm96EHUQ6252UYZtWSkBTmcFapcoadhBpy0451gnnTb24J9bIUSOCz6YFOSmiOQRpOYGyBjuI4LN9SVDJtunD+GyIYHckzImLte4eBF9CGRuLSGt2SgWOnpDWFuzSqgA7iLTNFcyHTLXf2VbGrnOfxdkoIrCTYx+zOuhDa3KEKXw2RMgVOCZaM6BJNvXcNN7B7iDS3e6MGvWkqmkLiOyanwM7iLS2O7nas8Ii3T2aryZXgEh3u+O9Bo+/LU3LiVPRuGBjEelrd0qjqPbslNKCOEsNvthYRPrGO9pMHeBMeWxeXhxzchDB7kiNjTZZBz6jDjZk1gcisFPqbdzK+J9hie6sAj4bIsQ7WqJmlqo9H+e9pyFUbCwi7e1OnvmpIY/CYnlGKOwg0truSFxjqd7GboKud9lYRPrandRZMNIHRFICQaZOuXcHO4j0tTu+pFe0zP/UT1YVrGAHEXIFpSg0zkbvobv0viECO9e3q6KTVFt7xqp2KuBiYxGBnfqJkDJTN5JvqVWBjUUEduTTomPdLQmpf4fzHURg5/rOdRrOZunT8Br+YHcQ6c6Or6tDR922lK+exDuIwM6v10QEEUQQQQSRH4q8AjcAV3vM5KV3AAAAAElFTkSuQmCC" alt="QR C">
+    <div class="txt">
+      <div class="name">Beedrill V (Alternate Full Art)</div>
+      <div class="sub">Astral Radiance · 161/189 · PSA 10.0 GEM - MT</div>
+      <div class="price">$181.65</div>
+    </div>
+    <div class="mark">C</div>
+  </div>
+<button class="print-btn" onclick="window.print()">🖨️ Print the 3 samples</button>
+</body>
+</html>
