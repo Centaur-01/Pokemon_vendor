@@ -2387,9 +2387,10 @@ var qrcode = function() {
     <div>
       <label class="fld">Label preset</label>
       <select id="preset">
+        <option value="50,33" selected>50 × 33 mm (Jack's labels)</option>
         <option value="40,30">40 × 30 mm</option>
         <option value="50,30">50 × 30 mm</option>
-        <option value="40,40" selected>40 × 40 mm</option>
+        <option value="40,40">40 × 40 mm</option>
         <option value="50,50">50 × 50 mm</option>
         <option value="30,30">30 × 30 mm</option>
         <option value="custom">Custom…</option>
@@ -2401,12 +2402,12 @@ var qrcode = function() {
     </div>
   </div>
   <div class="row">
-    <div><label class="fld">Width (mm)</label><input id="w" type="number" value="40"></div>
-    <div><label class="fld">Height (mm)</label><input id="h" type="number" value="40"></div>
+    <div><label class="fld">Width (mm)</label><input id="w" type="number" value="50"></div>
+    <div><label class="fld">Height (mm)</label><input id="h" type="number" value="33"></div>
     <div><label class="fld"># copies to print</label><input id="copies" type="number" value="3"></div>
   </div>
   <label class="fld">URL the QR points to (defaults to a real card on your live site)</label>
-  <input id="url" value="https://jfung1668.github.io/Pokemon_vendor/#legendary-collection-36-arcanine-holofoil-psa-9-0-mint-pc">
+  <input id="url" value="https://centaur-01.github.io/Pokemon_vendor/#legendary-collection-36-arcanine-holofoil-psa-9-0-mint-pc">
   <label class="fld">Card label text</label>
   <input id="name" value="Arcanine — Legendary Collection · #36">
 </div>
@@ -2463,7 +2464,11 @@ function setPrintCss(c, { landscape=false, pad='1mm', textPx=6, qrPct=86 } = {})
         padding:${pad}; overflow:hidden;
       }
       .lbl:last-child { page-break-after:auto; break-after:auto; }
-      .lbl svg { width:${qrPct}%; height:auto; max-height:${qrPct}%; }
+      /* size the (square) QR by the label's SMALLER side — on a wide label (50x33) driving
+         by width overflowed the height and the print dialog shrank the whole page */
+      .lbl svg { ${W >= H
+        ? `height:${qrPct}%; width:auto; max-width:${qrPct}%;`
+        : `width:${qrPct}%; height:auto; max-height:${qrPct}%;`} }
       .lbl .t { font:700 ${textPx}px -apple-system,sans-serif; text-align:center; margin-top:.6mm; line-height:1.1; }
     }`;
 }
@@ -2477,6 +2482,9 @@ function go(c){ setTimeout(() => window.print(), 90); }
 
 // ---- the named solutions ----------------------------------------------------
 const SOLUTIONS = [
+  { id:'full', name:'Fill 50×33 ⭐', desc:'THE fix: one QR filling the whole 50×33 sticker, page = label, zero margins.',
+    run(c){ setPrintCss(c,{qrPct:97,pad:'0.5mm'}); render(c,{withText:false}); go(c); } },
+
   { id:'solo', name:'Solo', desc:'1 QR per label, ~86% size, tiny name. The baseline fix.',
     run(c){ setPrintCss(c,{qrPct:86,textPx:6}); render(c,{withText:true}); go(c); } },
 
