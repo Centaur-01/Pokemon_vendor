@@ -67,6 +67,7 @@
         <div class="text-right">
           <p class="text-lg md:text-2xl font-bold gradient-text" id="statValue">—</p>
           <p class="text-[10px] md:text-xs text-gray-500 -mt-1">cards listed</p>
+          <p class="text-[10px] md:text-xs text-gray-400 whitespace-nowrap" id="pricesUpdated"></p>
         </div>
       </div>
     </div>
@@ -139,12 +140,20 @@ const hasPrice = c => Number(c.sale_price) > 0;
 const isGraded = c => c.Grade && !/ungraded/i.test(c.Grade);
 
 async function init(){
+  let builtAt = '';
   try {
     const data = await (await fetch('inventory.json',{cache:'no-cache'})).json();
     ALL = data.cards || [];
+    builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
   $('#statValue').textContent = ALL.length.toLocaleString();
+
+  if (builtAt) {
+    const d = new Date(builtAt.replace(' ', 'T'));
+    if (!isNaN(d)) $('#pricesUpdated').textContent =
+      'Prices updated ' + d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+  }
 
   buildRegionTabs();
   buildEraOptions();
