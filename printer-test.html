@@ -2321,6 +2321,12 @@ var qrcode = function() {
   button.sol span { display:block; font-size:11px; color:#9aa3b2; line-height:1.35; }
   button.sol:active { background:#243049; }
   .note { margin:12px; font-size:12px; color:#9aa3b2; line-height:1.5; }
+  #cardhits { margin-top:4px; }
+  #cardhits button { display:block; width:100%; text-align:left; background:#101826; color:#e7e9ee;
+    border:1px solid #223049; border-radius:9px; padding:8px 10px; margin-top:5px; cursor:pointer; font-size:13px; }
+  #cardhits button small { color:#9aa3b2; display:block; font-size:11px; margin-top:1px; }
+  #cardhits button:active { background:#1c2a44; }
+  #cardhits .none { color:#9aa3b2; font-size:12px; padding:6px 2px; }
   .tag { display:inline-block; background:#243049; color:#9ecbff; border-radius:6px; padding:1px 6px; font-size:11px; margin-right:4px; }
 
   /* ---- print area (hidden on screen) ---- */
@@ -2406,6 +2412,9 @@ var qrcode = function() {
     <div><label class="fld">Height (mm)</label><input id="h" type="number" value="33"></div>
     <div><label class="fld"># copies to print</label><input id="copies" type="number" value="3"></div>
   </div>
+  <label class="fld">Pick a real card (searches the live inventory — tap a result to load it)</label>
+  <input id="cardsearch" placeholder="type a name, set, or number… e.g. arcanine" autocomplete="off">
+  <div id="cardhits"></div>
   <label class="fld">URL the QR points to (defaults to a real card on your live site)</label>
   <input id="url" value="https://centaur-01.github.io/Pokemon_vendor/#legendary-collection-36-arcanine-holofoil-psa-9-0-mint-pc">
   <label class="fld">Card label text</label>
@@ -2540,6 +2549,31 @@ function downloadPng(c){
   a.click();
   alert(`Saved ${size}×${size}px PNG (${c.w}mm @ ${c.dpi} DPI).\nOpen it in the Clabel app's "print image / photo" mode — it should land 1-to-1 with no shrinking.`);
 }
+
+// ---- real-card picker (Jack 2026-08-22: "make one that actually links to a card") ----
+const SITE = 'https://centaur-01.github.io/Pokemon_vendor/';   // stickers always point at the LIVE site
+let CARDS = null;
+fetch('inventory.json').then(r => r.json()).then(d => { CARDS = d.cards || d; })
+  .catch(() => { $('#cardhits').innerHTML = '<div class="none">Inventory not reachable from here — paste a URL below instead.</div>'; });
+
+$('#cardsearch').addEventListener('input', e => {
+  const q = e.target.value.trim().toLowerCase();
+  const box = $('#cardhits');
+  if (!CARDS || q.length < 3) { box.innerHTML = ''; return; }
+  const hits = CARDS.filter(c =>
+    (`${c['Product Name']} ${c['Set']} ${c['Number']}`).toLowerCase().includes(q)).slice(0, 8);
+  box.innerHTML = hits.length ? hits.map((c, i) =>
+    `<button data-i="${i}"><b>${c['Product Name']}</b>
+     <small>${c['Set'] || ''} · #${c['Number'] || '?'} · $${c['sale_price'] ?? '?'} · ${c['Variance'] || ''}</small></button>`).join('')
+    : '<div class="none">No card matches — check spelling or try fewer letters.</div>';
+  box.querySelectorAll('button').forEach(b => b.onclick = () => {
+    const c = hits[+b.dataset.i];
+    $('#url').value = SITE + '#' + c.slug;
+    $('#name').value = `${c['Product Name']} — ${c['Set'] || ''} · #${c['Number'] || ''}`.slice(0, 60);
+    box.innerHTML = `<div class="none">✓ loaded: ${c['Product Name']} — now tap “Fill 50×33 ⭐” to print its sticker.</div>`;
+    $('#cardsearch').value = '';
+  });
+});
 
 // build the buttons
 $('#sols').innerHTML = SOLUTIONS.map(s =>
