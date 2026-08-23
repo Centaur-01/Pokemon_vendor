@@ -389,6 +389,19 @@ function qrPngDataUrl(text, px){
     if (qr.isDark(r, c)) ctx.fillRect((quiet + c) * cell, (quiet + r) * cell, cell, cell);
   return cv.toDataURL('image/png');
 }
+// Copies of the same set+number are separate listings (own condition, own
+// price) — their stickers get a tiny ID tag ("Shadowless · LP") so the right
+// sticker lands on the right physical card. Unique cards stay clean.
+const COND_ABBR = { 'Near Mint':'NM', 'Lightly Played':'LP', 'Moderately Played':'MP',
+                    'Heavily Played':'HP', 'Damaged':'DMG' };
+function stickerTag(c){
+  const key = `${c.Set}|${c['Card Number']}`;
+  const dups = ALL.filter(x => `${x.Set}|${x['Card Number']}` === key).length;
+  if (dups < 2) return '';
+  const parts = [c.Variance, COND_ABBR[c['Card Condition']] || c['Card Condition']];
+  if (c.Grade && c.Grade !== 'Ungraded') parts.push(c.Grade);
+  return parts.filter(Boolean).join(' · ');
+}
 function makeStickerPdf(list, fname){
   const doc = new jspdf.jsPDF({ unit: 'mm', format: [50, 33], orientation: 'landscape' });
   const QR = 29, M = 1.5, X = M + QR + 1.5, COLW = 50 - X - M;
@@ -407,6 +420,8 @@ function makeStickerPdf(list, fname){
     y += 1;
     doc.setFontSize(7);
     sub.forEach(ln => { doc.text(ln, X, y); y += sh; });
+    const tag = stickerTag(c);
+    if (tag) { doc.setFontSize(5.5); doc.text(tag, X, 31.2); }
   });
   doc.save(fname);
 }
