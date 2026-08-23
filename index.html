@@ -140,7 +140,7 @@ async function init(){
   let builtAt = '';
   try {
     const data = await (await fetch('inventory.json',{cache:'no-cache'})).json();
-    ALL = data.cards || [];
+    ALL = (data.cards || []).filter(c => c.is_for_sale !== false);  // belt+suspenders: sold/held never render
     builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
@@ -300,6 +300,7 @@ function openCard(id){
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
         </div>
+        ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
         <button onclick="printCard('${c.id}')" class="w-full mb-3 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition flex items-center justify-center gap-2">⬇️ This card's sticker (PDF)</button>
         <button onclick="toggleReport()" class="w-full mb-3 py-2.5 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">🛠️ Suggest a fix</button>
         <div id="reportForm" class="hidden mb-5 p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-3">
@@ -389,17 +390,24 @@ function qrPngDataUrl(text, px){
     if (qr.isDark(r, c)) ctx.fillRect((quiet + c) * cell, (quiet + r) * cell, cell, cell);
   return cv.toDataURL('image/png');
 }
-// Copies of the same set+number are separate listings (own condition, own
-// price) — their stickers get a tiny ID tag ("Shadowless · LP") so the right
-// sticker lands on the right physical card. Unique cards stay clean.
+// EVERY sticker carries one grade mark (Jack 2026-08-23): PSA grade for slabs,
+// NM/LP/MP/HP/D for raw cards, UO for sealed. Variance is prefixed only when
+// the same set+number exists as multiple copies (so twins stay tellable-apart).
 const COND_ABBR = { 'Near Mint':'NM', 'Lightly Played':'LP', 'Moderately Played':'MP',
-                    'Heavily Played':'HP', 'Damaged':'DMG' };
+                    'Heavily Played':'HP', 'Damaged':'D' };
+function gradeMark(c){
+  const g = String(c.Grade || '');
+  const m = g.match(/^([A-Z]+)\s*([\d.]+)/);
+  if (m && g !== 'Ungraded') return `${m[1]} ${parseFloat(m[2])}`;   // "PSA 9.0 MINT" -> "PSA 9"
+  if (!(c['Card Number'] || '').trim()) return 'UO';                  // sealed product
+  return COND_ABBR[c['Card Condition']] || c['Card Condition'] || '';
+}
 function stickerTag(c){
   const key = `${c.Set}|${c['Card Number']}`;
   const dups = ALL.filter(x => `${x.Set}|${x['Card Number']}` === key).length;
-  if (dups < 2) return '';
-  const parts = [c.Variance, COND_ABBR[c['Card Condition']] || c['Card Condition']];
-  if (c.Grade && c.Grade !== 'Ungraded') parts.push(c.Grade);
+  const parts = [];
+  if (dups > 1 && c.Variance) parts.push(c.Variance);
+  parts.push(gradeMark(c));
   return parts.filter(Boolean).join(' · ');
 }
 function makeStickerPdf(list, fname){
@@ -422,6 +430,7 @@ function makeStickerPdf(list, fname){
     sub.forEach(ln => { doc.text(ln, X, y); y += sh; });
     const tag = stickerTag(c);
     if (tag) { doc.setFontSize(5.5); doc.text(tag, X, 31.2); }
+    if (c.internal_id) { doc.setFontSize(5.5); doc.text(String(c.internal_id), 48.5, 31.2, { align: 'right' }); }
   });
   doc.save(fname);
 }
