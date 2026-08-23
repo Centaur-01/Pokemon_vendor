@@ -396,6 +396,12 @@ function qrPngDataUrl(text, px){
 // the same set+number exists as multiple copies (so twins stay tellable-apart).
 const COND_ABBR = { 'Near Mint':'NM', 'Lightly Played':'LP', 'Moderately Played':'MP',
                     'Heavily Played':'HP', 'Damaged':'D' };
+// footer variance abbreviations — full words overflow the ~17mm column (QC'd cut-off print)
+const VAR_ABBR = { 'Reverse Holofoil':'RH', 'Poke Ball Reverse Holo':'PB RH',
+                   'Master Ball Reverse Holo':'MB RH', 'Holofoil':'Holo',
+                   '1st Edition':'1st Ed', '1st Edition Holofoil':'1st Ed Holo',
+                   'Unlimited Holofoil':'Unl Holo', 'Unlimited':'Unl',
+                   'Shadowless Holofoil':'Shdwls Holo', 'Shadowless':'Shdwls' };
 function gradeMark(c){
   const g = String(c.Grade || '');
   const m = g.match(/^([A-Z]+)\s*([\d.]+)/);
@@ -407,7 +413,7 @@ function stickerTag(c){
   const key = `${c.Set}|${c['Card Number']}`;
   const dups = ALL.filter(x => `${x.Set}|${x['Card Number']}` === key).length;
   const parts = [];
-  if (dups > 1 && c.Variance) parts.push(c.Variance);
+  if (dups > 1 && c.Variance) parts.push(VAR_ABBR[c.Variance] || c.Variance);
   parts.push(gradeMark(c));
   return parts.filter(Boolean).join(' · ');
 }
@@ -432,7 +438,9 @@ function makeStickerPdf(list, fname){
     doc.setFontSize(7);
     sub.forEach(ln => { doc.text(ln, X, y); y += sh; });
     doc.setFontSize(5.5);
-    const tag = stickerTag(c);
+    let tag = stickerTag(c);
+    while (tag && doc.getTextWidth(tag) > COLW && tag.includes('·'))
+      tag = tag.split('·').slice(1).join('·').trim();        // too wide: drop variance, keep grade
     if (tag) doc.text(tag, X, 29.4);                         // footer line 1
     if (c.internal_id) doc.text(String(c.internal_id), X, 31.6);   // footer line 2
   });
