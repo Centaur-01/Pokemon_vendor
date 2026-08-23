@@ -272,6 +272,7 @@ function cardHTML(c){
       <div class="mt-1 flex gap-1 flex-wrap">
         ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
+        ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
       </div>
       <div class="mt-auto pt-2">
         ${priced
