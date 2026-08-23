@@ -422,15 +422,18 @@ function makeStickerPdf(list, fname){
     doc.setFontSize(7);
     const sub = doc.splitTextToSize(`${c.Set || ''}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}`, COLW).slice(0, 3);
     const lh = 8 * 0.3528 * 1.2, sh = 7 * 0.3528 * 1.2;     // pt -> mm, 1.2 leading
-    let y = Math.max(M + 2, (33 - (name.length * lh + 1 + sub.length * sh)) / 2 + lh * .8);
+    // text block centers in the area ABOVE the tag/ID zone (bottom ~5mm) so
+    // nothing ever collides with the two footer lines (Jack's squish report)
+    let y = Math.max(M + 2, (28 - (name.length * lh + 1 + sub.length * sh)) / 2 + lh * .8);
     doc.setFontSize(8);
     name.forEach(ln => { doc.text(ln, X, y); y += lh; });
     y += 1;
     doc.setFontSize(7);
     sub.forEach(ln => { doc.text(ln, X, y); y += sh; });
+    doc.setFontSize(5.5);
     const tag = stickerTag(c);
-    if (tag) { doc.setFontSize(5.5); doc.text(tag, X, 31.2); }
-    if (c.internal_id) { doc.setFontSize(5.5); doc.text(String(c.internal_id), 48.5, 31.2, { align: 'right' }); }
+    if (tag) doc.text(tag, X, 29.4);                         // footer line 1
+    if (c.internal_id) doc.text(String(c.internal_id), X, 31.6);   // footer line 2
   });
   doc.save(fname);
 }
