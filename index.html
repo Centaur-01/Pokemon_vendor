@@ -149,7 +149,8 @@ async function init(){
   if (builtAt) {
     const d = new Date(builtAt.replace(' ', 'T'));
     if (!isNaN(d)) $('#pricesUpdated').textContent =
-      'Prices updated ' + d.toLocaleDateString(undefined, {month:'short', day:'numeric', year:'numeric'});
+      'Prices updated ' + d.toLocaleString(undefined,
+        {month:'short', day:'numeric', year:'numeric', hour:'numeric', minute:'2-digit'});
   }
 
   buildRegionTabs();
