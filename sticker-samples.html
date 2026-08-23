@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sticker samples — 3 QR sizes on 50×33</title>
+<title>Sticker test round 2 — final layout ×5</title>
 <style>
   @page { size: 50mm 33mm; margin: 0; }
   * { box-sizing: border-box; margin: 0; }
@@ -11,17 +11,15 @@
   .howto { max-width: 420px; margin: 0 auto 14px; font-size: 14px; line-height: 1.45;
             background: #fff; border-radius: 10px; padding: 12px 14px; }
   .caption { max-width: 420px; margin: 14px auto 4px; font-size: 13px; font-weight: 600; }
-  .caption small { font-weight: 400; color: #555; }
   .label { position: relative; width: 50mm; height: 33mm; background: #fff;
             border: 1px dashed #bbb; margin: 0 auto; padding: 1.5mm;
             display: flex; align-items: center; gap: 1.5mm; overflow: hidden;
             page-break-after: always; break-after: page; }
-  .qr { flex: 0 0 auto; image-rendering: pixelated; }
+  .qr { width: 29mm; height: 29mm; flex: 0 0 auto; image-rendering: pixelated; }
   .txt { flex: 1 1 auto; min-width: 0; }
-  .name { font-size: 8.5pt; font-weight: 700; line-height: 1.15; overflow-wrap: break-word; }
-  .sub { font-size: 6pt; color: #333; margin-top: 1mm; }
-  .price { font-size: 8pt; font-weight: 700; margin-top: 1mm; }
-  .mark { position: absolute; bottom: 0.5mm; right: 1mm; font-size: 6pt; color: #999; }
+  .name { font-size: 8pt; font-weight: 700; color: #000; line-height: 1.15; overflow-wrap: break-word; }
+  .sub { font-size: 7pt; font-weight: 700; color: #000; margin-top: 1mm; }
+  .mark { position: absolute; bottom: 0.5mm; right: 1mm; font-size: 6pt; font-weight: 700; color: #000; }
   .print-btn { display: block; margin: 16px auto; padding: 12px 26px; font-size: 16px;
                 font-weight: 700; color: #fff; background: #e3350d; border: 0;
                 border-radius: 10px; }
@@ -34,39 +32,57 @@
 </head>
 <body>
 <div class="howto">
-  <b>3 sticker samples — one tap to print all 3.</b><br>
-  Each prints on its own 50×33 label: <b>A</b> big QR, <b>B</b> medium, <b>C</b> compact.
-  Scan each with a phone — every QR opens that card's real page. Then just say
-  which letter looked/scanned best.
+  <b>Round 2 — the FINAL layout, 5 different cards.</b><br>
+  Big 29mm QR · no grade · one bold font. Print all 5, scan each with a phone
+  (each opens its own card page), check the text reads clean. If all 5 pass,
+  say "go" and every card gets its sticker in this exact layout.
 </div>
 
-  <div class="caption">Sample A — BIG — QR nearly fills the label height<br><small>Togepi & Cleffa & Igglybuff GX</small></div>
+  <div class="caption">Sample 1 — Team Rocket's Moltres ex - 208/182 (Destined Rivals Stamp)</div>
   <div class="label">
-    <img class="qr" style="width:29mm;height:29mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC70lEQVR42u2dW2okMQxFxWyg9r9L78DJdFzWvXINNHR+Bh0TCnen63wYLnpYlmN+PkYAAQIECBAg70Nij+vvN9/PNZ9rsp7lm3zlT/zCAALk/4K8tHMtJa3JSF3o35LV/rhfQTtAGmtHlbIs2v3cqtFvzBihHSBoZztjr8mPh5Ze3Gu+3Dy0AwTtnHZHvDizOKfK0A4Q4p0tDY9uNA5KG0S8AwRI1Dzbu3/yCtoB0lY7OlakM+5/jRXjPNqj269jYYH0jncido46RTSnRTcRtiV0oR0g7bVzzSIKdcwsL11+gM8GpLfPts1KTspGzy2rTB1c+GxA0E5u36hXdqfRohqma+6ACLsDpLV2xCVTFy51dH/UvR7RFAsLpK92tGBgyyTzA2WLRwfaAdJeOyV1YLVtEhNZ4nq9zsICaaqdbVxyKyeO8javCA3dGEI7QBrnCjJ+uTPS6sjpSZ+0O3lmgYUF0j1XkHoZx+84+wYEyOmzxVO8cyfZ8jky3kk3D7sDpHe8owkBS7hJAdu2OBYioR0gvX22PKrjJQR7l0dL3azRAT4bkN65gvCC6vB6g6WReZS0oR0g2J1ZT7Q9NDEYVUH4bECIdzSNVrZHzX/bVaBWh8DCAumdK9A02s68SSmO7fioqUI7QJrnCjze0dxaVk2HTwbxDhDsTrY01PMF1ilU0td27BrtAGlrd3xb52yiq92ltMoauwMEu2P5gaNorfQ2POIjFhZIX+2cbpumBUp6zQZ2Bwh2R8N/705ggvLLEbA7QLrbnQi76SBC2+qenQq8WJSFBdLa7tSuuZJJMF9OCnXIswFprp3SF7Qchau9QD38Id4B0truWOCfFQX1pqpR/TrsDhB8NrsipNRUP94qMtnfAYJ26q06/4qALGkQaZvQDhC083Daehz1bJddjoDPBgTt1HMHuh86q6b2D9AOEOKd0n36+WaEcq8i+ztAmmvH45coTd0vq8Ypt12jHSCdtfPpGECAAAECBMibkC8WQVWMU8m69QAAAABJRU5ErkJggg==" alt="QR A">
+    <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC+klEQVR42u2dUWokMQxExV7A97+lb+CEGbdUkh12IPuz6JkhDJPu+jA8JJVl29bvxzREEEEEEUQQ+VzEfIzXL+/P67/fY/99DX8sv/LH/sFABJH/S+TFztgkxRdFZgYs/kx6BXYQaczOjiZjf4+4MyLAbV5mfQV2EIGdiC+Stmm2phzBDiKwU9h5Z2uB0pBYUyiDHUSodzSaWHIhNiBeBI34hXoHke7s+PCS568feQV2EGnLTooytl01/SWFm7eBkIxuJhaR3vWOlDbqsKXq5rEL4nnYQQR2xEY7gTpTNXESmFhEuuZsJb48HrUv6LhXoKyFgw07iHT2Cnzd80nJwmGb7kVbIuipg2AHkebsBEHrqG7Uu/a8Lpp2mFhEuuZsa5XkbS+PWu0OTf+KB5hYRPp6BUpQ8gGk4zqBlgoiJhaRvjlbaWCLmKJeQTGrw8pmYhHpm7PVrQfTUsea7ETwB8RMYGIRaVzvaNOabtI5uqnTdh7iDiLt650wAY4F0Ogx0P0I2rcDO4g0rndSDFKgVjAVVpsuj8IOIp1ztikQlYWesUrTjppvD1NMLCJ9487VKIigY1Yg0rwOdhDpXO8ku0C2i+rWg2RWa+Mo7CDSud5xOuzCiOlqzlrabEDcQaR1vbNW6Y4+O6ijM2fm7h3iDiLNczaPI3LWR/mip+Xkd5lYRBrHnR/aBkqXTjmcjf07iBB3IhOTEHM5um2s0lcAO4hQ72w0Vs7fVl3fKft3yNkQaR137HKKe1obPVt3fMAOIuRs0/QIqZKqXY7+MPbvIAI7l32jqQJSy1paRlkbRQR2lKC6Z0cOyXFq8AoQgZ16Lqg0GLg5YIfnlvaWwg4inb0CB2Elv7oejFPOOaTeQYScbdU26cudO1bNBPrZEIEdT8YuF70djQSp9oEdRGCnbDfQRE6bDbRph3oHEdixfO/buJlvlu6/jg2ksIMI9c65SDrzFYqjXgMHO4i0Zkfrl3xO+5nI6QU9+GyINGfnt2MigggiiCCCyIciX7xnSnmVCWS7AAAAAElFTkSuQmCC" alt="QR 1">
     <div class="txt">
-      <div class="name">Togepi & Cleffa & Igglybuff GX</div>
-      <div class="sub">Alternate Art Promos · 143a/236 · Ungraded</div>
+      <div class="name">Team Rocket's Moltres ex - 208/182 (Destined Rivals Stamp)</div>
+      <div class="sub">Miscellaneous Cards & Products · #208/182</div>
     </div>
-    <div class="mark">A</div>
+    <div class="mark">1</div>
   </div>
-  <div class="caption">Sample B — MEDIUM — QR + roomier text<br><small>Gyarados (21)</small></div>
+  <div class="caption">Sample 2 — Mew</div>
   <div class="label">
-    <img class="qr" style="width:24mm;height:24mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC7klEQVR42u2dW27EIAxFrW6A/e+SHaTTJuBrm0ojtT+VD8pHZpLcD6QjPwG7fj+mIYIIIogggsj7IrbHeP583bx+fT1d19fP15vj9Mn8sD8YiCDyv0QWEd/jvrnB8afmsOg7/gnsINKYnduC6KUG6DE32x7FT2AHEdh5ruWtbWQeakaxTbCDCOxsduyJbtxVW7amvgk7iMCOo7G9NeXltjXmBoh4BxHYSUmzdy/5BHYQacuOjpwuqOZm2n60Et1MLCK9453HiFig5rpCdHOnES55H3YQ6Wx3Fg7PzbiSL+d2R4enr5lYRBr7bPP0aJo2MITcgnpusINI51zBEEZyCtpvlCBvCoIdRBr7bKb9Nmp3kre2q6WXMsXEItLX7mj/gPISukZncfBgBxFyBTMUST1pUPMDqWkHnw2R3rkCjWh86cEVegwsJeXoK0AEduayKZo6SDcrAgpVHnw2RJrHOzG02S1tungnp6lNCqmwg0hnuzMCGjnkGdl5i/8zsYg0zhWIcck/T0WfYKpgB5G2PluKX1JH6IqGwj4JUz03JhaRvvGOrxLdntuu9cQ+6vw97CDSPN4pGYBQJJX9CnJCG58NEdiZsto6pKB/SCl4cw4Ti0hXdpLbNn8IiFLNlHgHEdgJCwpK1/SITp3VmIiJRaRrrmBF/QeH7Qq7HabFcfhsiHRnZ5TNcMx0HzbdXSrl32AHkeZ2J9V0UlknwFJ6RGEHkdbsSP7ZI6C6ia60g25PD3YQ6eyzheVs+6asEg35BGP9DiKwU5ptRi7uVKtk9LMhAjuaFphlzU5MFNRHsINIW3Zyv7TuLnXqNEhHIcAOIp1zBRL4H3Y4PC/ewWdDBHZKDdRin5vF7HQ6FgF2EOnMjluT03ki6eyqbaTYrwAR2FEWPMCRPUBMK0EW96SCHURgpxz9lmqjXuvRPAPsIEK8M8KJb3pAfD3J1+hnQwR2LFiZtFFbWDdqZTNq2EGkMTu/HRMRRBBBBBFE3hT5BIh3PrLetovrAAAAAElFTkSuQmCC" alt="QR B">
+    <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC8ElEQVR42u2dQYrDMAxFxVzA97+lb+CZklj6krMotJtBz5QhdNK3CHwkfUuOrc/XNCBAgAABAuR9iPkar2/+1uvvWNfnun7dNvb9o/zkx76wgAD5X5BbC9e6ROHC0mtV0K2p5YLiwQLpq50rgrgobmlMuW2aR7r7zv0TtAME7XiS5lEmkrqdvMWdaAcI2lEh7FQtCcRMMjS0AwTIQ71z52aSoRWvgHoHCJDQjq+x3v3IT9AOkLba0ZUStm1Ka6UTpVBYcDxYIORsOQY9Fj7uJMwtPbQDpLNX4K7aNI04kdS5/2bmO6TEHSDUOy6QZAtYSs/S/Zq5oR0gveudEoPKVmnkdRKD0A4QcrYShlJ3gdvU07SfDY8aCNqpHloparbVFhHKtcbeKJDmOds0dQnOMBSNbWK1Sd8ODxZI43pn5mvJ2SL0eLbmyZuxNwqEnM0ibbPkRWvjQXyPdoCgHa1lZPBNneroLvC9UeodIGhHI4vYBbqh42IpxRE+GxByNjum2zRhS6PWMsiz4xEPFkjvnK2kZPm8gqP/k3oHCNqRhG1lr+CYG41DDLRjB+0A6ZyzjRR3Hk/LiRpHxYV2gPT2ClLPwFjnAELUQTpeilcApH3cqYdKlR0c7QJ1/w3tAEE7OryjpY0aa9KZEz4b2gGCV3BeFJ9NY420HFDvAGld78gcaMSdfC6BziOkk3iJO0Caxx0dQNDdz3U058zcokPcAdJbO7qhY7nJzY6JbN3fIe4A6a6ddezjzId2HS186GcDgnbSJk4+F/RO51ZtzklvTEA7QBprJx0tlY214iGUqVK0A6SzdkpfQdJLGbvO/0U7QKh37jXqlOjZ/OkWgZyIyIMF0jhnK2M75fSPfBZoedUI2gHS2iswe3zpW7jTelqOBCniDhC0U198cN6Zzy6QTVIeLBC0s0qg0Y4dy4d+EHeAoJ1U7+S2gXqm7vH2N+odIK21IyWMlR0fy/s+Gnrw2YC0186nawIBAgQIECBvQn4BlcGLg863tRoAAAAASUVORK5CYII=" alt="QR 2">
+    <div class="txt">
+      <div class="name">Mew</div>
+      <div class="sub">Celebrations · #011/025</div>
+    </div>
+    <div class="mark">2</div>
+  </div>
+  <div class="caption">Sample 3 — Acerola's Mischief</div>
+  <div class="label">
+    <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC50lEQVR42u2dS27kMAxEhbmA739L30BJ2mqyilIwATKbAZ/QaLg/roWBhyIpShrz9+MeiCCCCCKIIPJzkRHjms/75/df19f7P69X/ueyW+b9Z/yDgQgi/5fIi51rkfRcLCLmYuThaNH0+lhvgR1EGrMThhL+kl7zIDPXeyAjt/BgEYEduX5bzIrZ5ozoDnYQQeTITuZBnu9oEgQ7iMBOSV60GhDgPLHc8/GQIsEOIm3ZiRFh219fcgvsINKWHR1RKNDaWsRpUT3wQjcPFpHWMVu4SaY277BNS3DqU8RsiMBOKQgUZBY1YjpZuIYdRHrHbJrFBDhZJRAbsr/BDiKw4xOjWqnO+Z3bUyF8BxFiNo3EvCygv37bUwc7iDT2nZzKqfFYNrDt7W34DiL4jjUVSF+oNVFLuw59BYjAjsFyjzIBWpwoq3Bz4juIwE70SB8mevSnKFZ7gyjsINKXHZ3ckblRnevRNQjrTnwHEdiRsrPOh1ofjjhRsgY7iMDOGIdCgc7paDfOlSu+YQeR7jGbuM8pKhslYLM1PrCDSFd20lnu/Lj36qg3RXQHO4gQsy0cNEIrvqNLR4nZEIGdOcvE6KEcrV/qqlLYQaS578xZgrfaGqpTPGXNAvM7iLSP2RKirXkgF5AOvyDfQaR9rSCQWQWBu/aIqh9Z0QB2EOnNjpIihmJltzFsZ11pP+DBItLad8ruoOdt2XyDKfIdRGCnVtJOy6udF/rZEIEd38Xdc5+M6GSKp/oR7CDSmR31oDsTHK1L2130giICO/O0xm1bha3Hi2h+RL6DSHPfscNBdMP2a4vWtFcH30Gkve+YlUgrtbYTaCDH3oaIwM52qMGogdl1OA/O2q1hB5HG7Bgm+8Y4ZctQqRjgO4jATvGXcBnbvmD4GgR8BxHYcSjs6BBNizZw8B1EyHdsj6ltAUJZgzBsOx0eLCJd2YmhUIx6qoh1GthBijxYRJqy89txI4IIIogggsgPRT4AIS1wRMS91mUAAAAASUVORK5CYII=" alt="QR 3">
+    <div class="txt">
+      <div class="name">Acerola's Mischief</div>
+      <div class="sub">MEGA Dream ex · #169/193</div>
+    </div>
+    <div class="mark">3</div>
+  </div>
+  <div class="caption">Sample 4 — Detective Pikachu (JP)</div>
+  <div class="label">
+    <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC8UlEQVR42u2dQU4EMQwELT6Q//9yfhAEJE63s0JIcEGu0R5gZqcOkVq2O3Y25u+vJ4AAAQIECJCfQyKvMc/n69+Ir6+dp/t+vjKft/iDCwiQ/wX51M5YSlLhfMjqWU+XgqZ9Lf9GO0A6ayfDigYji24SeuoraAcI2pGI8ymKI5z1976DdoCgnUsI+/4TJXM7d9AOECBXvVOytSOWtA6eoN4BAmRpJy/12b7/yCtoB0hb7RQPLUPPkoYY2i9fQTtAmtc7q5wRZ+DkaXNm/pY+m1gKLCyQvjmbiUL3etI30FRNd0jRDpDeOZsVO2lTuz+gu6LuKrCwQBrnbEPk8ISmbda9s79zREfcAULONo4jfeTj2dpyDHb7Afs7QMjZqrf2mD+gXW0ZqmTPlIUF0lU72jygkUVs6pCdILXg0A6Q5trROBLa0qa7PE8NUnjUQPAK0lgrzkDsfZ8TgKwbB58NSPd655QzY1oH9eW86Z0dj1hYIK21czK33S9tRY0Za9ZvgHaAtPYKVD4ys2NGgQ9cSw8PCwuksXZKI4HUNTr4ptmaxCMWFkhXryCu3ht9VHpyyoXPBqR3vWOT1BHFK0iZbLHYWBzaAdI37ow6hnCnbVG6RreIiDtA0E6JOCWF0w43/Q7aAdLdK5izDLXpyR56xlR1qtEOkN5eQdm+KRujt1FgJjbaAdJYO3r0zXGkRz26zU6aoo8aCNrRRtAh6Zn4bPV83ew9QDtAetc7EXXS7bW3FpbXBX0FQNrHHTUKMjczm9pneegrAIJ2yg5OsQXqDx+4a03cAULOdh+Dcx9AfSdv9BUAIe7cbTkpk9OW4zaC3GRhgXStd1wsUY6Z8qNB0y4I+tmAoJ0x7+nRckK1FkRl+BrtAOmsnYwmdZbHf370TO7IU7QDBO2Ug6bDfwNOH1k3AtoBgnaGj1dLfNFZUT3WAO0Aod6ppc0dccark6upd4B01o6HmHVfhw7up9Y1ysICaaqd314PECBAgAAB8kPIO3YPXO6jJ3OdAAAAAElFTkSuQmCC" alt="QR 4">
+    <div class="txt">
+      <div class="name">Detective Pikachu (JP)</div>
+      <div class="sub">Scarlet & Violet Promo JP · #098/SV-P</div>
+    </div>
+    <div class="mark">4</div>
+  </div>
+  <div class="caption">Sample 5 — Gyarados (21)</div>
+  <div class="label">
+    <img class="qr" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC7klEQVR42u2dW27EIAxFrW6A/e+SHaTTJuBrm0ojtT+VD8pHZpLcD6QjPwG7fj+mIYIIIogggsj7IrbHeP583bx+fT1d19fP15vj9Mn8sD8YiCDyv0QWEd/jvrnB8afmsOg7/gnsINKYnduC6KUG6DE32x7FT2AHEdh5ruWtbWQeakaxTbCDCOxsduyJbtxVW7amvgk7iMCOo7G9NeXltjXmBoh4BxHYSUmzdy/5BHYQacuOjpwuqOZm2n60Et1MLCK9453HiFig5rpCdHOnES55H3YQ6Wx3Fg7PzbiSL+d2R4enr5lYRBr7bPP0aJo2MITcgnpusINI51zBEEZyCtpvlCBvCoIdRBr7bKb9Nmp3kre2q6WXMsXEItLX7mj/gPISukZncfBgBxFyBTMUST1pUPMDqWkHnw2R3rkCjWh86cEVegwsJeXoK0AEduayKZo6SDcrAgpVHnw2RJrHOzG02S1tungnp6lNCqmwg0hnuzMCGjnkGdl5i/8zsYg0zhWIcck/T0WfYKpgB5G2PluKX1JH6IqGwj4JUz03JhaRvvGOrxLdntuu9cQ+6vw97CDSPN4pGYBQJJX9CnJCG58NEdiZsto6pKB/SCl4cw4Ti0hXdpLbNn8IiFLNlHgHEdgJCwpK1/SITp3VmIiJRaRrrmBF/QeH7Qq7HabFcfhsiHRnZ5TNcMx0HzbdXSrl32AHkeZ2J9V0UlknwFJ6RGEHkdbsSP7ZI6C6ia60g25PD3YQ6eyzheVs+6asEg35BGP9DiKwU5ptRi7uVKtk9LMhAjuaFphlzU5MFNRHsINIW3Zyv7TuLnXqNEhHIcAOIp1zBRL4H3Y4PC/ewWdDBHZKDdRin5vF7HQ6FgF2EOnMjluT03ki6eyqbaTYrwAR2FEWPMCRPUBMK0EW96SCHURgpxz9lmqjXuvRPAPsIEK8M8KJb3pAfD3J1+hnQwR2LFiZtFFbWDdqZTNq2EGkMTu/HRMRRBBBBBFE3hT5BIh3PrLetovrAAAAAElFTkSuQmCC" alt="QR 5">
     <div class="txt">
       <div class="name">Gyarados (21)</div>
-      <div class="sub">Ancient Origins · 21 · PSA 9.0 MINT</div>
+      <div class="sub">Ancient Origins · #21</div>
     </div>
-    <div class="mark">B</div>
+    <div class="mark">5</div>
   </div>
-  <div class="caption">Sample C — COMPACT — smallest QR, biggest text<br><small>Beedrill V (Alternate Full Art)</small></div>
-  <div class="label">
-    <img class="qr" style="width:17mm;height:17mm" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAAIcAQAAAACVhUrRAAAC8UlEQVR42u2dW0oAMQxFgxvo/nfZHdRXm9ykIwr6IzlFZBxn7kfhkEeTjK3fr2mIIIIIIogg8nMR8zXW/nOs9+u5b779en9y2r458ivzxf5gIYLI/xL5YGdskvbFzP+a5/rAssnyV2AHkcbsFFuzCXJMZjzmyMgrbCwisBPWR1wyU6v0hBsbiwjsrM+4JkhxS3TiHb8PO4jAjgYvnhzYDpvAtbGaV4gEO4i0ZcfXCXC+/5FXYAeRtuzUrPVJXGtSWv03NzrnFTYWkcY+m4czkh+I5IBkrdVzgx1EutsdB0EOQyMtkFPWfngaNgh2EOkc75wQJioN/Jx0pAqEUmCA3UEEny2SzyOFP2pl0n1/EnYQac7OsTuRnZ7JEillKSaCHUQ6+2zCUQ2C1kNJm96EHUQ6252UYZtWSkBTmcFapcoadhBpy0451gnnTb24J9bIUSOCz6YFOSmiOQRpOYGyBjuI4LN9SVDJtunD+GyIYHckzImLte4eBF9CGRuLSGt2SgWOnpDWFuzSqgA7iLTNFcyHTLXf2VbGrnOfxdkoIrCTYx+zOuhDa3KEKXw2RMgVOCZaM6BJNvXcNN7B7iDS3e6MGvWkqmkLiOyanwM7iLS2O7nas8Ii3T2aryZXgEh3u+O9Bo+/LU3LiVPRuGBjEelrd0qjqPbslNKCOEsNvthYRPrGO9pMHeBMeWxeXhxzchDB7kiNjTZZBz6jDjZk1gcisFPqbdzK+J9hie6sAj4bIsQ7WqJmlqo9H+e9pyFUbCwi7e1OnvmpIY/CYnlGKOwg0truSFxjqd7GboKud9lYRPrandRZMNIHRFICQaZOuXcHO4j0tTu+pFe0zP/UT1YVrGAHEXIFpSg0zkbvobv0viECO9e3q6KTVFt7xqp2KuBiYxGBnfqJkDJTN5JvqVWBjUUEduTTomPdLQmpf4fzHURg5/rOdRrOZunT8Br+YHcQ6c6Or6tDR922lK+exDuIwM6v10QEEUQQQQSRH4q8AjcAV3vM5KV3AAAAAElFTkSuQmCC" alt="QR C">
-    <div class="txt">
-      <div class="name">Beedrill V (Alternate Full Art)</div>
-      <div class="sub">Astral Radiance · 161/189 · PSA 10.0 GEM - MT</div>
-    </div>
-    <div class="mark">C</div>
-  </div>
-<button class="print-btn" onclick="window.print()">🖨️ Print the 3 samples</button>
+<button class="print-btn" onclick="window.print()">🖨️ Print the 5 samples</button>
 </body>
 </html>
