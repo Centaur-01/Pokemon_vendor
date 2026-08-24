@@ -97,6 +97,7 @@
       <div class="flex items-center justify-between gap-3">
         <p class="text-xs text-gray-500" id="count">Loading…</p>
         <button id="printBtn" class="shrink-0 text-sm font-semibold px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-700 transition">🖨️ Stickers PDF</button>
+        <button id="cartBtn" title="Sticker cart — print your picked cards as one batch" class="shrink-0 text-sm font-semibold px-4 py-2 rounded-xl bg-rose-600 text-white hover:bg-rose-500 transition">🛒 0</button>
       </div>
     </div>
   </div>
@@ -161,6 +162,8 @@ async function init(){
   $('#sort').addEventListener('change', e => { state.sort = e.target.value; apply(); });
   $('#loadMore').addEventListener('click', () => { shown += PAGE; render(); });
   $('#printBtn').addEventListener('click', printStickers);
+  $('#cartBtn').addEventListener('click', cartPrint);
+  cartUI();
   window.addEventListener('keydown', e => { if(e.key==='Escape') closeCard(); });
   // Hide the top bar on scroll-down, bring it back on scroll-up (mobile breathing room).
   let lastY = 0;
@@ -275,10 +278,13 @@ function cardHTML(c){
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
         ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
       </div>
-      <div class="mt-auto pt-2">
+      <div class="mt-auto pt-2 flex items-end justify-between gap-1">
         ${priced
           ? `<p class="text-base md:text-lg font-bold gradient-text">${money(c.sale_price)}</p>`
           : `<p class="text-sm font-bold text-amber-600">Price TBD</p>`}
+        <button onclick="event.stopPropagation();cartAdd('${c.id}')"
+          class="text-[11px] font-bold px-2 py-1 rounded-lg ${cartHas(c.id) ? 'bg-rose-100 text-rose-600' : 'bg-gray-100 text-gray-600'} hover:bg-rose-100 hover:text-rose-600 transition"
+          title="Add sticker to cart">🛒+</button>
       </div>
     </div>
   </div>`;
@@ -303,7 +309,10 @@ function openCard(id){
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
         </div>
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
-        <button onclick="printCard('${c.id}')" class="w-full mb-3 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition flex items-center justify-center gap-2">⬇️ This card's sticker (PDF)</button>
+        <div class="flex gap-2 mb-3">
+          <button onclick="printCard('${c.id}')" class="flex-1 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">⬇️ Sticker (PDF)</button>
+          <button onclick="cartAdd('${c.id}')" class="py-3 px-4 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-500 transition" title="Add to sticker cart">🛒+</button>
+        </div>
         <button onclick="toggleReport()" class="w-full mb-3 py-2.5 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">🛠️ Suggest a fix</button>
         <div id="reportForm" class="hidden mb-5 p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-3">
           <div>
@@ -453,6 +462,26 @@ function printStickers(){
   makeStickerPdf(view, `stickers-${view.length}.pdf`);
 }
 function printCard(id){ const c = ALL.find(x => x.id === id); if(c) makeStickerPdf([c], `sticker-${id}.pdf`); }
+
+// --- Sticker cart: pick cards anywhere, print one batch (Andy's show flow) ---
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem('cc_cart')) || []; } catch(e) { cart = []; }
+function cartHas(id){ return cart.includes(id); }
+function cartSave(){ localStorage.setItem('cc_cart', JSON.stringify(cart)); cartUI(); }
+function cartUI(){ const b = $('#cartBtn'); if(b) b.textContent = `🛒 ${cart.length}`; }
+function cartAdd(id){
+  if(cartHas(id)){ cart = cart.filter(x => x !== id); }   // tap again = remove
+  else cart.push(id);
+  cartSave(); apply();                                     // re-render tiles so the + button reflects state
+}
+function cartPrint(){
+  const cards = cart.map(id => ALL.find(c => c.id === id)).filter(Boolean);
+  if(!cards.length){ alert('Cart is empty — tap 🛒+ on cards to build a print batch.'); return; }
+  makeStickerPdf(cards, `stickers-cart-${cards.length}.pdf`);
+  setTimeout(() => {
+    if(confirm(`Downloaded ${cards.length} stickers. Clear the cart?`)){ cart = []; cartSave(); apply(); }
+  }, 400);
+}
 
 init();
 </script>
