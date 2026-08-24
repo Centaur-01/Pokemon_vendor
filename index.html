@@ -21,6 +21,10 @@
     @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(3px) rotate(3deg)} }
     .sleeper { display:inline-block; animation:bob 3s ease-in-out infinite; }
     #bgart { position:fixed; inset:0; width:100%; height:100%; z-index:0; opacity:.5; pointer-events:none; }
+    .pokefly { position:fixed; z-index:60; font-size:26px; pointer-events:none; will-change:transform,opacity;
+               transition:transform .7s cubic-bezier(.5,-0.4,.6,1), opacity .7s ease-in; }
+    @keyframes cartbump { 0%,100%{transform:scale(1)} 40%{transform:scale(1.35)} }
+    .cartbump { animation:cartbump .35s ease; }
   </style>
 </head>
 <body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
@@ -282,7 +286,7 @@ function cardHTML(c){
         ${priced
           ? `<p class="text-base md:text-lg font-bold gradient-text">${money(c.sale_price)}</p>`
           : `<p class="text-sm font-bold text-amber-600">Price TBD</p>`}
-        <button onclick="event.stopPropagation();cartAdd('${c.id}')"
+        <button onclick="event.stopPropagation();cartAdd('${c.id}',this)"
           class="text-[11px] font-bold px-2 py-1 rounded-lg ${cartHas(c.id) ? 'bg-rose-100 text-rose-600' : 'bg-gray-100 text-gray-600'} hover:bg-rose-100 hover:text-rose-600 transition"
           title="Add sticker to cart">🛒+</button>
       </div>
@@ -311,7 +315,7 @@ function openCard(id){
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
         <div class="flex gap-2 mb-3">
           <button onclick="printCard('${c.id}')" class="flex-1 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">⬇️ Sticker (PDF)</button>
-          <button onclick="cartAdd('${c.id}')" class="py-3 px-4 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-500 transition" title="Add to sticker cart">🛒+</button>
+          <button id="modalCartBtn" onclick="cartAdd('${c.id}',this)" class="py-3 px-4 rounded-xl font-semibold transition ${cartHas(c.id)?'bg-rose-100 text-rose-700':'bg-rose-600 text-white hover:bg-rose-500'}" title="Add to sticker cart">${cartHas(c.id)?'✓ In cart':'🛒 Add'}</button>
         </div>
         <button onclick="toggleReport()" class="w-full mb-3 py-2.5 rounded-xl border-2 border-gray-300 text-gray-700 font-semibold hover:bg-gray-50 transition flex items-center justify-center gap-2">🛠️ Suggest a fix</button>
         <div id="reportForm" class="hidden mb-5 p-4 rounded-xl bg-gray-50 border border-gray-200 space-y-3">
@@ -469,10 +473,34 @@ try { cart = JSON.parse(localStorage.getItem('cc_cart')) || []; } catch(e) { car
 function cartHas(id){ return cart.includes(id); }
 function cartSave(){ localStorage.setItem('cc_cart', JSON.stringify(cart)); cartUI(); }
 function cartUI(){ const b = $('#cartBtn'); if(b) b.textContent = `🛒 ${cart.length}`; }
-function cartAdd(id){
-  if(cartHas(id)){ cart = cart.filter(x => x !== id); }   // tap again = remove
-  else cart.push(id);
-  cartSave(); apply();                                     // re-render tiles so the + button reflects state
+function flyPokeball(fromEl){
+  const target = $('#cartBtn'); if(!fromEl || !target) return;
+  const a = fromEl.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const ball = document.createElement('div');
+  ball.className = 'pokefly'; ball.textContent = '⚪';
+  ball.style.left = (a.left + a.width/2 - 13) + 'px';
+  ball.style.top  = (a.top + a.height/2 - 13) + 'px';
+  document.body.appendChild(ball);
+  requestAnimationFrame(() => {                            // next frame: animate to the cart
+    const dx = (b.left + b.width/2) - (a.left + a.width/2);
+    const dy = (b.top + b.height/2) - (a.top + a.height/2);
+    ball.style.transform = `translate(${dx}px,${dy}px) scale(.4) rotate(540deg)`;
+    ball.style.opacity = '0.2';
+  });
+  setTimeout(() => { ball.remove(); target.classList.add('cartbump');
+    setTimeout(() => target.classList.remove('cartbump'), 350); }, 720);
+}
+function cartAdd(id, srcEl){
+  const adding = !cartHas(id);
+  if(adding){ cart.push(id); if(srcEl) flyPokeball(srcEl); }
+  else cart = cart.filter(x => x !== id);
+  cartSave();
+  const mb = $('#modalCartBtn');                           // live feedback inside the open modal
+  if(mb){
+    mb.textContent = adding ? '✓ In cart' : '🛒 Add';
+    mb.className = `py-3 px-4 rounded-xl font-semibold transition ${adding?'bg-rose-100 text-rose-700':'bg-rose-600 text-white hover:bg-rose-500'}`;
+  }
+  if($('#modal').classList.contains('hidden')) apply();    // grid re-render only when no modal is up
 }
 function cartPrint(){
   const cards = cart.map(id => ALL.find(c => c.id === id)).filter(Boolean);
