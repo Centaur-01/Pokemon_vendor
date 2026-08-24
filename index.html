@@ -276,7 +276,7 @@ function cardHTML(c){
         <h3 class="text-[12px] md:text-sm font-semibold leading-tight line-clamp-2">${c['Product Name']}</h3>
         ${c.region==='JP'?'<span class="text-[10px] shrink-0">🇯🇵</span>':''}
       </div>
-      ${c.name_overridden?'':`<p class="text-[10px] md:text-[11px] text-gray-500 mt-0.5 line-clamp-1">${c.Set} · #${c['Card Number']||'—'}</p>`}
+      ${(() => { const sub = c.name_overridden ? c.display_sub : `${c.Set} · #${c['Card Number']||'—'}`; return sub ? `<p class="text-[10px] md:text-[11px] text-gray-500 mt-0.5 line-clamp-1">${sub}</p>` : ''; })()}
       <div class="mt-1 flex gap-1 flex-wrap">
         ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
@@ -307,7 +307,7 @@ function openCard(id){
           <h2 class="text-2xl font-bold">${c['Product Name']}</h2>
           <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
         </div>
-        ${c.name_overridden?(c.region==='JP'?'<p class="text-gray-500 mt-1">🇯🇵 Japanese</p>':''):`<p class="text-gray-500 mt-1">${c.Set} · #${c['Card Number']||'—'} ${c.region==='JP'?' · 🇯🇵 Japanese':''}</p>`}
+        ${(() => { const base = c.name_overridden ? c.display_sub : `${c.Set} · #${c['Card Number']||'—'}`; const jp = c.region==='JP' ? (base?' · ':'')+'🇯🇵 Japanese' : ''; return (base||jp) ? `<p class="text-gray-500 mt-1">${base}${jp}</p>` : ''; })()}
         <div class="my-5">
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
@@ -441,7 +441,8 @@ function makeStickerPdf(list, fname){
     doc.setFontSize(8);
     const name = doc.splitTextToSize(String(c['Product Name'] || ''), COLW).slice(0, 4);
     doc.setFontSize(7);
-    const sub = c.name_overridden ? [] : doc.splitTextToSize(`${c.Set || ''}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}`, COLW).slice(0, 3);
+    const subText = c.name_overridden ? (c.display_sub || '') : `${c.Set || ''}${c['Card Number'] ? ' · #' + c['Card Number'] : ''}`;
+    const sub = subText ? doc.splitTextToSize(subText, COLW).slice(0, 3) : [];
     const lh = 8 * 0.3528 * 1.2, sh = 7 * 0.3528 * 1.2;     // pt -> mm, 1.2 leading
     // text block centers in the area ABOVE the tag/ID zone (bottom ~5mm) so
     // nothing ever collides with the two footer lines (Jack's squish report)
