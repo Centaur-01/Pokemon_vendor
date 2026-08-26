@@ -21,6 +21,9 @@
     @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(3px) rotate(3deg)} }
     .sleeper { display:inline-block; animation:bob 3s ease-in-out infinite; }
     #bgart { position:fixed; inset:0; width:100%; height:100%; z-index:0; opacity:.5; pointer-events:none; }
+    /* subtle price-source dot — decorative to the public, decodable by Jack+Andy */
+    .srcdot { position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%;
+              z-index:5; opacity:.7; box-shadow:0 0 0 1.5px rgba(255,255,255,.85); }
     .pokefly { position:fixed; z-index:60; font-size:26px; pointer-events:none; will-change:transform,opacity;
                transition:transform .7s cubic-bezier(.5,-0.4,.6,1), opacity .7s ease-in; }
     @keyframes cartbump { 0%,100%{transform:scale(1)} 40%{transform:scale(1.35)} }
@@ -269,7 +272,8 @@ function imgBlock(c, big){
 function cardHTML(c){
   const graded = isGraded(c);
   const priced = hasPrice(c);
-  return `<div data-card="${c.id}" class="card group bg-white rounded-xl border ${priced?'border-gray-200':'border-amber-300'} overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col">
+  return `<div data-card="${c.id}" class="card group relative bg-white rounded-xl border ${priced?'border-gray-200':'border-amber-300'} overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col">
+    <span class="srcdot" style="background:${srcColor(c)}"></span>
     ${imgBlock(c,false)}
     <div class="p-2.5 md:p-3 flex flex-col flex-1">
       <div class="flex items-start gap-1 justify-between">
@@ -308,9 +312,10 @@ function openCard(id){
           <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
         </div>
         ${(() => { const base = c.name_overridden ? c.display_sub : `${c.Set} · #${c['Card Number']||'—'}`; const jp = c.region==='JP' ? (base?' · ':'')+'🇯🇵 Japanese' : ''; return (base||jp) ? `<p class="text-gray-500 mt-1">${base}${jp}</p>` : ''; })()}
-        <div class="my-5">
+        <div class="my-5 flex items-center gap-2">
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
+          <span class="inline-block rounded-full" style="width:9px;height:9px;background:${srcColor(c)};box-shadow:0 0 0 1.5px rgba(0,0,0,.06)"></span>
         </div>
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
         <div class="flex gap-2 mb-3">
@@ -468,6 +473,19 @@ function printStickers(){
 }
 function printCard(id){ const c = ALL.find(x => x.id === id); if(c) makeStickerPdf([c], `sticker-${id}.pdf`); }
 
+// --- Price-source dot: decorative to public, decodable by Jack+Andy only ----
+// Decode key lives OFF-SITE (pokemon/SOURCE_DECODE.md). Never label it here.
+function srcColor(c){
+  switch(c.price_source){
+    case 'tcg-last-sold':   return '#22c55e';   // green
+    case 'ebay-sold':       return '#14b8a6';   // teal
+    case 'tcgplayer':       return '#3b82f6';   // blue
+    case 'collectr-graded': return '#f59e0b';   // amber
+    case 'andy-override':
+    case 'override':        return '#a855f7';   // violet
+    default:                return '#94a3b8';   // slate (Collectr raw/JP)
+  }
+}
 // --- Sticker cart: pick cards anywhere, print one batch (Andy's show flow) ---
 let cart = [];
 try { cart = JSON.parse(localStorage.getItem('cc_cart')) || []; } catch(e) { cart = []; }
