@@ -87,6 +87,7 @@
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 space-y-3">
       <!-- Region tabs -->
       <div class="flex items-center gap-2" id="regionTabs"></div>
+      <div class="flex items-center gap-2" id="ownerTabs"></div>
       <div class="flex flex-col md:flex-row gap-3 md:items-center">
         <div class="relative flex-1">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
@@ -133,8 +134,8 @@
 
 <script>
 const $ = s => document.querySelector(s);
-let ALL = [], view = [], shown = 0, PAGE = 60;
-const state = { region:'all', era:'all', q:'', sort:'price-desc' };
+let ALL = [], TOMBS = [], view = [], shown = 0, PAGE = 60;
+const state = { region:'all', owner:'all', era:'all', q:'', sort:'price-desc' };
 
 const ERA_ORDER = ["Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White",
   "HeartGold & SoulSilver","Platinum","Diamond & Pearl","EX","e-Card","Neo","Gym","Base",
@@ -148,7 +149,12 @@ async function init(){
   let builtAt = '';
   try {
     const data = await (await fetch('inventory.json',{cache:'no-cache'})).json();
-    ALL = (data.cards || []).filter(c => c.is_for_sale !== false);  // belt+suspenders: sold/held never render
+    // Browse shows only what's for sale. TOMBSTONES are cards that have left the
+    // storefront but still carry a printed QR sticker — they must never appear in
+    // the grid, but their direct link has to keep resolving or a scan dead-ends.
+    const raw = data.cards || [];
+    ALL   = raw.filter(c => c.is_for_sale !== false && !c.status);
+    TOMBS = raw.filter(c => c.status);
     builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
@@ -162,6 +168,7 @@ async function init(){
   }
 
   buildRegionTabs();
+  buildOwnerTabs();
   buildEraOptions();
 
   $('#search').addEventListener('input', e => { state.q = e.target.value.toLowerCase().trim(); apply(); });
@@ -196,6 +203,25 @@ function buildRegionTabs(){
   });
 }
 
+// Owner tabs come from the data, so adding a consignor needs no code change —
+// portfolios.json -> import_inbox.py -> the Owner field -> a tab appears here.
+function buildOwnerTabs(){
+  const owners = [...new Set(ALL.map(c=>c.owner).filter(Boolean))].sort();
+  if(owners.length < 2){ $('#ownerTabs').innerHTML = ''; return; }
+  const codeOf = o => (ALL.find(c=>c.owner===o)||{}).owner_code || o;
+  const tabs = [['all','All owners']].concat(owners.map(o=>[o, codeOf(o)==='A' ? o : `${o} (${codeOf(o)})`]));
+  $('#ownerTabs').innerHTML = tabs.map(([val,label])=>{
+    const n = val==='all' ? ALL.length : ALL.filter(c=>c.owner===val).length;
+    return `<button data-owner="${val}" class="owner-tab px-3 py-2 rounded-full text-sm font-semibold border transition
+      ${state.owner===val ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white border-transparent shadow'
+                          : 'bg-white text-gray-600 border-gray-300 hover:border-teal-400'}">
+      ${label} <span class="opacity-70">${n}</span></button>`;
+  }).join('');
+  document.querySelectorAll('.owner-tab').forEach(b => b.onclick = () => {
+    state.owner = b.dataset.owner; buildOwnerTabs(); apply();
+  });
+}
+
 function buildEraOptions(){
   const present = [...new Set(ALL.map(c=>c.era).filter(Boolean))];
   present.sort((a,b)=> (ERA_ORDER.indexOf(a)+1||99) - (ERA_ORDER.indexOf(b)+1||99));
@@ -206,6 +232,7 @@ function buildEraOptions(){
 function apply(){
   view = ALL.filter(c => {
     if(state.region!=='all' && c.region!==state.region) return false;
+    if(state.owner!=='all' && c.owner!==state.owner) return false;
     if(state.era!=='all' && c.era!==state.era) return false;
     if(state.q){
       const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']).toLowerCase();
@@ -285,6 +312,7 @@ function cardHTML(c){
         ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
         ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
+        ${c.owner_code && c.owner_code !== 'A'?`<span class="text-[9px] bg-teal-100 text-teal-700 font-bold px-1.5 py-0.5 rounded" title="Consigned — ${c.owner}">${c.owner_code}</span>`:''}
       </div>
       <div class="mt-auto pt-2 flex items-end justify-between gap-1">
         ${priced
@@ -299,7 +327,10 @@ function cardHTML(c){
 }
 
 function openCard(id){
-  const c = ALL.find(x=>x.id===id); if(!c) return;
+  let c = ALL.find(x=>x.id===id);
+  if(!c) c = TOMBS.find(x => x.id===id || x.slug===id || x.internal_id===id);
+  if(!c) return;
+  if(c.status){ openTombstone(c); return; }
   CURRENT = c;
   history.replaceState(null,'','#'+id);
   const graded = isGraded(c), priced = hasPrice(c);
@@ -360,6 +391,34 @@ function openCard(id){
   document.body.style.overflow='hidden';
 }
 const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font-semibold">${v}</p></div>`;
+// A scanned sticker for a card that's no longer listed lands here: the link
+// still works and says what happened, instead of showing a blank page.
+function openTombstone(c){
+  CURRENT = c;
+  history.replaceState(null,'','#'+(c.id||c.slug));
+  const sub = c.display_sub || [c.Set, c['Card Number'] ? '#'+c['Card Number'] : '']
+                                 .filter(Boolean).join(' · ');
+  const tone = c.status === 'sold'
+    ? ['bg-gray-900','text-white','This card has been sold.']
+    : ['bg-amber-100','text-amber-900','This card is not currently listed for sale.'];
+  $('#modalBody').innerHTML = `
+    <div class="p-8 text-center">
+      <div class="flex justify-end -mt-4 -mr-4">
+        <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
+      </div>
+      <h2 class="text-2xl font-bold mt-2">${c['Product Name']||''}</h2>
+      ${sub ? `<p class="text-gray-500 mt-1">${sub}</p>` : ''}
+      <div class="inline-block mt-6 px-5 py-2 rounded-full font-bold ${tone[0]} ${tone[1]}">
+        ${c.status_label || 'Not available'}
+      </div>
+      <p class="mt-5 text-sm text-gray-600">${tone[2]}</p>
+      ${c.internal_id ? `<p class="mt-6 text-[11px] text-gray-400">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
+      <a href="${location.pathname}" class="inline-block mt-6 px-5 py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-500 transition">Browse what's available</a>
+    </div>`;
+  $('#modal').classList.remove('hidden');
+  document.body.style.overflow='hidden';
+}
+
 function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
 
 // --- "Suggest a fix" — free-text card report emailed to Jack -----------------
