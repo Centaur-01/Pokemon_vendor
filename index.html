@@ -134,7 +134,7 @@
 
 <script>
 const $ = s => document.querySelector(s);
-let ALL = [], TOMBS = [], view = [], shown = 0, PAGE = 60;
+let ALL = [], TOMBS = [], ALIASES = {}, view = [], shown = 0, PAGE = 60;
 const state = { region:'all', owner:'all', era:'all', q:'', sort:'price-desc' };
 
 const ERA_ORDER = ["Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White",
@@ -153,8 +153,12 @@ async function init(){
     // storefront but still carry a printed QR sticker — they must never appear in
     // the grid, but their direct link has to keep resolving or a scan dead-ends.
     const raw = data.cards || [];
-    ALL   = raw.filter(c => c.is_for_sale !== false && !c.status);
-    TOMBS = raw.filter(c => c.status);
+    ALL     = raw.filter(c => c.is_for_sale !== false && !c.status);
+    TOMBS   = raw.filter(c => c.status);
+    // A sticker encodes the URL it was printed with. Identity moved from
+    // portfolio to owner on 2026-09-18, so every earlier sticker points at an
+    // old anchor; ALIASES maps those to where the card lives now.
+    ALIASES = data.aliases || {};
     builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
@@ -329,6 +333,10 @@ function cardHTML(c){
 function openCard(id){
   let c = ALL.find(x=>x.id===id);
   if(!c) c = TOMBS.find(x => x.id===id || x.slug===id || x.internal_id===id);
+  if(!c && ALIASES[id]){                       // old sticker -> current card
+    const to = ALIASES[id];
+    c = ALL.find(x=>x.id===to) || TOMBS.find(x => x.id===to || x.slug===to);
+  }
   if(!c) return;
   if(c.status){ openTombstone(c); return; }
   CURRENT = c;
