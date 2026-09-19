@@ -330,6 +330,20 @@ function cardHTML(c){
   </div>`;
 }
 
+// ---- GoatCounter analytics (POC) ----------------------------------------
+// Counts the base pageview automatically (path only, never the #hash), plus a
+// manual event per card open below — which makes every QR-sticker scan a
+// countable "/card/CC-####" view. No cookies, no banner needed. Beacons no-op
+// until the account exists and always skip local preview servers.
+function trackCard(c){
+  try{
+    if(location.hostname !== "centaur-01.github.io") return;
+    if(window.goatcounter && window.goatcounter.count)
+      window.goatcounter.count({path:"/card/"+(c.internal_id||c.id),
+                                title:(c["Product Name"]||"")+(c.status?" (sold)":"")});
+  }catch(e){}
+}
+
 function openCard(id){
   let c = ALL.find(x=>x.id===id);
   if(!c) c = TOMBS.find(x => x.id===id || x.slug===id || x.internal_id===id);
@@ -339,6 +353,7 @@ function openCard(id){
   }
   if(!c) return;
   if(c.status){ openTombstone(c); return; }
+  trackCard(c);
   CURRENT = c;
   history.replaceState(null,'','#'+id);
   const graded = isGraded(c), priced = hasPrice(c);
@@ -402,6 +417,7 @@ const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font
 // A scanned sticker for a card that's no longer listed lands here: the link
 // still works and says what happened, instead of showing a blank page.
 function openTombstone(c){
+  trackCard(c);
   CURRENT = c;
   history.replaceState(null,'','#'+(c.id||c.slug));
   const sub = c.display_sub || [c.Set, c['Card Number'] ? '#'+c['Card Number'] : '']
@@ -599,5 +615,6 @@ function cartPrint(){
 
 init();
 </script>
+<script data-goatcounter="https://couplescollective.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
