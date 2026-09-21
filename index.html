@@ -91,7 +91,7 @@
       <div class="flex flex-col md:flex-row gap-3 md:items-center">
         <div class="relative flex-1">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
-          <input id="search" type="search" placeholder="Search name, set, or number…"
+          <input id="search" type="search" placeholder="Search name, set, number, or Item ID (CC-####)…"
                  class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100 outline-none text-sm" />
         </div>
         <select id="era" class="py-2.5 px-3 rounded-xl border border-gray-300 text-sm bg-white focus:border-rose-400 outline-none"></select>
@@ -255,7 +255,7 @@ function apply(){
     if(state.owner!=='all' && c.owner!==state.owner) return false;
     if(state.era!=='all' && c.era!==state.era) return false;
     if(state.q){
-      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']).toLowerCase();
+      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']+' '+(c.internal_id||'')).toLowerCase();
       if(!hay.includes(state.q)) return false;
     }
     return true;
@@ -388,6 +388,13 @@ function openCard(id){
           <span class="inline-block rounded-full" style="width:9px;height:9px;background:${srcColor(c)};box-shadow:0 0 0 1.5px rgba(0,0,0,.06)"></span>
         </div>
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
+        <button onclick="toggleBuy()" class="w-full mb-3 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-base hover:from-emerald-500 hover:to-teal-500 transition shadow">🙋 I want this card</button>
+        <div id="buyForm" class="hidden mb-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-3">
+          <p class="text-xs text-emerald-800 font-semibold">Leave your contact and we'll reach out to arrange it — no account, no checkout.</p>
+          <input id="bFrom" placeholder="Your email, phone, or Instagram *" class="w-full rounded-lg border border-emerald-300 p-2.5 text-sm bg-white">
+          <textarea id="bText" rows="2" placeholder="Anything to add? (optional — offer, pickup at a show, questions)" class="w-full rounded-lg border border-emerald-300 p-2.5 text-sm bg-white"></textarea>
+          <button onclick="sendBuy(this)" class="w-full py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition">✉️ Request this card</button>
+        </div>
         <div class="flex gap-2 mb-3">
           <button onclick="printCard('${c.id}')" class="flex-1 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">⬇️ Sticker (PDF)</button>
           <button id="modalCartBtn" onclick="cartAdd('${c.id}',this)" class="py-3 px-4 rounded-xl font-semibold transition ${cartHas(c.id)?'bg-rose-100 text-rose-700':'bg-rose-600 text-white hover:bg-rose-500'}" title="Add to sticker cart">${cartHas(c.id)?'✓ In cart':'🛒 Add'}</button>
@@ -528,6 +535,40 @@ ${txt || '(no details provided)'}
   if (f) f.innerHTML = ok
     ? '<p class="text-sm font-semibold text-emerald-700 text-center py-2">✓ Sent — thank you!</p>'
     : '<p class="text-sm font-semibold text-amber-700 text-center py-2">Messaging is temporarily unavailable — please try again later.</p>';
+}
+
+// --- "I want this card" — buy request with card context ----------------------
+// Contact is REQUIRED here (unlike card-fix): a buy request we can't answer is
+// a lost sale. Routes through the same anonymous transport, type=buy-request.
+function toggleBuy(){ const f=$('#buyForm'); if(f) f.classList.toggle('hidden'); }
+function sendBuy(btn){
+  const c = CURRENT; if(!c) return;
+  const from = (($('#bFrom')||{}).value || '').trim();
+  if (!from){ const i=$('#bFrom'); i.classList.add('ring-2','ring-rose-400'); i.focus(); return; }
+  const txt = (($('#bText')||{}).value || '').trim();
+  const body =
+`A buy request came in from the storefront.
+
+---
+type: buy-request
+card_id: ${c.id}
+cc: ${c.internal_id||''}
+name: ${c['Product Name']}
+set: ${c.Set}
+number: ${c['Card Number']||''}
+price: ${c.sale_price||''}
+owner: ${c.owner||''}
+contact: ${from}
+url: ${location.origin+location.pathname}#${c.id}
+---
+
+${txt || '(no note)'}
+`;
+  const ok = sendMsg('buy-request', `[BUY] ${c['Product Name']} (${c.internal_id||c.id}) — $${c.sale_price||'?'}`, body, from);
+  const f = $('#buyForm');
+  if (f) f.innerHTML = ok
+    ? '<p class="text-sm font-semibold text-emerald-700 text-center py-2">✓ Request sent — we\'ll contact you shortly!</p>'
+    : '<p class="text-sm font-semibold text-amber-700 text-center py-2">Requests are temporarily unavailable — please try again later.</p>';
 }
 
 // --- Card share: QR lives in the zoom modal; this is the tap path ------------
