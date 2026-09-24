@@ -87,11 +87,10 @@
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 space-y-3">
       <!-- Region tabs -->
       <div class="flex items-center gap-2" id="regionTabs"></div>
-      <div class="flex items-center gap-2" id="ownerTabs"></div>
       <div class="flex flex-col md:flex-row gap-3 md:items-center">
         <div class="relative flex-1">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">🔍</span>
-          <input id="search" type="search" placeholder="Search name, set, number, or Item ID (CC-####)…"
+          <input id="search" type="search" placeholder="Search name, set, or number…"
                  class="w-full pl-9 pr-3 py-2.5 rounded-xl border border-gray-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-100 outline-none text-sm" />
         </div>
         <select id="era" class="py-2.5 px-3 rounded-xl border border-gray-300 text-sm bg-white focus:border-rose-400 outline-none"></select>
@@ -125,7 +124,6 @@
   <footer class="relative z-10 border-t border-gray-200/70 py-8 text-center text-xs text-gray-400 space-y-2">
     <p class="flex items-center justify-center gap-1.5">Questions or to buy — <a href="https://instagram.com/couples_collectivetcg" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-semibold text-rose-500 hover:text-purple-600"><svg viewBox="0 0 24 24" class="w-4 h-4 fill-current" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.0044 11.977.0018 8.718.008 8.31.0223 7.0301.084m.1408 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9 1.3787.1655.4217.3617 1.056.4169 2.2263.0602 1.2645.0739 1.6444.0796 4.848.0058 3.2036-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.7708-6.1559-6.174-6.1492-3.403.0065-6.156 2.771-6.1496 6.1732M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Contact us on Instagram</a></p>
     <p>Prices update from inventory exports · Images for reference only · Couples Collective TCG</p>
-    <p><button onclick="openContact()" class="font-semibold text-gray-500 hover:text-purple-600 transition">💼 Want a site like this for your business? Work with us</button></p>
   </footer>
 
   <!-- Card Modal -->
@@ -133,25 +131,10 @@
     <div class="max-w-3xl mx-auto my-6 bg-white rounded-2xl overflow-hidden shadow-2xl" id="modalBody"></div>
   </div>
 
-  <!-- Contact / work-inquiry modal — no name or address anywhere in markup -->
-  <div id="cmodal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm p-4 overflow-y-auto" onclick="if(event.target===this)closeContact()">
-    <div class="max-w-md mx-auto my-16 bg-white rounded-2xl shadow-2xl p-6">
-      <div class="flex justify-between items-start gap-3">
-        <h2 class="text-lg font-bold">💼 Work with us</h2>
-        <button onclick="closeContact()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
-      </div>
-      <p class="text-sm text-gray-500 mt-1">Like this site? Tell us what you'd want built — it goes straight to the admins.</p>
-      <textarea id="cText" rows="4" placeholder="What are you looking to build?" class="w-full mt-4 rounded-lg border border-gray-300 p-2.5 text-sm"></textarea>
-      <input id="cFrom" placeholder="Your email or phone — only if you want a reply" class="w-full mt-2 rounded-lg border border-gray-300 p-2.5 text-sm">
-      <button onclick="sendContact(this)" class="w-full mt-3 py-2.5 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">✉️ Send</button>
-      <p class="mt-3 text-[11px] text-gray-400 text-center">We only see what you type in this box.</p>
-    </div>
-  </div>
-
 <script>
 const $ = s => document.querySelector(s);
-let ALL = [], TOMBS = [], ALIASES = {}, view = [], shown = 0, PAGE = 60;
-const state = { region:'all', owner:'all', era:'all', q:'', sort:'price-desc' };
+let ALL = [], view = [], shown = 0, PAGE = 60;
+const state = { region:'all', era:'all', q:'', sort:'price-desc' };
 
 const ERA_ORDER = ["Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White",
   "HeartGold & SoulSilver","Platinum","Diamond & Pearl","EX","e-Card","Neo","Gym","Base",
@@ -165,16 +148,7 @@ async function init(){
   let builtAt = '';
   try {
     const data = await (await fetch('inventory.json',{cache:'no-cache'})).json();
-    // Browse shows only what's for sale. TOMBSTONES are cards that have left the
-    // storefront but still carry a printed QR sticker — they must never appear in
-    // the grid, but their direct link has to keep resolving or a scan dead-ends.
-    const raw = data.cards || [];
-    ALL     = raw.filter(c => c.is_for_sale !== false && !c.status);
-    TOMBS   = raw.filter(c => c.status);
-    // A sticker encodes the URL it was printed with. Identity moved from
-    // portfolio to owner on 2026-09-18, so every earlier sticker points at an
-    // old anchor; ALIASES maps those to where the card lives now.
-    ALIASES = data.aliases || {};
+    ALL = (data.cards || []).filter(c => c.is_for_sale !== false);  // belt+suspenders: sold/held never render
     builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
@@ -188,7 +162,6 @@ async function init(){
   }
 
   buildRegionTabs();
-  buildOwnerTabs();
   buildEraOptions();
 
   $('#search').addEventListener('input', e => { state.q = e.target.value.toLowerCase().trim(); apply(); });
@@ -223,25 +196,6 @@ function buildRegionTabs(){
   });
 }
 
-// Owner tabs come from the data, so adding a consignor needs no code change —
-// portfolios.json -> import_inbox.py -> the Owner field -> a tab appears here.
-function buildOwnerTabs(){
-  const owners = [...new Set(ALL.map(c=>c.owner).filter(Boolean))].sort();
-  if(owners.length < 2){ $('#ownerTabs').innerHTML = ''; return; }
-  const codeOf = o => (ALL.find(c=>c.owner===o)||{}).owner_code || o;
-  const tabs = [['all','All owners']].concat(owners.map(o=>[o, codeOf(o)==='A' ? o : `${o} (${codeOf(o)})`]));
-  $('#ownerTabs').innerHTML = tabs.map(([val,label])=>{
-    const n = val==='all' ? ALL.length : ALL.filter(c=>c.owner===val).length;
-    return `<button data-owner="${val}" class="owner-tab px-3 py-2 rounded-full text-sm font-semibold border transition
-      ${state.owner===val ? 'bg-gradient-to-r from-teal-600 to-emerald-600 text-white border-transparent shadow'
-                          : 'bg-white text-gray-600 border-gray-300 hover:border-teal-400'}">
-      ${label} <span class="opacity-70">${n}</span></button>`;
-  }).join('');
-  document.querySelectorAll('.owner-tab').forEach(b => b.onclick = () => {
-    state.owner = b.dataset.owner; buildOwnerTabs(); apply();
-  });
-}
-
 function buildEraOptions(){
   const present = [...new Set(ALL.map(c=>c.era).filter(Boolean))];
   present.sort((a,b)=> (ERA_ORDER.indexOf(a)+1||99) - (ERA_ORDER.indexOf(b)+1||99));
@@ -252,10 +206,9 @@ function buildEraOptions(){
 function apply(){
   view = ALL.filter(c => {
     if(state.region!=='all' && c.region!==state.region) return false;
-    if(state.owner!=='all' && c.owner!==state.owner) return false;
     if(state.era!=='all' && c.era!==state.era) return false;
     if(state.q){
-      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']+' '+(c.internal_id||'')).toLowerCase();
+      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']).toLowerCase();
       if(!hay.includes(state.q)) return false;
     }
     return true;
@@ -332,7 +285,6 @@ function cardHTML(c){
         ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
         ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
-        ${c.owner_code && c.owner_code !== 'A'?`<span class="text-[9px] bg-teal-100 text-teal-700 font-bold px-1.5 py-0.5 rounded" title="Consigned — ${c.owner}">${c.owner_code}</span>`:''}
       </div>
       <div class="mt-auto pt-2 flex items-end justify-between gap-1">
         ${priced
@@ -346,30 +298,8 @@ function cardHTML(c){
   </div>`;
 }
 
-// ---- GoatCounter analytics (POC) ----------------------------------------
-// Counts the base pageview automatically (path only, never the #hash), plus a
-// manual event per card open below — which makes every QR-sticker scan a
-// countable "/card/CC-####" view. No cookies, no banner needed. Beacons no-op
-// until the account exists and always skip local preview servers.
-function trackCard(c){
-  try{
-    if(location.hostname !== "centaur-01.github.io") return;
-    if(window.goatcounter && window.goatcounter.count)
-      window.goatcounter.count({path:"/card/"+(c.internal_id||c.id),
-                                title:(c["Product Name"]||"")+(c.status?" (sold)":"")});
-  }catch(e){}
-}
-
 function openCard(id){
-  let c = ALL.find(x=>x.id===id);
-  if(!c) c = TOMBS.find(x => x.id===id || x.slug===id || x.internal_id===id);
-  if(!c && ALIASES[id]){                       // old sticker -> current card
-    const to = ALIASES[id];
-    c = ALL.find(x=>x.id===to) || TOMBS.find(x => x.id===to || x.slug===to);
-  }
-  if(!c) return;
-  if(c.status){ openTombstone(c); return; }
-  trackCard(c);
+  const c = ALL.find(x=>x.id===id); if(!c) return;
   CURRENT = c;
   history.replaceState(null,'','#'+id);
   const graded = isGraded(c), priced = hasPrice(c);
@@ -388,13 +318,6 @@ function openCard(id){
           <span class="inline-block rounded-full" style="width:9px;height:9px;background:${srcColor(c)};box-shadow:0 0 0 1.5px rgba(0,0,0,.06)"></span>
         </div>
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
-        <button onclick="toggleBuy()" class="w-full mb-3 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-base hover:from-emerald-500 hover:to-teal-500 transition shadow">🙋 I want this card</button>
-        <div id="buyForm" class="hidden mb-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-3">
-          <p class="text-xs text-emerald-800 font-semibold">Leave your contact and we'll reach out to arrange it — no account, no checkout.</p>
-          <input id="bFrom" placeholder="Your email, phone, or Instagram *" class="w-full rounded-lg border border-emerald-300 p-2.5 text-sm bg-white">
-          <textarea id="bText" rows="2" placeholder="Anything to add? (optional — offer, pickup at a show, questions)" class="w-full rounded-lg border border-emerald-300 p-2.5 text-sm bg-white"></textarea>
-          <button onclick="sendBuy(this)" class="w-full py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition">✉️ Request this card</button>
-        </div>
         <div class="flex gap-2 mb-3">
           <button onclick="printCard('${c.id}')" class="flex-1 py-3 rounded-xl bg-gray-900 text-white font-semibold hover:bg-gray-700 transition">⬇️ Sticker (PDF)</button>
           <button id="modalCartBtn" onclick="cartAdd('${c.id}',this)" class="py-3 px-4 rounded-xl font-semibold transition ${cartHas(c.id)?'bg-rose-100 text-rose-700':'bg-rose-600 text-white hover:bg-rose-500'}" title="Add to sticker cart">${cartHas(c.id)?'✓ In cart':'🛒 Add'}</button>
@@ -418,7 +341,7 @@ function openCard(id){
             <label class="text-xs text-gray-500 font-semibold">Details — what's wrong & how to fix it</label>
             <textarea id="rText" rows="3" placeholder="Say whatever you need to…" class="w-full mt-1 rounded-lg border border-gray-300 p-2 text-sm"></textarea>
           </div>
-          <button onclick="sendReport()" class="w-full py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-700 transition">✉️ Send to Admins</button>
+          <button onclick="sendReport()" class="w-full py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-700 transition">✉️ Send to Jack</button>
         </div>
         <div class="grid grid-cols-2 gap-3 text-sm border-t border-gray-100 pt-4">
           ${row('Grade', c.Grade||'—')}
@@ -427,14 +350,6 @@ function openCard(id){
           ${row('Rarity', c.Rarity||'—')}
           ${row('Era', c.era||'—')}
           ${row('Qty available', c.quantity)}
-        </div>
-        <div class="mt-4 flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-3">
-          <img src="${qrPngDataUrl(BASE+'#'+c.id,240)}" alt="QR code linking to this card" class="w-24 h-24 rounded-lg border border-gray-200 bg-white shrink-0">
-          <div class="flex-1">
-            <p class="text-xs font-semibold text-gray-700">📱 Scan to pull this card up on another phone</p>
-            <p class="text-[11px] text-gray-400 mt-0.5">Same link the sticker carries — share it anywhere.</p>
-            <button onclick="shareCard('${c.id}',this)" class="mt-2 text-xs font-semibold px-3 py-1.5 rounded-lg bg-gray-900 text-white hover:bg-gray-700 transition">🔗 Share link</button>
-          </div>
         </div>
         <p class="mt-5 text-[11px] text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
           📷 Image is a stock reference for identification — not a photo of the actual card. Grade & condition above describe the item.
@@ -445,66 +360,11 @@ function openCard(id){
   document.body.style.overflow='hidden';
 }
 const row = (k,v)=>`<div><p class="text-gray-400 text-xs">${k}</p><p class="font-semibold">${v}</p></div>`;
-// A scanned sticker for a card that's no longer listed lands here: the link
-// still works and says what happened, instead of showing a blank page.
-function openTombstone(c){
-  trackCard(c);
-  CURRENT = c;
-  history.replaceState(null,'','#'+(c.id||c.slug));
-  const sub = c.display_sub || [c.Set, c['Card Number'] ? '#'+c['Card Number'] : '']
-                                 .filter(Boolean).join(' · ');
-  const tone = c.status === 'sold'
-    ? ['bg-gray-900','text-white','This card has been sold.']
-    : ['bg-amber-100','text-amber-900','This card is not currently listed for sale.'];
-  $('#modalBody').innerHTML = `
-    <div class="p-8 text-center">
-      <div class="flex justify-end -mt-4 -mr-4">
-        <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
-      </div>
-      <h2 class="text-2xl font-bold mt-2">${c['Product Name']||''}</h2>
-      ${sub ? `<p class="text-gray-500 mt-1">${sub}</p>` : ''}
-      <div class="inline-block mt-6 px-5 py-2 rounded-full font-bold ${tone[0]} ${tone[1]}">
-        ${c.status_label || 'Not available'}
-      </div>
-      <p class="mt-5 text-sm text-gray-600">${tone[2]}</p>
-      ${c.internal_id ? `<p class="mt-6 text-[11px] text-gray-400">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
-      <a href="${location.pathname}" class="inline-block mt-6 px-5 py-2.5 rounded-xl bg-rose-600 text-white font-semibold hover:bg-rose-500 transition">Browse what's available</a>
-    </div>`;
-  $('#modal').classList.remove('hidden');
-  document.body.style.overflow='hidden';
-}
-
 function closeCard(){ $('#modal').classList.add('hidden'); document.body.style.overflow=''; history.replaceState(null,'',location.pathname); }
 
-// --- Message transport — card fixes AND work inquiries -----------------------
-// PRIVACY (Jack 2026-09-20): no admin name or address may ship in this page.
-// Messages POST silently to a Google Form (responses land in a Sheet + email
-// notification) so the sender never sees a destination. GFORM is unwired until
-// Jack creates the form: action = the form's .../formResponse URL, and each
-// field maps to an entry.NNNN id (view-source on the form to read them).
-// NO FALLBACK by design: an unwired GFORM disables messaging rather than
-// exposing any address. Nothing identifying an admin may ever ship here.
-const GFORM = { action: 'https://docs.google.com/forms/d/e/1FAIpQLSeK8PVHGa4ZFtIoGo4DY7HG-FXmoq6x6lCx6APr75aiayAMdQ/formResponse',
-                f: { type: 'entry.209257252', subject: 'entry.1612024118',
-                     message: 'entry.855797076', contact: 'entry.1024344263' } };
-function sendMsg(type, subject, message, contact){
-  if (!GFORM.action) return false;
-  const fd = new FormData();
-  fd.append(GFORM.f.type, type);
-  fd.append(GFORM.f.subject, subject);
-  fd.append(GFORM.f.message, message);
-  // '(none)': the form's contact field is REQUIRED — an empty value 400s the
-  // whole submission, invisibly under no-cors (verified by curl 2026-09-20).
-  fd.append(GFORM.f.contact, (contact || '').trim() || '(none)');
-  // no-cors: Google Forms accepts the POST but the response is opaque —
-  // fire-and-forget is the deal. Failures are invisible; acceptable for POC.
-  fetch(GFORM.action, { method:'POST', mode:'no-cors', body:fd }).catch(()=>{});
-  return true;
-}
-
-// --- "Suggest a fix" — free-text card report to the admins --------------------
-// Subject is tagged [CARD-FIX]; the body carries a YAML block so a script (or
-// the responses sheet) can parse them.
+// --- "Suggest a fix" — free-text card report emailed to Jack -----------------
+// Subject is tagged [CARD-FIX] and the body carries a YAML block so the inbox can
+// auto-file these (Gmail filter on the subject) and a script can parse them.
 let CURRENT = null;
 function toggleReport(){ const f=$('#reportForm'); if(f) f.classList.toggle('hidden'); }
 function sendReport(){
@@ -530,81 +390,8 @@ url: ${location.origin+location.pathname}#${c.id}
 
 ${txt || '(no details provided)'}
 `;
-  const ok = sendMsg('card-fix', `[CARD-FIX] ${issue} — ${c['Product Name']} (${c.id})`, body);
-  const f = $('#reportForm');
-  if (f) f.innerHTML = ok
-    ? '<p class="text-sm font-semibold text-emerald-700 text-center py-2">✓ Sent — thank you!</p>'
-    : '<p class="text-sm font-semibold text-amber-700 text-center py-2">Messaging is temporarily unavailable — please try again later.</p>';
-}
-
-// --- "I want this card" — buy request with card context ----------------------
-// Contact is REQUIRED here (unlike card-fix): a buy request we can't answer is
-// a lost sale. Routes through the same anonymous transport, type=buy-request.
-function toggleBuy(){ const f=$('#buyForm'); if(f) f.classList.toggle('hidden'); }
-function sendBuy(btn){
-  const c = CURRENT; if(!c) return;
-  const from = (($('#bFrom')||{}).value || '').trim();
-  if (!from){ const i=$('#bFrom'); i.classList.add('ring-2','ring-rose-400'); i.focus(); return; }
-  const txt = (($('#bText')||{}).value || '').trim();
-  const body =
-`A buy request came in from the storefront.
-
----
-type: buy-request
-card_id: ${c.id}
-cc: ${c.internal_id||''}
-name: ${c['Product Name']}
-set: ${c.Set}
-number: ${c['Card Number']||''}
-price: ${c.sale_price||''}
-owner: ${c.owner||''}
-contact: ${from}
-url: ${location.origin+location.pathname}#${c.id}
----
-
-${txt || '(no note)'}
-`;
-  const ok = sendMsg('buy-request', `[BUY] ${c['Product Name']} (${c.internal_id||c.id}) — $${c.sale_price||'?'}`, body, from);
-  const f = $('#buyForm');
-  if (f) f.innerHTML = ok
-    ? '<p class="text-sm font-semibold text-emerald-700 text-center py-2">✓ Request sent — we\'ll contact you shortly!</p>'
-    : '<p class="text-sm font-semibold text-amber-700 text-center py-2">Requests are temporarily unavailable — please try again later.</p>';
-}
-
-// --- Card share: QR lives in the zoom modal; this is the tap path ------------
-async function shareCard(id, btn){
-  const url = BASE + '#' + id;
-  const c = ALL.find(x=>x.id===id) || {};
-  try{
-    if (navigator.share){ await navigator.share({ title: c['Product Name'] || 'Card', url }); return; }
-    await navigator.clipboard.writeText(url);
-    if (btn){ const t = btn.textContent; btn.textContent = '✓ Copied'; setTimeout(()=>{ btn.textContent = t; }, 1500); }
-  }catch(e){}
-}
-
-// --- Work-inquiry box ---------------------------------------------------------
-function openContact(){ $('#cmodal').classList.remove('hidden'); document.body.style.overflow='hidden'; }
-function closeContact(){ $('#cmodal').classList.add('hidden'); document.body.style.overflow=''; }
-function sendContact(btn){
-  const txt = (($('#cText')||{}).value || '').trim();
-  if (!txt){ $('#cText').focus(); return; }
-  const from = (($('#cFrom')||{}).value || '').trim();
-  const body = `A work inquiry was sent from the storefront.
-
----
-type: work-inquiry
-contact: ${from || '(none left)'}
-page: ${location.origin + location.pathname}
----
-
-${txt}
-`;
-  const ok = sendMsg('work-inquiry', '[WORK] Storefront inquiry', body, from);
-  if (btn){
-    btn.textContent = ok ? '✓ Sent — thank you!' : 'Temporarily unavailable — try later';
-    btn.disabled = ok;
-    if (ok) setTimeout(closeContact, 1400);
-  }
+  const subj = `[CARD-FIX] ${issue} — ${c['Product Name']} (${c.id})`;
+  location.href = `mailto:j.fung1668@gmail.com?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
 }
 
 // --- Sticker PDFs (layout "A", validated on the Clabel 2026-08-23) ------------
@@ -745,6 +532,5 @@ function cartPrint(){
 
 init();
 </script>
-<script data-goatcounter="https://couplecollective.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
