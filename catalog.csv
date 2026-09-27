@@ -566,7 +566,7 @@ CC-2215,Deino — White Flare · #146/086,NM,18,Andy
 CC-2219,Durant (Poke Ball Pattern) — White Flare · #070/086,NM,1,Andy
 CC-2221,Ferrothorn (Master Ball Pattern) — White Flare · #069/086,NM,1,Andy
 CC-2222,Ferrothorn (Poke Ball Pattern) — White Flare · #069/086,NM,1,Andy
-CC-2224,Harlequin — White Flare · #165/086,NM,30,Andy
+CC-2224,Harlequin — White Flare · #165/086,NM,28,Andy
 CC-2227,Jellicent ex — White Flare · #160/086,NM,2,Andy
 CC-2228,Jellicent ex — White Flare · #045/086,NM,1,Andy
 CC-2230,Keldeo ex — White Flare · #030/086,NM,1,Andy
@@ -1616,7 +1616,7 @@ CC-4469,Golurk V — Evolving Skies · #070/203,NM,1,Trung
 CC-4470,Golurk V — Evolving Skies · #070/203,NM,1,Trung
 CC-4471,Gyarados V — Evolving Skies · #028/203,NM,3,Trung
 CC-4472,Lycanroc V — Evolving Skies · #091/203,NM,1,Trung
-CC-4473,Lycanroc VMAX — Evolving Skies · #092/203,NM,3,Trung
+CC-4473,Lycanroc VMAX — Evolving Skies · #092/203,NM,2,Trung
 CC-4474,Medicham V — Evolving Skies · #083/203,NM,1,Trung
 CC-4475,Noivern V — Evolving Skies · #117/203,NM,1,Trung
 CC-4476,Suicune V — Evolving Skies · #031/203,NM,2,Trung
@@ -1626,9 +1626,9 @@ CC-4479,Volcarona V — Evolving Skies · #021/203,NM,1,Trung
 CC-4480,Tsareena V (JP) — Fusion Arts · #011/100,NM,2,Trung
 CC-4481,Appletun V — Fusion Strike · #026/264,NM,2,Trung
 CC-4482,Boltund V — Fusion Strike · #103/264,NM,1,Trung
-CC-4483,Breloom V — Fusion Strike · #006/264,NM,1,Trung
-CC-4484,Chandelure V — Fusion Strike · #039/264,NM,1,Trung
-CC-4485,Chandelure V — Fusion Strike · #039/264,NM,1,Trung
+CC-4483,Breloom V — Fusion Strike · #006/264,NM,2,Trung
+CC-4484,Chandelure V — Fusion Strike · #039/264,NM,2,Trung
+CC-4485,Chandelure V — Fusion Strike · #039/264,NM,2,Trung
 CC-4486,Chandelure VMAX — Fusion Strike · #040/264,NM,4,Trung
 CC-4487,Cinderace V (43) — Fusion Strike · #043/264,NM,1,Trung
 CC-4488,Cinderace V (44) — Fusion Strike · #044/264,NM,1,Trung
@@ -1789,7 +1789,7 @@ CC-4755,Candela — Sword & Shield Promo · #SWSH228,NM,3,Trung
 CC-4756,Crobat VMAX — Sword & Shield Promo · #SWSH099,NM,3,Trung
 CC-4757,Dark Sylveon V — Sword & Shield Promo · #SWSH134,NM,8,Trung
 CC-4758,Deoxys VSTAR — Sword & Shield Promo · #SWSH268,NM,8,Trung
-CC-4759,Dragapult VMAX — Sword & Shield Promo · #SWSH097,NM,3,Trung
+CC-4759,Dragapult VMAX — Sword & Shield Promo · #SWSH097,NM,4,Trung
 CC-4760,Dragonite V — Sword & Shield Promo · #SWSH154,NM,7,Trung
 CC-4761,Dubwool V — Sword & Shield Promo · #SWSH049,NM,1,Trung
 CC-4762,Empoleon V — Sword & Shield Promo · #SWSH108,NM,1,Trung
@@ -1850,10 +1850,10 @@ CC-4858,Pokemon Trader — Base Set (1st Edition & Shadowless) · #77,MP,4,Andy
 CC-4859,Ponyta — Base Set (1st Edition & Shadowless) · #60,MP,1,Andy
 CC-4860,Rattata — Base Set (1st Edition & Shadowless) · #61,MP,1,Andy
 CC-4861,Rattata — Base Set (1st Edition & Shadowless) · #61,MP,1,Andy
-CC-4862,Super Energy Removal — Base Set (1st Edition & Shadowless) · #79,MP,7,Andy
+CC-4862,Super Energy Removal — Base Set (1st Edition & Shadowless) · #79,MP,3,Andy
 CC-4863,Kangaskhan — Base Set 2 · #26,HP,3,Andy
 CC-4864,Pidgeotto — Base Set 2 · #28,LP,5,Andy
-CC-4865,Snorlax — Base Set 2 · #30,LP,24,Andy
+CC-4865,Snorlax — Base Set 2 · #30,LP,25,Andy
 CC-4866,Antique Cover Fossil (Poke Ball Pattern) — Black Bolt · #080/086,NM,1,Andy
 CC-4867,Reshiram - 017/094 (Cosmos Holo) — Blister Exclusives · #017/094,NM,6,Andy
 CC-4868,Arceus V — Brilliant Stars · #122/172,NM,3,Andy
@@ -1888,11 +1888,11 @@ CC-4901,Lapras (25) — Fossil · #25,D,4,Andy
 CC-4902,Tentacool — Fossil · #56,LP,2,Andy
 CC-4903,Greninja V — Fusion Strike · #073/264,NM,4,Andy
 CC-4904,Alolan Ninetales GX — Guardians Rising · #22/145,NM,8,Andy
-CC-4905,Brock's Rhyhorn (22) — Gym Heroes · #22,LP,11,Andy
+CC-4905,Brock's Rhyhorn (22) — Gym Heroes · #22,LP,18,Andy
 CC-4906,Lt. Surge's Electabuzz (27) — Gym Heroes · #27,LP,8,Andy
 CC-4907,Misty's Goldeen (30) — Gym Heroes · #30,LP,6,Andy
 CC-4908,Giovanni's Exile (Full Art) — Hidden Fates · #67/68,NM,5,Andy
-CC-4909,Raichu GX — Hidden Fates · #20/68,NM,4,Andy
+CC-4909,Raichu GX — Hidden Fates · #20/68,NM,3,Andy
 CC-4910,Glaceon GX — Hidden Fates: Shiny Vault · #SV55/SV94,PSA 10,135,Andy
 CC-4911,Inkay — Hidden Fates: Shiny Vault · #SV17/SV94,NM,3,Andy
 CC-4913,Magnezone — Hidden Fates: Shiny Vault · #SV29/SV94,NM,4,Andy
@@ -1917,7 +1917,7 @@ CC-4931,Eternatus V — Lost Origin Trainer Gallery · #TG21/TG30,NM,6,Andy
 CC-4932,Hisuian Arcanine — Lost Origin Trainer Gallery · #TG08/TG30,NM,6,Andy
 CC-4933,Parasect — Lost Origin Trainer Gallery · #TG01/TG30,NM,5,Andy
 CC-4934,Roserade — Lost Origin Trainer Gallery · #TG02/TG30,NM,4,Andy
-CC-4935,Spiritomb — Lost Origin Trainer Gallery · #TG09/TG30,NM,4,Andy
+CC-4935,Spiritomb — Lost Origin Trainer Gallery · #TG09/TG30,NM,3,Andy
 CC-4937,Mega Camerupt ex — Mega Evolution · #022/132,NM,1,Andy
 CC-4938,Mega Camerupt ex — Mega Evolution · #022/132,NM,1,Andy
 CC-4939,Mega Latias ex — Mega Evolution · #100/132,NM,1,Andy
@@ -2081,12 +2081,12 @@ CC-5135,Raichu — Base Set (Unlimited) · #14,HP,42,Jordan and Marcus
 CC-5136,Noivern V (Alternate Full Art) — Evolving Skies · #196/203,NM,74,Jordan and Marcus
 CC-5137,Ditto — Fossil · #3,NM,119,Jordan and Marcus
 CC-5139,Haunter — Fossil · #6,NM,52,Jordan and Marcus
-CC-5140,Magneton (11) — Fossil · #11,HP,34,Jordan and Marcus
+CC-5140,Magneton (11) — Fossil · #11,HP,35,Jordan and Marcus
 CC-5141,Misty's Golduck — Gym Challenge · #12,MP,48,Jordan and Marcus
 CC-5142,Erika's Dragonair — Gym Heroes · #4,PSA 8,177,Jordan and Marcus
-CC-5143,Lt. Surge's Electabuzz — Gym Heroes · #6,MP,31,Jordan and Marcus
+CC-5143,Lt. Surge's Electabuzz — Gym Heroes · #6,MP,32,Jordan and Marcus
 CC-5144,Kangaskhan — Jungle · #5,LP,16,Jordan and Marcus
-CC-5145,Nidoqueen — Jungle · #7,LP,38,Jordan and Marcus
+CC-5145,Nidoqueen — Jungle · #7,LP,37,Jordan and Marcus
 CC-5146,Snorlax — Jungle · #11,MP,117,Jordan and Marcus
 CC-5147,Vaporeon — Jungle · #28,MP,31,Jordan and Marcus
 CC-5149,Vaporeon — Jungle · #12,MP,36,Jordan and Marcus
@@ -2122,11 +2122,11 @@ CC-5331,Mega Gengar ex — Ascended Heroes · #269/217,NM,44,Andy
 CC-5332,Snorunt — Ascended Heroes · #227/217,NM,5,Andy
 CC-5333,Mega Greninja ex — Chaos Rising · #022/086,NM,1,Andy
 CC-5334,Arceus & Dialga & Palkia GX — Cosmic Eclipse · #156/236,MP,24,Andy
-CC-5335,Misty's Psyduck — Destined Rivals · #193/182,NM,56,Andy
+CC-5335,Misty's Psyduck — Destined Rivals · #193/182,NM,55,Andy
 CC-5336,Evolving Skies Sleeved Booster Pack — Evolving Skies,UO,61,Andy
 CC-5337,Rayquaza VMAX — Evolving Skies · #111/203,NM,16,Andy
 CC-5338,Genesect V (Alternate Full Art) — Fusion Strike · #255/264,NM,28,Andy
-CC-5339,Furret — Journey Together · #168/159,NM,7,Andy
+CC-5339,Furret — Journey Together · #168/159,NM,8,Andy
 CC-5340,Hop's Wooloo — Journey Together · #170/159,NM,5,Andy
 CC-5341,Helioptile — Mega Evolution · #143/132,NM,3,Andy
 CC-5342,Mega Latias ex — Mega Evolution · #100/132,NM,1,Andy
