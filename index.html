@@ -28,6 +28,39 @@
                transition:transform .7s cubic-bezier(.5,-0.4,.6,1), opacity .7s ease-in; }
     @keyframes cartbump { 0%,100%{transform:scale(1)} 40%{transform:scale(1.35)} }
     .cartbump { animation:cartbump .35s ease; }
+    /* Graded slabs are an elevated status, so the grade pops (Jack 2026-10-08:
+       "something that pops ... sparkles maybe??"). Before this the card page
+       listed the grade only in the details grid below the buttons, and tiles had
+       a plain blue chip. Tiers: 10 = gold, 9–9.5 = platinum, other grades = the
+       brand rose→violet. A slow holo shine + twinkling 4-point stars (the same
+       star as the backdrop); all motion stops under prefers-reduced-motion. */
+    .slab { position:relative; display:inline-flex; align-items:center; gap:.3em; font-weight:800;
+            letter-spacing:.02em; line-height:1; white-space:nowrap; border-radius:999px;
+            padding:.36em .7em; background-size:230% 100%; animation:slabShine 3.8s linear infinite; }
+    .slab-gem    { color:#4a2c00; background-image:linear-gradient(110deg,#fcd34d 0%,#f59e0b 26%,#fff8dc 42%,#fbbf24 56%,#d97706 78%,#fcd34d 100%);
+                   box-shadow:0 0 0 1px rgba(161,98,7,.45),0 2px 12px -2px rgba(245,158,11,.8); }
+    .slab-mint   { color:#1e293b; background-image:linear-gradient(110deg,#e2e8f0 0%,#94a3b8 26%,#ffffff 42%,#cbd5e1 56%,#64748b 78%,#e2e8f0 100%);
+                   box-shadow:0 0 0 1px rgba(71,85,105,.4),0 2px 12px -2px rgba(100,116,139,.65); }
+    .slab-graded { color:#fff; background-image:linear-gradient(110deg,#e11d48 0%,#9333ea 30%,#f5d0fe 44%,#a855f7 58%,#e11d48 100%);
+                   box-shadow:0 0 0 1px rgba(147,51,234,.35),0 2px 12px -2px rgba(225,29,72,.55); }
+    .slab-graded .slab-sub { color:#fdf4ff; }
+    @keyframes slabShine { from{background-position:100% 0} to{background-position:-130% 0} }
+    .slab .spark { position:absolute; width:.85em; height:.85em; pointer-events:none;
+                   animation:twinkle 2.4s ease-in-out infinite; }
+    .slab .spark svg { width:100%; height:100%; display:block; }
+    .slab-gem .spark    { color:#f59e0b; filter:drop-shadow(0 0 2px rgba(253,224,71,.95)); }
+    .slab-mint .spark   { color:#8b5cf6; filter:drop-shadow(0 0 2px rgba(196,181,253,.95)); }
+    .slab-graded .spark { color:#ec4899; filter:drop-shadow(0 0 2px rgba(249,168,212,.95)); }
+    @keyframes twinkle { 0%,100%{opacity:0;transform:scale(.2) rotate(0deg)} 45%{opacity:1;transform:scale(1) rotate(40deg)} 70%{opacity:.55} }
+    .slab-sub { font-weight:600; opacity:.85; }
+    /* graded tile: a thin holographic rim instead of the grey border */
+    .slab-rim { border:2px solid transparent !important;
+                background:linear-gradient(#fff,#fff) padding-box,
+                           linear-gradient(135deg,#fbbf24,#f0abfc,#a78bfa,#67e8f9,#fbbf24) border-box; }
+    @media (prefers-reduced-motion: reduce) {
+      .slab { animation:none; background-position:30% 0; }
+      .slab .spark { animation:none; opacity:.9; transform:none; }
+    }
   </style>
 </head>
 <body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
@@ -319,9 +352,9 @@ function imgBlock(c, big){
 function cardHTML(c){
   const graded = isGraded(c);
   const priced = hasPrice(c);
-  return `<div data-card="${c.id}" class="card group relative bg-white rounded-xl border ${priced?'border-gray-200':'border-amber-300'} overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col">
+  return `<div data-card="${c.id}" class="card group relative bg-white rounded-xl border ${graded?'slab-rim':priced?'border-gray-200':'border-amber-300'} overflow-hidden cursor-pointer hover:shadow-lg transition flex flex-col">
     <span class="srcdot" style="background:${srcColor(c)}"></span>
-    ${imgBlock(c,false)}
+    <div class="relative">${imgBlock(c,false)}${graded?`<div class="absolute top-1.5 left-1.5 z-10">${slabBadge(c,false)}</div>`:''}</div>
     <div class="p-2.5 md:p-3 flex flex-col flex-1">
       <div class="flex items-start gap-1 justify-between">
         <h3 class="text-[12px] md:text-sm font-semibold leading-tight line-clamp-2">${c['Product Name']}</h3>
@@ -329,7 +362,6 @@ function cardHTML(c){
       </div>
       ${(() => { const sub = c.name_overridden ? c.display_sub : `${c.Set} · #${c['Card Number']||'—'}`; return sub ? `<p class="text-[10px] md:text-[11px] text-gray-500 mt-0.5 line-clamp-1">${sub}</p>` : ''; })()}
       <div class="mt-1 flex gap-1 flex-wrap">
-        ${graded?`<span class="text-[9px] font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded">${c.Grade}</span>`:''}
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
         ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
         ${c.owner_code && c.owner_code !== 'A'?`<span class="text-[9px] bg-teal-100 text-teal-700 font-bold px-1.5 py-0.5 rounded" title="Consigned — ${c.owner}">${c.owner_code}</span>`:''}
@@ -382,7 +414,8 @@ function openCard(id){
           <button onclick="closeCard()" class="text-gray-400 hover:text-gray-700 text-2xl leading-none">×</button>
         </div>
         ${(() => { const base = c.name_overridden ? c.display_sub : `${c.Set} · #${c['Card Number']||'—'}`; const jp = c.region==='JP' ? (base?' · ':'')+'🇯🇵 Japanese' : ''; return (base||jp) ? `<p class="text-gray-500 mt-1">${base}${jp}</p>` : ''; })()}
-        <div class="my-5 flex items-center gap-2">
+        ${graded ? `<div class="mt-4">${slabBadge(c,true)}</div>` : ''}
+        <div class="${graded ? 'mt-3 mb-5' : 'my-5'} flex items-center gap-2">
           ${priced ? `<div class="text-4xl font-bold gradient-text">${money(c.sale_price)}</div>`
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
           <span class="inline-block rounded-full" style="width:9px;height:9px;background:${srcColor(c)};box-shadow:0 0 0 1.5px rgba(0,0,0,.06)"></span>
@@ -640,6 +673,26 @@ function gradeMark(c){
   if (m && g !== 'Ungraded') return `${m[1]} ${parseFloat(m[2])}`;   // "PSA 9.0 MINT" -> "PSA 9"
   if (!(c['Card Number'] || '').trim()) return 'UO';                  // sealed product
   return COND_ABBR[c['Card Condition']] || c['Card Condition'] || '';
+}
+// The grader's words after the number ("PSA 10.0 GEM - MT" -> "Gem Mint"), for the
+// big badge on the card page. Unknown words fall back to the raw text, tidied.
+const GRADE_WORDS = { 'GEM - MT':'Gem Mint', 'GEM MT':'Gem Mint', 'GEM MINT':'Gem Mint', 'PRISTINE':'Pristine',
+  'MINT':'Mint', 'NM - MT':'NM-MT', 'NM-MT':'NM-MT', 'NM+':'NM+', 'NM':'Near Mint', 'EX - MT':'EX-MT',
+  'EX':'Excellent', 'VG - EX':'VG-EX', 'VG':'Very Good', 'GOOD':'Good', 'FR':'Fair', 'PR':'Poor' };
+const SPARK_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z"/></svg>';
+function slabBadge(c, big){
+  if (!isGraded(c)) return '';
+  const m = String(c.Grade).match(/^([A-Z]+)\s*([\d.]+)\s*(.*)$/);
+  if (!m) return '';
+  const n = parseFloat(m[2]), q = m[3].trim().toUpperCase();
+  const tier = n >= 10 ? 'gem' : n >= 9 ? 'mint' : 'graded';
+  const words = GRADE_WORDS[q] || m[3].trim();
+  // a 10 gets three stars, a 9 two, everything else one: the shine scales with the grade
+  const at = { gem:[[-14,-38,0],[90,-42,.8],[62,70,1.6]], mint:[[-12,-36,.3],[88,62,1.3]], graded:[[90,-40,.6]] }[tier];
+  const sparks = at.map(([x, y, d]) =>
+    `<span class="spark" style="left:${x}%;top:${y}%;animation-delay:${d}s">${SPARK_SVG}</span>`).join('');
+  return `<span class="slab slab-${tier} ${big ? 'text-sm md:text-base' : 'text-[10px] md:text-[11px]'}" title="${c.Grade}">`
+       + `✦ ${gradeMark(c)}${big && words ? ` <span class="slab-sub">· ${words}</span>` : ''}${sparks}</span>`;
 }
 function stickerTag(c){
   const key = `${c.Set}|${c['Card Number']}`;

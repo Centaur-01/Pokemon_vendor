@@ -17,7 +17,7 @@ CC-0038,Roxanne (Full Art) — Astral Radiance · #188/189,NM,6,Andy
 CC-0039,Shadow Rider Calyrex VMAX — Astral Radiance Trainer Gallery · #TG18/TG30,NM,12,Andy
 CC-0043,Charmander — Base Set (1st Edition & Shadowless) · #46,MP,3,Andy
 CC-0045,Gastly — Base Set (1st Edition & Shadowless) · #50,MP,2,Andy
-CC-0047,Growlithe — Base Set (1st Edition & Shadowless) · #28,MP,1,Andy
+CC-0047,Growlithe — Base Set (1st Edition & Shadowless) · #28,MP,10,Andy
 CC-0051,Squirtle — Base Set 2 · #93,NM,3,Andy
 CC-0052,Arcanine — Base Set (Unlimited) · #23,LP,4,Andy
 CC-0053,Beedrill — Base Set (Unlimited) · #17,LP,3,Andy
@@ -30,7 +30,7 @@ CC-0065,Squirtle — Base Set (Unlimited) · #63,MP,5,Andy
 CC-0069,Tyranitar V (Full Art) — Battle Styles · #154/163,NM,13,Andy
 CC-0070,Black Kyurem — Black and White Promos · #BW58,LP,15,Andy
 CC-0075,Beartic (Poke Ball Pattern) — Black Bolt · #026/086,NM,1,Andy
-CC-0077,Cobalion — Black Bolt · #149/086,NM,6,Andy
+CC-0077,Cobalion — Black Bolt · #149/086,NM,10,Andy
 CC-0078,Cobalion (Poke Ball Pattern) — Black Bolt · #066/086,NM,1,Andy
 CC-0079,Krokorok — Black Bolt · #136/086,NM,12,Andy
 CC-0081,Elgyem (Poke Ball Pattern) — Black Bolt · #040/086,NM,1,Andy
@@ -39,8 +39,8 @@ CC-0084,Excadrill ex — Black Bolt · #046/086,NM,1,Andy
 CC-0087,Genesect ex — Black Bolt · #067/086,NM,2,Andy
 CC-0088,Genesect ex — Black Bolt · #169/086,PSA 10,90,Andy
 CC-0090,Klinklang (Poke Ball Pattern) — Black Bolt · #063/086,NM,1,Andy
-CC-0091,Krokorok (Master Ball Pattern) — Black Bolt · #058/086,NM,1,Andy
-CC-0092,Kyurem ex — Black Bolt · #028/086,NM,5,Andy
+CC-0091,Krokorok (Master Ball Pattern) — Black Bolt · #058/086,NM,13,Andy
+CC-0092,Kyurem ex — Black Bolt · #028/086,NM,1,Andy
 CC-0098,Pansage (Poke Ball Pattern) — Black Bolt · #004/086,NM,1,Andy
 CC-0100,Rufflet (Poke Ball Pattern) — Black Bolt · #077/086,NM,1,Andy
 CC-0104,Tirtouga — Black Bolt · #106/086,NM,31,Andy
@@ -60,7 +60,7 @@ CC-0151,Surfing Pikachu V — Celebrations · #008/025,NM,5,Andy
 CC-0152,Surfing Pikachu VMAX — Celebrations · #009/025,NM,8,Andy
 CC-0155,Zacian V — Celebrations · #016/025,NM,1,Andy
 CC-0156,Zamazenta V — Celebrations · #018/025,NM,1,Andy
-CC-0158,Here Comes Team Rocket! — Celebrations: Classic Collection · #15/82,NM,11,Andy
+CC-0158,Here Comes Team Rocket! — Celebrations: Classic Collection · #15/82,NM,2,Andy
 CC-0159,Imposter Professor Oak — Celebrations: Classic Collection · #73/102,NM,1,Andy
 CC-0163,Gardevoir V (Full Art) — Champion's Path · #70/73,NM,5,Andy
 CC-0165,Beedrill ex — Chaos Rising · #003/086,NM,1,Andy
@@ -202,7 +202,7 @@ CC-0735,Paldean Clodsire ex — Journey Together · #094/159,NM,1,Andy
 CC-0736,Salamence ex — Journey Together · #114/159,NM,1,Andy
 CC-0737,Salamence ex — Journey Together · #177/159,NM,2,Andy
 CC-0738,Volcanion ex — Journey Together · #031/159,NM,1,Andy
-CC-0742,Butterfree — Jungle · #33,LP,14,Andy
+CC-0742,Butterfree — Jungle · #33,LP,2,Andy
 CC-0743,Clefable — Jungle · #1,MP,15,Andy
 CC-0744,Cubone — Jungle · #50,NM,14,Andy
 CC-0747,Kangaskhan — Jungle · #5,LP,10,Andy
@@ -311,8 +311,8 @@ CC-1105,Pikachu (Cosmo Holo) — Miscellaneous Cards & Products · #051/162,NM,3
 CC-1109,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #208/182,NM,8,Andy
 CC-1110,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #031/182,NM,2,Andy
 CC-1111,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #229/182,NM,60,Andy
-CC-1118,Tyranitar (31) — Neo Discovery · #31,HP,56,Andy
-CC-1119,Elekid — Neo Genesis · #22,LP,19,Andy
+CC-1118,Tyranitar (31) — Neo Discovery · #31,HP,15,Andy
+CC-1119,Elekid — Neo Genesis · #22,LP,4,Andy
 CC-1120,Togetic — Neo Genesis · #16,MP,24,Andy
 CC-1121,Piloswine — Neo Revelation · #36,MP,2,Andy
 CC-1126,Cassiopeia (JP) — Night Wanderer · #085/064,NM,3,Andy
@@ -674,9 +674,9 @@ CC-2211,Bouffalant ex — White Flare · #077/086,NM,1,Andy
 CC-2214,Deerling (Poke Ball Pattern) — White Flare · #006/086,NM,1,Andy
 CC-2215,Deino — White Flare · #146/086,NM,18,Andy
 CC-2219,Durant (Poke Ball Pattern) — White Flare · #070/086,NM,1,Andy
-CC-2221,Ferrothorn (Master Ball Pattern) — White Flare · #069/086,NM,1,Andy
+CC-2221,Ferrothorn (Master Ball Pattern) — White Flare · #069/086,NM,11,Andy
 CC-2222,Ferrothorn (Poke Ball Pattern) — White Flare · #069/086,NM,1,Andy
-CC-2224,Harlequin — White Flare · #165/086,NM,28,Andy
+CC-2224,Harlequin — White Flare · #165/086,NM,1,Andy
 CC-2227,Jellicent ex — White Flare · #160/086,NM,1,Andy
 CC-2228,Jellicent ex — White Flare · #045/086,NM,1,Andy
 CC-2230,Keldeo ex — White Flare · #030/086,NM,1,Andy
@@ -689,7 +689,7 @@ CC-2239,Reshiram ex — White Flare · #158/086,NM,4,Andy
 CC-2240,Reshiram ex — White Flare · #020/086,NM,1,Andy
 CC-2243,Sewaddle (Poke Ball Pattern) — White Flare · #001/086,NM,1,Andy
 CC-2245,Shelmet (Poke Ball Pattern) — White Flare · #008/086,NM,1,Andy
-CC-2246,Sigilyph (Master Ball Pattern) — White Flare · #038/086,NM,1,Andy
+CC-2246,Sigilyph (Master Ball Pattern) — White Flare · #038/086,NM,10,Andy
 CC-2247,Trubbish (Poke Ball Pattern) — White Flare · #059/086,NM,1,Andy
 CC-2249,Whimsicott ex — White Flare · #005/086,NM,1,Andy
 CC-2251,Zorua — White Flare · #142/086,LP,40,Andy
@@ -810,7 +810,7 @@ CC-2410,Dragonite VSTAR (Secret) — Pokemon Go · #081/078,PSA 10,156,Trung
 CC-2411,Melmetal V (Full Art) — Pokemon Go · #075/078,NM,2,Trung
 CC-2413,Slaking V (Full Art) — Pokemon Go · #077/078,NM,2,Trung
 CC-2414,Spark (Secret) — Pokemon Go · #085/078,NM,9,Trung
-CC-2415,Spinarak (Peelable Ditto) — Pokemon Go · #006/078,NM,1,Trung
+CC-2415,Spinarak (Peelable Ditto) — Pokemon Go · #006/078,NM,15,Trung
 CC-2416,Bouffalant — Primal Clash · #119,NM,1,Trung
 CC-2417,Boltund V (Full Art) — Rebel Clash · #181/192,NM,4,Trung
 CC-2418,Eldegoss V (Full Art) — Rebel Clash · #176/192,NM,3,Trung
@@ -923,7 +923,7 @@ CC-2643,Journey Together Booster Pack — Journey Together,UO,7,Andy
 CC-2644,Journey Together Booster Pack — Journey Together,UO,7,Andy
 CC-2649,Salamence ex — Journey Together · #114/159,NM,1,Andy
 CC-2650,Salamence ex — Journey Together · #177/159,NM,2,Andy
-CC-2651,Butterfree — Jungle · #33,LP,14,Andy
+CC-2651,Butterfree — Jungle · #33,LP,2,Andy
 CC-2655,Giratina V — Lost Origin · #130/196,NM,2,Andy
 CC-2656,Giratina V — Lost Origin · #130/196,NM,2,Andy
 CC-2660,Lost Vacuum (Secret) — Lost Origin · #217/196,NM,3,Andy
@@ -1146,7 +1146,7 @@ CC-3024,Pachirisu (JP) — Violet ex · #084/078,NM,9,Andy
 CC-3027,Hatterene VMAX (JP) — VSTAR Universe · #066/172,NM,3,Andy
 CC-3039,Lapras (JP) — VSTAR Universe · #177/172,NM,12,Andy
 CC-3041,Mew (JP) — VSTAR Universe · #183/172,PSA 10,107,Andy
-CC-3046,Emboar — White Flare · #098/086,NM,45,Andy
+CC-3046,Emboar — White Flare · #098/086,NM,10,Andy
 CC-3048,Keldeo ex — White Flare · #030/086,NM,1,Andy
 CC-3050,Lillipup (Poke Ball Pattern) — White Flare · #074/086,NM,1,Andy
 CC-3053,Whimsicott ex — White Flare · #005/086,NM,1,Andy
@@ -1555,7 +1555,7 @@ CC-3464,Zekrom — Celebrations · #010/025,NM,1,Trung
 CC-3466,Kangaskhan (SM Base Set) — Deck Exclusives · #099/149,NM,1,Trung
 CC-3468,Boltund VMAX (Secret) — Fusion Strike · #267/264,NM,8,Trung
 CC-3469,Snorlax — Lost Origin · #143/196,NM,4,Trung
-CC-3471,Spinarak (Peelable Ditto) — Pokemon Go · #006/078,NM,1,Trung
+CC-3471,Spinarak (Peelable Ditto) — Pokemon Go · #006/078,NM,15,Trung
 CC-3473,V Guard Energy (Secret) — Silver Tempest · #215/195,NM,2,Trung
 CC-3476,Braviary — Surging Sparks · #214/191,NM,6,Trung
 CC-3477,Boltund V — Sword & Shield Promo · #SWSH085,NM,1,Trung
@@ -1579,9 +1579,9 @@ CC-3890,Excadrill ex — Black Bolt · #046/086,NM,1,Andy
 CC-3891,Genesect ex — Black Bolt · #067/086,NM,2,Andy
 CC-3892,Klink (Poke Ball Pattern) — Black Bolt · #061/086,NM,1,Andy
 CC-3894,Pawniard — Black Bolt · #142/086,NM,8,Andy
-CC-3895,Minccino (Master Ball Pattern) — Black Bolt · #077/086,NM,1,Andy
-CC-3898,Volcarona — Black Bolt · #104/086,NM,12,Andy
-CC-3899,Volcarona (Master Ball Pattern) — Black Bolt · #019/086,NM,1,Andy
+CC-3895,Minccino (Master Ball Pattern) — Black Bolt · #077/086,NM,3,Andy
+CC-3898,Volcarona — Black Bolt · #104/086,NM,15,Andy
+CC-3899,Volcarona (Master Ball Pattern) — Black Bolt · #019/086,NM,4,Andy
 CC-3910,Eevee — Brilliant Stars Trainer Gallery · #TG11/TG30,NM,19,Andy
 CC-3911,Flareon — Brilliant Stars Trainer Gallery · #TG01/TG30,NM,22,Andy
 CC-3912,Jolteon — Brilliant Stars Trainer Gallery · #TG04/TG30,NM,17,Andy
@@ -1752,8 +1752,8 @@ CC-4271,Genesect V (JP) — VSTAR Universe · #102/172,NM,2,Andy
 CC-4276,Hatterene VMAX (JP) — VSTAR Universe · #066/172,NM,3,Andy
 CC-4285,Keldeo (JP) — VSTAR Universe · #179/172,NM,10,Andy
 CC-4288,Latias (JP) — VSTAR Universe · #195/172,PSA 9,24,Andy
-CC-4320,Deino (Master Ball Pattern) — White Flare · #060/086,NM,1,Andy
-CC-4321,Durant (Master Ball Pattern) — White Flare · #068/086,NM,1,Andy
+CC-4320,Deino (Master Ball Pattern) — White Flare · #060/086,NM,5,Andy
+CC-4321,Durant (Master Ball Pattern) — White Flare · #068/086,NM,7,Andy
 CC-4322,White Flare Pokemon Center Elite Trainer Box (Exclusive) — White Flare,UO,235,Andy
 CC-4326,Mega Gardevoir ex — Ascended Heroes · #089/217,NM,1,Trung
 CC-4327,Darkrai V — Astral Radiance · #098/189,NM,2,Trung
@@ -2327,7 +2327,7 @@ CC-5118,Charizard — Vivid Voltage · #025/185,NM,4,Andy
 CC-5119,Raikou — Vivid Voltage · #050/185,NM,7,Andy
 CC-5120,Zamazenta — Vivid Voltage · #102/185,NM,3,Andy
 CC-5121,Abra — Base Set (1st Edition & Shadowless) · #43,LP,29,Jordan and Marcus
-CC-5122,Haunter — Base Set (1st Edition & Shadowless) · #29,LP,3,Jordan and Marcus
+CC-5122,Haunter — Base Set (1st Edition & Shadowless) · #29,LP,20,Jordan and Marcus
 CC-5123,Magikarp — Base Set (1st Edition & Shadowless) · #35,MP,145,Jordan and Marcus
 CC-5124,Magneton — Base Set (1st Edition & Shadowless) · #9,MP,24,Jordan and Marcus
 CC-5125,Venusaur — Base Set 2 · #18,HP,40,Jordan and Marcus
