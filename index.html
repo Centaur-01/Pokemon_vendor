@@ -393,7 +393,9 @@ function trackCard(c){
 }
 
 function openCard(id){
-  let c = ALL.find(x=>x.id===id);
+  // 2026-10-20: a listed card also opens by its CC id. Sold pages always did, so a card
+  // relisted after a wrong Sold (41 on 10-20) lost its #CC-#### link (sticker_replay mirrors this).
+  let c = ALL.find(x=>x.id===id) || ALL.find(x=>x.internal_id===id);
   if(!c) c = TOMBS.find(x => x.id===id || x.slug===id || x.internal_id===id);
   if(!c && ALIASES[id]){                       // old sticker -> current card
     const to = ALIASES[id];
