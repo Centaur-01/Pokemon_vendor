@@ -17,7 +17,7 @@ CC-0045,Gastly — Base Set (1st Edition & Shadowless) · #50,MP,2,Andy
 CC-0047,Growlithe — Base Set (1st Edition & Shadowless) · #28,MP,10,Andy
 CC-0051,Squirtle — Base Set 2 · #93,NM,2,Andy
 CC-0052,Arcanine — Base Set (Unlimited) · #23,LP,4,Andy
-CC-0053,Beedrill — Base Set (Unlimited) · #17,LP,4,Andy
+CC-0053,Beedrill — Base Set (Unlimited) · #17,LP,3,Andy
 CC-0054,Bulbasaur — Base Set (Unlimited) · #44,NM,4,Andy
 CC-0055,Bulbasaur — Base Set (Unlimited) · #44,LP,2,Andy
 CC-0058,Hitmonchan — Base Set (Unlimited) · #7,MP,9,Andy
@@ -29,7 +29,7 @@ CC-0070,Black Kyurem — Black and White Promos · #BW58,LP,14,Andy
 CC-0075,Beartic (Poke Ball Pattern) — Black Bolt · #026/086,NM,1,Andy
 CC-0077,Cobalion — Black Bolt · #149/086,NM,10,Andy
 CC-0078,Cobalion (Poke Ball Pattern) — Black Bolt · #066/086,NM,1,Andy
-CC-0079,Krokorok — Black Bolt · #136/086,NM,9,Andy
+CC-0079,Krokorok — Black Bolt · #136/086,NM,10,Andy
 CC-0081,Elgyem (Poke Ball Pattern) — Black Bolt · #040/086,NM,1,Andy
 CC-0082,Escavalier (Poke Ball Pattern) — Black Bolt · #060/086,NM,1,Andy
 CC-0084,Excadrill ex — Black Bolt · #046/086,NM,1,Andy
@@ -87,17 +87,17 @@ CC-0200,Cosmic Eclipse Booster Pack — Cosmic Eclipse,UO,73,Andy
 CC-0201,Gallade (Secret) — Cosmic Eclipse · #244/236,NM,13,Andy
 CC-0202,Guzzlord — Cosmic Eclipse · #136/236,NM,7,Andy
 CC-0237,Charizard V — Crown Zenith · #018/159,NM,7,Andy
-CC-0238,Charizard VSTAR — Crown Zenith · #019/159,NM,11,Andy
+CC-0238,Charizard VSTAR — Crown Zenith · #019/159,NM,10,Andy
 CC-0261,Duraludon VMAX — Crown Zenith · #104/159,NM,2,Andy
 CC-0291,Friends in Sinnoh (Full Art) — Crown Zenith · #149/159,NM,8,Andy
 CC-0308,Greedent V — Crown Zenith · #120/159,NM,1,Andy
 CC-0336,Leafeon V — Crown Zenith · #013/159,NM,3,Andy
-CC-0392,Radiant Charizard — Crown Zenith · #020/159,NM,13,Andy
+CC-0392,Radiant Charizard — Crown Zenith · #020/159,NM,12,Andy
 CC-0410,Rotom V — Crown Zenith · #045/159,NM,1,Andy
 CC-0483,Zamazenta VSTAR — Crown Zenith · #099/159,NM,2,Andy
 CC-0498,Comfey — Crown Zenith: Galarian Gallery · #GG14/GG70,NM,3,Andy
-CC-0504,Diancie — Crown Zenith: Galarian Gallery · #GG13/GG70,NM,6,Andy
-CC-0509,Electivire — Crown Zenith: Galarian Gallery · #GG08/GG70,NM,10,Andy
+CC-0504,Diancie — Crown Zenith: Galarian Gallery · #GG13/GG70,NM,5,Andy
+CC-0509,Electivire — Crown Zenith: Galarian Gallery · #GG08/GG70,NM,9,Andy
 CC-0524,Kricketune — Crown Zenith: Galarian Gallery · #GG02/GG70,NM,8,Andy
 CC-0538,Oricorio — Crown Zenith: Galarian Gallery · #GG04/GG70,NM,4,Andy
 CC-0556,Toxtricity — Crown Zenith: Galarian Gallery · #GG09/GG70,NM,5,Andy
@@ -139,7 +139,7 @@ CC-0617,Yanmega ex — Destined Rivals · #003/182,NM,1,Andy
 CC-0618,Zamazenta — Destined Rivals · #201/182,NM,4,Andy
 CC-0625,M Charizard EX — Evolutions · #13/108,NM,40,Andy
 CC-0627,Mew — Evolutions · #53/108,NM,36,Andy
-CC-0630,Mewtwo EX (Full Art) — Evolutions · #103/108,NM,49,Andy
+CC-0630,Mewtwo EX (Full Art) — Evolutions · #103/108,NM,48,Andy
 CC-0634,Espeon VMAX — Evolving Skies · #065/203,NM,16,Andy
 CC-0635,Garbodor V — Evolving Skies · #100/203,NM,2,Andy
 CC-0636,Glaceon VMAX — Evolving Skies · #041/203,NM,9,Andy
@@ -157,20 +157,20 @@ CC-0668,Kangaskhan EX — Flashfire · #78,HP,2,Andy
 CC-0670,Ekans — Fossil · #46,LP,2,Andy
 CC-0671,Graveler — Fossil · #37,LP,3,Andy
 CC-0672,Haunter — Fossil · #6,MP,19,Andy
-CC-0673,Kabuto — Fossil · #50,MP,10,Andy
+CC-0673,Kabuto — Fossil · #50,MP,9,Andy
 CC-0675,Moltres (27) — Fossil · #27,HP,4,Andy
 CC-0676,Muk (13) — Fossil · #13,LP,7,Andy
-CC-0677,Psyduck — Fossil · #53,NM,15,Andy
+CC-0677,Psyduck — Fossil · #53,NM,14,Andy
 CC-0680,Appletun V — Fusion Strike · #026/264,NM,1,Andy
 CC-0683,Crabominable V — Fusion Strike · #076/264,NM,1,Andy
-CC-0684,Gengar V — Fusion Strike · #156/264,NM,12,Andy
+CC-0684,Gengar V — Fusion Strike · #156/264,NM,13,Andy
 CC-0686,Greedent V — Fusion Strike · #217/264,NM,1,Andy
 CC-0695,Golem — Generations · #45,NM,3,Andy
 CC-0700,Flareon EX — Generations: Radiant Collection · #RC6,PSA 9,467,Andy
 CC-0705,Blaine's Growlithe — Gym Challenge · #62,NM,12,Andy
 CC-0708,Lt. Surge's Pikachu — Gym Challenge · #84,NM,13,Andy
 CC-0714,Sabrina's Haunter — Gym Heroes · #58,LP,42,Andy
-CC-0718,Moltres & Zapdos & Articuno GX (Secret) — Hidden Fates · #69/68,NM,45,Andy
+CC-0718,Moltres & Zapdos & Articuno GX (Secret) — Hidden Fates · #69/68,NM,44,Andy
 CC-0719,Naganadel GX — Hidden Fates: Shiny Vault · #SV63/SV94,NM,16,Andy
 CC-0720,Noivern GX — Hidden Fates: Shiny Vault · #SV78/SV94,NM,19,Andy
 CC-0723,Alcremie ex — Journey Together · #075/159,NM,1,Andy
@@ -183,8 +183,8 @@ CC-0735,Paldean Clodsire ex — Journey Together · #094/159,NM,1,Andy
 CC-0736,Salamence ex — Journey Together · #114/159,NM,1,Andy
 CC-0737,Salamence ex — Journey Together · #177/159,NM,2,Andy
 CC-0738,Volcanion ex — Journey Together · #031/159,NM,1,Andy
-CC-0742,Butterfree — Jungle · #33,LP,2,Andy
-CC-0743,Clefable — Jungle · #1,MP,15,Andy
+CC-0742,Butterfree — Jungle · #33,LP,1,Andy
+CC-0743,Clefable — Jungle · #1,MP,16,Andy
 CC-0744,Cubone — Jungle · #50,NM,13,Andy
 CC-0747,Kangaskhan — Jungle · #5,LP,12,Andy
 CC-0748,Marowak — Jungle · #39,LP,5,Andy
@@ -208,7 +208,7 @@ CC-0787,Radiant Hisuian Sneasler — Lost Origin · #123/196,NM,1,Andy
 CC-0788,Radiant Steelix — Lost Origin · #124/196,NM,2,Andy
 CC-0789,Rotom V — Lost Origin · #058/196,NM,1,Andy
 CC-0792,Hisuian Arcanine — Lost Origin Trainer Gallery · #TG08/TG30,NM,5,Andy
-CC-0794,Pikachu — Lost Origin Trainer Gallery · #TG05/TG30,NM,43,Andy
+CC-0794,Pikachu — Lost Origin Trainer Gallery · #TG05/TG30,NM,42,Andy
 CC-0795,Roserade — Lost Origin Trainer Gallery · #TG02/TG30,NM,3,Andy
 CC-0797,Cresselia — Majestic Dawn · #2,LP,10,Andy
 CC-0802,Dragonite — McDonald's Promos 2024 · #012/015,NM,6,Andy
@@ -264,7 +264,7 @@ CC-1051,Mega Gardevoir ex — Mega Evolution · #159/132,NM,5,Andy
 CC-1052,Mega Kangaskhan ex — Mega Evolution · #104/132,NM,2,Andy
 CC-1053,Mega Latias ex — Mega Evolution · #163/132,NM,4,Andy
 CC-1054,Mega Latias ex — Mega Evolution · #100/132,NM,1,Andy
-CC-1056,Mega Lucario ex — Mega Evolution · #160/132,NM,13,Andy
+CC-1056,Mega Lucario ex — Mega Evolution · #160/132,NM,11,Andy
 CC-1057,Mega Manectric ex — Mega Evolution · #050/132,NM,1,Andy
 CC-1058,Mega Mawile ex — Mega Evolution · #094/132,NM,1,Andy
 CC-1059,Mega Signal — Mega Evolution · #171/132,NM,1,Andy
@@ -287,7 +287,7 @@ CC-1099,Kanto Power Mini Tin [Mew] — Miscellaneous Cards & Products,UO,40,Andy
 CC-1101,Mega Battle Deck (Mega Gengar ex) — Miscellaneous Cards & Products,UO,64,Andy
 CC-1102,Mega Zygarde ex Premium Collection — Miscellaneous Cards & Products,UO,49,Andy
 CC-1105,Pikachu (Cosmo Holo) — Miscellaneous Cards & Products · #051/162,NM,3,Andy
-CC-1109,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #208/182,NM,6,Andy
+CC-1109,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #208/182,NM,7,Andy
 CC-1110,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #031/182,NM,2,Andy
 CC-1111,Team Rocket's Moltres ex (Destined Rivals Stamp) — Miscellaneous Cards & Products · #229/182,NM,47,Andy
 CC-1118,Tyranitar (31) — Neo Discovery · #31,HP,10,Andy
@@ -315,7 +315,7 @@ CC-1151,Miraidon ex — Obsidian Flames · #079/197,NM,1,Andy
 CC-1152,Ninetales — Obsidian Flames · #199/197,NM,32,Andy
 CC-1153,Obsidian Flames Elite Trainer Box — Obsidian Flames,UO,270,Andy
 CC-1154,Pidgeot ex — Obsidian Flames · #164/197,NM,2,Andy
-CC-1156,Pidgey — Obsidian Flames · #207/197,NM,12,Andy
+CC-1156,Pidgey — Obsidian Flames · #207/197,NM,11,Andy
 CC-1157,Poppy — Obsidian Flames · #227/197,NM,3,Andy
 CC-1159,Toedscruel ex — Obsidian Flames · #022/197,NM,1,Andy
 CC-1160,Dedenne ex — Paldea Evolved · #093/193,NM,2,Andy
@@ -323,16 +323,16 @@ CC-1161,Dendra — Paldea Evolved · #266/193,NM,9,Andy
 CC-1162,Eiscue — Paldea Evolved · #205/193,NM,24,Andy
 CC-1163,Fletchinder — Paldea Evolved · #199/193,NM,19,Andy
 CC-1166,Paldean Clodsire ex — Paldea Evolved · #130/193,NM,1,Andy
-CC-1167,Rabsca — Paldea Evolved · #215/193,NM,6,Andy
+CC-1167,Rabsca — Paldea Evolved · #215/193,NM,7,Andy
 CC-1169,Slowking ex — Paldea Evolved · #086/193,NM,2,Andy
 CC-1171,Ting-Lu ex — Paldea Evolved · #127/193,NM,1,Andy
-CC-1173,Alakazam ex — Paldean Fates · #215/091,NM,7,Andy
+CC-1173,Alakazam ex — Paldean Fates · #215/091,NM,6,Andy
 CC-1174,Charizard ex — Paldean Fates · #054/091,NM,5,Andy
 CC-1175,Chien-Pao — Paldean Fates · #242/091,NM,10,Andy
 CC-1176,Clive — Paldean Fates · #227/091,NM,1,Andy
 CC-1178,Espathra ex — Paldean Fates · #006/091,NM,1,Andy
 CC-1179,Forretress ex — Paldean Fates · #002/091,NM,1,Andy
-CC-1180,Gardevoir ex — Paldean Fates · #217/091,NM,8,Andy
+CC-1180,Gardevoir ex — Paldean Fates · #217/091,NM,9,Andy
 CC-1181,Glimmora ex — Paldean Fates · #218/091,NM,1,Andy
 CC-1183,Great Tusk ex — Paldean Fates · #053/091,NM,1,Andy
 CC-1185,Iron Treads ex — Paldean Fates · #066/091,NM,1,Andy
@@ -366,7 +366,7 @@ CC-1229,Lapras ex — Perfect Order · #022/088,NM,1,Andy
 CC-1230,Mega Clefable ex — Perfect Order · #031/088,NM,1,Andy
 CC-1231,Mega Skarmory ex — Perfect Order · #106/088,NM,4,Andy
 CC-1232,Mega Skarmory ex — Perfect Order · #055/088,NM,1,Andy
-CC-1233,Mega Starmie ex — Perfect Order · #118/088,NM,29,Andy
+CC-1233,Mega Starmie ex — Perfect Order · #118/088,NM,30,Andy
 CC-1234,Mega Zygarde ex — Perfect Order · #124/088,NM,85,Andy
 CC-1235,Mega Zygarde ex — Perfect Order · #047/088,NM,1,Andy
 CC-1236,Meowth ex — Perfect Order · #062/088,NM,2,Andy
@@ -379,7 +379,7 @@ CC-1245,Rosa's Encouragement - 114/088 — Perfect Order · #114/088,NM,4,Andy
 CC-1247,Salazzle ex — Perfect Order · #016/088,NM,1,Andy
 CC-1248,Spewpa — Perfect Order · #089/088,NM,2,Andy
 CC-1249,Talonflame — Perfect Order · #091/088,NM,2,Andy
-CC-1250,Yveltal ex — Perfect Order · #105/088,NM,4,Andy
+CC-1250,Yveltal ex — Perfect Order · #105/088,NM,5,Andy
 CC-1251,Yveltal ex — Perfect Order · #053/088,NM,1,Andy
 CC-1252,Battle Cage — Phantasmal Flames · #116/094,NM,2,Andy
 CC-1253,Dawn — Phantasmal Flames · #118/094,NM,6,Andy
@@ -391,7 +391,7 @@ CC-1258,Mega Diancie ex — Phantasmal Flames · #041/094,NM,1,Andy
 CC-1259,Mega Gengar ex — Phantasmal Flames · #056/094,NM,2,Andy
 CC-1260,Mega Heracross ex — Phantasmal Flames · #004/094,NM,1,Andy
 CC-1261,Mega Lopunny ex — Phantasmal Flames · #084/094,NM,1,Andy
-CC-1262,Mega Sharpedo ex — Phantasmal Flames · #113/094,NM,3,Andy
+CC-1262,Mega Sharpedo ex — Phantasmal Flames · #113/094,NM,4,Andy
 CC-1264,Nymble — Phantasmal Flames · #096/094,NM,2,Andy
 CC-1265,Oricorio ex — Phantasmal Flames · #018/094,NM,1,Andy
 CC-1269,Rotom ex — Phantasmal Flames · #029/094,NM,1,Andy
@@ -410,7 +410,7 @@ CC-1611,Tauros (JP) — Pokemon 151 · #128/165,NM,16,Andy
 CC-1623,Venusaur ex (JP) — Pokemon 151 · #200/165,PSA 10,156,Andy
 CC-1651,Mewtwo V — Pokemon Go · #030/078,NM,6,Andy
 CC-1656,Torchic (Omega) — Primal Clash · #26,NM,5,Andy
-CC-1657,Wailord EX (147 Full Art) — Primal Clash · #147,NM,57,Andy
+CC-1657,Wailord EX (147 Full Art) — Primal Clash · #147,NM,58,Andy
 CC-1659,Amarys — Prismatic Evolutions · #132/131,NM,1,Andy
 CC-1660,Binding Mochi (Poke Ball Pattern) — Prismatic Evolutions · #095/131,NM,1,Andy
 CC-1661,Black Belt's Training (Poke Ball Pattern) — Prismatic Evolutions · #099/131,NM,1,Andy
@@ -434,7 +434,7 @@ CC-1710,Alakazam ex — Scarlet & Violet Promo · #050,NM,1,Andy
 CC-1712,Bellibolt — Scarlet & Violet Promo · #094,NM,1,Andy
 CC-1714,Cinderace ex — Scarlet & Violet Promo · #163,NM,5,Andy
 CC-1718,Flareon (Cosmos Holo) — Scarlet & Violet Promo · #167,NM,1,Andy
-CC-1719,Greninja ex — Scarlet & Violet Promo · #132,NM,78,Andy
+CC-1719,Greninja ex — Scarlet & Violet Promo · #132,NM,75,Andy
 CC-1722,Houndstone ex — Scarlet & Violet Promo · #162,NM,1,Andy
 CC-1723,Iron Thorns — Scarlet & Violet Promo · #098,NM,2,Andy
 CC-1724,Jolteon - 169 (Cosmos Holo) — Scarlet & Violet Promo · #169,NM,1,Andy
@@ -442,7 +442,7 @@ CC-1725,Kingambit — Scarlet & Violet Promo · #130,NM,4,Andy
 CC-1728,Latias (Cosmo Holo) — Scarlet & Violet Promo · #139,NM,4,Andy
 CC-1729,Lillie's Clefairy ex — Scarlet & Violet Promo · #195,NM,16,Andy
 CC-1731,Meowscarada ex — Scarlet & Violet Promo · #033,NM,1,Andy
-CC-1732,Mew ex — Scarlet & Violet Promo · #053,NM,64,Andy
+CC-1732,Mew ex — Scarlet & Violet Promo · #053,NM,62,Andy
 CC-1733,Mewtwo — Scarlet & Violet Promo · #052,NM,43,Andy
 CC-1735,Noctowl — Scarlet & Violet Promo · #141,NM,3,Andy
 CC-1739,Pawmi Cosmos Holo — Scarlet & Violet Promo · #040,NM,1,Andy
@@ -483,11 +483,11 @@ CC-1809,Skuntank V — Silver Tempest · #108/195,NM,1,Andy
 CC-1810,Ursaluna V — Silver Tempest · #102/195,NM,1,Andy
 CC-1811,Worker (Full Art) — Silver Tempest · #195/195,NM,3,Andy
 CC-1812,Altaria — Silver Tempest Trainer Gallery · #TG11/TG30,NM,6,Andy
-CC-1813,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,6,Andy
+CC-1813,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,5,Andy
 CC-1814,Corviknight VMAX — Silver Tempest Trainer Gallery · #TG19/TG30,NM,9,Andy
 CC-1815,Flaaffy — Silver Tempest Trainer Gallery · #TG03/TG30,NM,5,Andy
 CC-1818,Kricketune V — Silver Tempest Trainer Gallery · #TG12/TG30,NM,6,Andy
-CC-1819,Mawile V — Silver Tempest Trainer Gallery · #TG17/TG30,NM,13,Andy
+CC-1819,Mawile V — Silver Tempest Trainer Gallery · #TG17/TG30,NM,12,Andy
 CC-1820,Milotic — Silver Tempest Trainer Gallery · #TG02/TG30,NM,7,Andy
 CC-1821,Passimian — Silver Tempest Trainer Gallery · #TG08/TG30,NM,2,Andy
 CC-1822,Smeargle — Silver Tempest Trainer Gallery · #TG10/TG30,NM,5,Andy
@@ -496,30 +496,30 @@ CC-1830,Gardevoir EX (Secret) — Steam Siege · #116,MP,53,Andy
 CC-1835,Cinderace ex — Stellar Crown · #028/142,NM,1,Andy
 CC-1836,Crabominable — Stellar Crown · #149/142,NM,4,Andy
 CC-1840,Galvantula ex — Stellar Crown · #051/142,NM,1,Andy
-CC-1841,Galvantula ex — Stellar Crown · #159/142,NM,2,Andy
+CC-1841,Galvantula ex — Stellar Crown · #159/142,NM,3,Andy
 CC-1842,Grand Tree — Stellar Crown · #136/142,NM,1,Andy
 CC-1843,Greninja ex — Stellar Crown · #041/142,NM,2,Andy
 CC-1844,Hydrapple ex — Stellar Crown · #014/142,NM,2,Andy
 CC-1845,Hydrapple ex — Stellar Crown · #156/142,NM,4,Andy
-CC-1847,Lucario ex — Stellar Crown · #082/142,NM,1,Andy
+CC-1847,Lucario ex — Stellar Crown · #082/142,NM,2,Andy
 CC-1849,Orthworm ex — Stellar Crown · #162/142,NM,1,Andy
 CC-1851,Sparkling Crystal — Stellar Crown · #142/142,NM,1,Andy
 CC-1852,Stellar Crown Sleeved Booster Pack — Stellar Crown,UO,10,Andy
-CC-1853,Zeraora — Stellar Crown · #151/142,NM,11,Andy
+CC-1853,Zeraora — Stellar Crown · #151/142,NM,10,Andy
 CC-1868,Pikachu — Sun & Moon Promo · #SM162,PSA 9,250,Andy
 CC-1869,Pikachu & Zekrom GX — Sun & Moon Promo · #SM248,NM,35,Andy
 CC-1870,Reshiram & Charizard GX — Sun & Moon Promo · #SM247,NM,43,Andy
 CC-1871,Snorlax GX — Sun & Moon Promo · #SM05,NM,29,Andy
 CC-1874,Alolan Exeggutor ex — Surging Sparks · #133/191,NM,1,Andy
 CC-1876,Archaludon ex — Surging Sparks · #130/191,NM,1,Andy
-CC-1877,Ceruledge — Surging Sparks · #197/191,NM,21,Andy
+CC-1877,Ceruledge — Surging Sparks · #197/191,NM,20,Andy
 CC-1878,Cyclizar ex — Surging Sparks · #159/191,NM,1,Andy
 CC-1879,Durant ex — Surging Sparks · #004/191,NM,1,Andy
 CC-1881,Flygon ex — Surging Sparks · #106/191,NM,1,Andy
 CC-1882,Flygon ex — Surging Sparks · #222/191,NM,3,Andy
 CC-1883,Kilowattrel ex — Surging Sparks · #068/191,NM,1,Andy
-CC-1884,Latias ex — Surging Sparks · #220/191,NM,8,Andy
-CC-1885,Mesprit — Surging Sparks · #204/191,NM,13,Andy
+CC-1884,Latias ex — Surging Sparks · #220/191,NM,9,Andy
+CC-1885,Mesprit — Surging Sparks · #204/191,NM,14,Andy
 CC-1887,Phanpy — Surging Sparks · #205/191,NM,9,Andy
 CC-1889,Scovillain ex — Surging Sparks · #037/191,NM,1,Andy
 CC-1890,Scramble Switch — Surging Sparks · #186/191,NM,1,Andy
@@ -530,7 +530,7 @@ CC-1894,Tatsugiri ex — Surging Sparks · #142/191,NM,1,Andy
 CC-1896,Charizard ex — SV: 151 · #006/165,NM,9,Andy
 CC-1897,Gengar — SV: 151 · #094/165,NM,3,Andy
 CC-1898,Golem ex — SV: 151 · #189/165,NM,7,Andy
-CC-1899,Golem ex — SV: 151 · #076/165,NM,1,Andy
+CC-1899,Golem ex — SV: 151 · #076/165,NM,2,Andy
 CC-1902,Kangaskhan ex — SV: 151 · #115/165,NM,2,Andy
 CC-1903,Mew ex — SV: 151 · #193/165,NM,28,Andy
 CC-1905,Ninetales ex — SV: 151 · #038/165,NM,2,Andy
@@ -558,11 +558,11 @@ CC-1976,Dark Vaporeon — Team Rocket · #45,LP,16,Andy
 CC-1980,Awakening Drum — Temporal Forces · #141/162,NM,1,Andy
 CC-1981,Ciphermaniac's Codebreaking — Temporal Forces · #198/162,NM,8,Andy
 CC-1983,Gouging Fire ex — Temporal Forces · #038/162,NM,1,Andy
-CC-1985,Hero's Cape — Temporal Forces · #152/162,NM,28,Andy
+CC-1985,Hero's Cape — Temporal Forces · #152/162,NM,26,Andy
 CC-1986,Koraidon ex — Temporal Forces · #120/162,NM,1,Andy
 CC-1987,Meltan — Temporal Forces · #179/162,NM,7,Andy
-CC-1988,Metagross — Temporal Forces · #178/162,NM,32,Andy
-CC-1989,Raging Bolt ex — Temporal Forces · #196/162,NM,5,Andy
+CC-1988,Metagross — Temporal Forces · #178/162,NM,33,Andy
+CC-1989,Raging Bolt ex — Temporal Forces · #196/162,NM,4,Andy
 CC-1991,Scizor ex — Temporal Forces · #111/162,NM,1,Andy
 CC-1992,Torterra ex — Temporal Forces · #012/162,NM,1,Andy
 CC-1993,Walking Wake ex — Temporal Forces · #050/162,NM,1,Andy
@@ -622,7 +622,7 @@ CC-2063,Iron Thorns ex — Twilight Masquerade · #077/167,NM,1,Andy
 CC-2064,Lana's Aid — Twilight Masquerade · #207/167,NM,6,Andy
 CC-2065,Magcargo ex — Twilight Masquerade · #029/167,NM,1,Andy
 CC-2067,Sinistcha ex — Twilight Masquerade · #023/167,NM,1,Andy
-CC-2068,Teal Mask Ogerpon ex — Twilight Masquerade · #025/167,NM,5,Andy
+CC-2068,Teal Mask Ogerpon ex — Twilight Masquerade · #025/167,NM,3,Andy
 CC-2069,Twilight Masquerade Elite Trainer Box — Twilight Masquerade,UO,108,Andy
 CC-2075,Metagross — Undaunted · #18,MP,7,Andy
 CC-2080,Unified Minds Booster Pack — Unified Minds,UO,89,Andy
@@ -661,12 +661,12 @@ CC-2246,Sigilyph (Master Ball Pattern) — White Flare · #038/086,NM,10,Andy
 CC-2247,Trubbish (Poke Ball Pattern) — White Flare · #059/086,NM,1,Andy
 CC-2249,Whimsicott ex — White Flare · #005/086,NM,1,Andy
 CC-2251,Zorua — White Flare · #142/086,LP,40,Andy
-CC-2252,Suicune & Entei LEGEND (94)(Ross Cawthon) — World Championship Decks · #94/95,MP,36,Andy
+CC-2252,Suicune & Entei LEGEND (94)(Ross Cawthon) — World Championship Decks · #94/95,MP,37,Andy
 CC-2253,Mew (8) — WoTC Promo · #8,NM,11,Andy
 CC-2259,Black Kyurem — XY Promos · #XY80,LP,33,Andy
 CC-2261,Groudon EX — XY Promos · #XY42,D,3,Andy
 CC-2262,Latias (Full Art Promo) — XY Promos · #XY78,LP,47,Andy
-CC-2263,Lucario — XY Promos · #XY140,NM,10,Andy
+CC-2263,Lucario — XY Promos · #XY140,NM,11,Andy
 CC-2265,Mew — XY Promos · #XY110,LP,90,Andy
 CC-2266,M Gengar EX — XY Promos · #XY166,D,40,Andy
 CC-2268,Lysandre — Ancient Origins · #78,NM,1,Trung
@@ -685,7 +685,7 @@ CC-2285,Honchkrow V (Full Art) — Brilliant Stars · #161/172,NM,2,Trung
 CC-2287,Shaymin V (Full Art) — Brilliant Stars · #152/172,NM,3,Trung
 CC-2288,Zamazenta V (Full Art) — Brilliant Stars · #163/172,NM,3,Trung
 CC-2291,Rapid Strike Urshifu VMAX (Secret) — Brilliant Stars Trainer Gallery · #TG30/TG30,NM,4,Trung
-CC-2292,Single Strike Urshifu VMAX (Secret) — Brilliant Stars Trainer Gallery · #TG29/TG30,NM,4,Trung
+CC-2292,Single Strike Urshifu VMAX (Secret) — Brilliant Stars Trainer Gallery · #TG29/TG30,NM,5,Trung
 CC-2295,Kirlia — Burning Shadows · #92/147,NM,2,Trung
 CC-2296,Cosmoem — Celebrations · #014/025,NM,1,Trung
 CC-2297,Cosmog — Celebrations · #013/025,NM,1,Trung
@@ -731,7 +731,7 @@ CC-2349,Boost Shake (Secret) — Evolving Skies · #229/203,NM,3,Trung
 CC-2350,Copycat (Secret) — Evolving Skies · #222/203,NM,5,Trung
 CC-2351,Cresselia (Secret) — Evolving Skies · #228/203,NM,14,Trung
 CC-2352,Crystal Cave (Secret) — Evolving Skies · #230/203,NM,5,Trung
-CC-2353,Dragonite V (Full Art) — Evolving Skies · #191/203,NM,38,Trung
+CC-2353,Dragonite V (Full Art) — Evolving Skies · #191/203,NM,39,Trung
 CC-2356,Froslass (Secret) — Evolving Skies · #226/203,NM,10,Trung
 CC-2357,Full Face Guard (Secret) — Evolving Skies · #231/203,NM,3,Trung
 CC-2358,Garbodor V (Full Art) — Evolving Skies · #190/203,NM,5,Trung
@@ -762,7 +762,7 @@ CC-2387,Wigglytuff — Fusion Strike · #111/264,NM,5,Trung
 CC-2388,Dark Patch (Secret) — Lost Origin · #216/196,NM,3,Trung
 CC-2390,Hisuian Goodra VSTAR (Secret) — Lost Origin · #202/196,NM,11,Trung
 CC-2391,Lady (Secret) — Lost Origin · #208/196,NM,6,Trung
-CC-2392,Snorlax — Lost Origin · #143/196,NM,4,Trung
+CC-2392,Snorlax — Lost Origin · #143/196,NM,3,Trung
 CC-2397,Ho-oh — Lost Thunder · #160,NM,4,Trung
 CC-2398,Marill — Lost Thunder · #135,NM,4,Trung
 CC-2400,Rowlet — McDonald's Promos 2017 · #1,NM,8,Trung
@@ -794,7 +794,7 @@ CC-2433,V Guard Energy (Secret) — Silver Tempest · #215/195,NM,2,Trung
 CC-2434,Wallace (Secret) — Silver Tempest · #208/195,NM,5,Trung
 CC-2435,Worker (Full Art) — Silver Tempest · #195/195,NM,3,Trung
 CC-2436,Worker (Secret) — Silver Tempest · #209/195,NM,5,Trung
-CC-2438,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,6,Trung
+CC-2438,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,5,Trung
 CC-2439,Duraludon VMAX (Secret) — Silver Tempest Trainer Gallery · #TG30/TG30,NM,4,Trung
 CC-2444,Alolan Muk — Sun & Moon Base Set · #58,NM,2,Trung
 CC-2445,Eevee — Sun & Moon Base Set · #101,NM,3,Trung
@@ -827,7 +827,7 @@ CC-2483,Charmander (11) — Team Up · #11,NM,1,Trung
 CC-2484,Kabuto — Team Up · #77,NM,1,Trung
 CC-2485,Meowth — Team Up · #125,NM,2,Trung
 CC-2486,Ciphermaniac's Codebreaking — Temporal Forces · #198/162,NM,8,Trung
-CC-2487,Alakazam V (Full Art) — Vivid Voltage · #172/185,NM,4,Trung
+CC-2487,Alakazam V (Full Art) — Vivid Voltage · #172/185,NM,5,Trung
 CC-2488,Coalossal V (Full Art) — Vivid Voltage · #173/185,NM,3,Trung
 CC-2489,Flareon — Vivid Voltage · #026/185,NM,1,Trung
 CC-2490,Galarian Obstagoon (Secret) — Vivid Voltage · #198/185,NM,7,Trung
@@ -859,7 +859,7 @@ CC-2568,Radiant Eternatus — Crown Zenith · #105/159,NM,1,Andy
 CC-2569,Radiant Eternatus — Crown Zenith · #105/159,NM,1,Andy
 CC-2576,Bidoof — Crown Zenith: Galarian Gallery · #GG29/GG70,NM,7,Andy
 CC-2577,Comfey — Crown Zenith: Galarian Gallery · #GG14/GG70,NM,3,Andy
-CC-2584,Lunatone — Crown Zenith: Galarian Gallery · #GG11/GG70,NM,11,Andy
+CC-2584,Lunatone — Crown Zenith: Galarian Gallery · #GG11/GG70,NM,12,Andy
 CC-2591,Mew V — Darkness Ablaze · #069/189,NM,7,Andy
 CC-2593,Arboliva ex — Destined Rivals · #023/182,NM,1,Andy
 CC-2594,Arboliva ex — Destined Rivals · #023/182,NM,1,Andy
@@ -884,7 +884,7 @@ CC-2643,Journey Together Booster Pack — Journey Together,UO,6,Andy
 CC-2644,Journey Together Booster Pack — Journey Together,UO,6,Andy
 CC-2649,Salamence ex — Journey Together · #114/159,NM,1,Andy
 CC-2650,Salamence ex — Journey Together · #177/159,NM,2,Andy
-CC-2651,Butterfree — Jungle · #33,LP,2,Andy
+CC-2651,Butterfree — Jungle · #33,LP,1,Andy
 CC-2655,Giratina V — Lost Origin · #130/196,NM,3,Andy
 CC-2656,Giratina V — Lost Origin · #130/196,NM,3,Andy
 CC-2660,Lost Vacuum (Secret) — Lost Origin · #217/196,NM,3,Andy
@@ -963,7 +963,7 @@ CC-2767,Perfect Order Booster Pack — Perfect Order,UO,6,Andy
 CC-2769,Salazzle ex — Perfect Order · #016/088,NM,1,Andy
 CC-2770,Salazzle ex — Perfect Order · #016/088,NM,1,Andy
 CC-2771,Salazzle ex — Perfect Order · #016/088,NM,1,Andy
-CC-2773,Mega Sharpedo ex — Phantasmal Flames · #113/094,NM,3,Andy
+CC-2773,Mega Sharpedo ex — Phantasmal Flames · #113/094,NM,4,Andy
 CC-2775,Rotom ex — Phantasmal Flames · #029/094,NM,1,Andy
 CC-2777,Abra (JP) — Pokemon 151 · #063/165,NM,3,Andy
 CC-2778,Aerodactyl (JP) — Pokemon 151 · #142/165,NM,1,Andy
@@ -1050,7 +1050,7 @@ CC-2925,Grand Tree — Stellar Crown · #136/142,NM,1,Andy
 CC-2926,Hydrapple ex — Stellar Crown · #014/142,NM,2,Andy
 CC-2927,Hydrapple ex — Stellar Crown · #014/142,NM,2,Andy
 CC-2928,Hydrapple ex — Stellar Crown · #156/142,NM,4,Andy
-CC-2930,Lucario ex — Stellar Crown · #082/142,NM,1,Andy
+CC-2930,Lucario ex — Stellar Crown · #082/142,NM,2,Andy
 CC-2933,Sparkling Crystal — Stellar Crown · #142/142,NM,1,Andy
 CC-2934,Stellar Crown Sleeved Booster Pack — Stellar Crown,UO,10,Andy
 CC-2935,Stellar Crown Sleeved Booster Pack — Stellar Crown,UO,10,Andy
@@ -1066,9 +1066,9 @@ CC-2954,Galarian Slowpoke — Sword & Shield Promo · #SWSH126,NM,9,Andy
 CC-2958,Lucario VSTAR — Sword & Shield Promo · #SWSH291,NM,9,Andy
 CC-2961,Lugia V — Sword & Shield Promo · #SWSH301,NM,20,Andy
 CC-2970,Unown V — Sword & Shield Promo · #SWSH300,NM,2,Andy
-CC-2973,Hero's Cape — Temporal Forces · #152/162,NM,28,Andy
-CC-2974,Hero's Cape — Temporal Forces · #152/162,NM,28,Andy
-CC-2975,Raging Bolt ex — Temporal Forces · #196/162,NM,5,Andy
+CC-2973,Hero's Cape — Temporal Forces · #152/162,NM,26,Andy
+CC-2974,Hero's Cape — Temporal Forces · #152/162,NM,26,Andy
+CC-2975,Raging Bolt ex — Temporal Forces · #196/162,NM,4,Andy
 CC-2977,Amarys (JP) — Terastal Festival ex · #173/187,NM,4,Andy
 CC-2978,Dusclops (JP) — Terastal Festival ex · #065/187,NM,2,Andy
 CC-2981,Fezandipiti ex (JP) — Terastal Festival ex · #104/187,NM,1,Andy
@@ -1106,7 +1106,7 @@ CC-3046,Emboar — White Flare · #098/086,NM,9,Andy
 CC-3048,Keldeo ex — White Flare · #030/086,NM,1,Andy
 CC-3050,Lillipup (Poke Ball Pattern) — White Flare · #074/086,NM,1,Andy
 CC-3053,Whimsicott ex — White Flare · #005/086,NM,1,Andy
-CC-3057,Lucario — XY Promos · #XY140,NM,10,Andy
+CC-3057,Lucario — XY Promos · #XY140,NM,11,Andy
 CC-3058,Honchkrow V (Full Art) — Brilliant Stars · #161/172,NM,2,Trung
 CC-3062,Cosmoem — Celebrations · #014/025,NM,1,Trung
 CC-3063,Cosmoem — Celebrations · #014/025,NM,1,Trung
@@ -1510,7 +1510,7 @@ CC-3463,Zekrom — Celebrations · #010/025,NM,1,Trung
 CC-3464,Zekrom — Celebrations · #010/025,NM,1,Trung
 CC-3466,Kangaskhan (SM Base Set) — Deck Exclusives · #099/149,NM,1,Trung
 CC-3468,Boltund VMAX (Secret) — Fusion Strike · #267/264,NM,8,Trung
-CC-3469,Snorlax — Lost Origin · #143/196,NM,4,Trung
+CC-3469,Snorlax — Lost Origin · #143/196,NM,3,Trung
 CC-3471,Spinarak (Peelable Ditto) — Pokemon Go · #006/078,NM,15,Trung
 CC-3473,V Guard Energy (Secret) — Silver Tempest · #215/195,NM,2,Trung
 CC-3476,Braviary — Surging Sparks · #214/191,NM,4,Trung
@@ -1527,8 +1527,8 @@ CC-3865,Mega Froslass ex — Ascended Heroes · #047/217,NM,2,Andy
 CC-3866,Mega Scrafty ex — Ascended Heroes · #135/217,NM,1,Andy
 CC-3876,Terapagos ex — Ascended Heroes · #179/217,NM,1,Andy
 CC-3877,Weavile — Ascended Heroes · #228/217,NM,4,Andy
-CC-3881,Kingdra — Astral Radiance Trainer Gallery · #TG03/TG30,NM,11,Andy
-CC-3883,Pidgeot — Base Set 2 · #14,NM,39,Andy
+CC-3881,Kingdra — Astral Radiance Trainer Gallery · #TG03/TG30,NM,12,Andy
+CC-3883,Pidgeot — Base Set 2 · #14,NM,38,Andy
 CC-3886,Cinccino (Poke Ball Pattern) — Black Bolt · #076/086,NM,1,Andy
 CC-3887,Axew (Poke Ball Pattern) — Black Bolt · #068/086,NM,1,Andy
 CC-3889,Audino (Master Ball Pattern) — Black Bolt · #076/086,NM,4,Andy
@@ -1586,7 +1586,7 @@ CC-4038,Rowlet — Nihil Zero · #082/080,NM,3,Andy
 CC-4039,Rowlet — Nihil Zero · #082/080,NM,3,Andy
 CC-4040,Chespin — Ninja Spinner · #084/083,NM,3,Andy
 CC-4041,Fennekin — Ninja Spinner · #085/083,NM,2,Andy
-CC-4045,Boss's Orders — Paldea Evolved · #248/193,NM,10,Andy
+CC-4045,Boss's Orders — Paldea Evolved · #248/193,NM,9,Andy
 CC-4048,Decidueye ex — Perfect Order · #012/088,NM,1,Andy
 CC-4049,Dedenne — Perfect Order · #093/088,NM,5,Andy
 CC-4051,Espurr — Perfect Order · #095/088,NM,4,Andy
@@ -1798,7 +1798,7 @@ CC-4446,Vikavolt V — Darkness Ablaze · #060/189,NM,1,Trung
 CC-4447,Dondozo ex — Destined Rivals · #066/182,NM,1,Trung
 CC-4450,Chansey — Evolutions · #70/108,NM,4,Trung
 CC-4451,Charmander — Evolutions · #9/108,NM,1,Trung
-CC-4453,Nidoking — Evolutions · #45/108,NM,6,Trung
+CC-4453,Nidoking — Evolutions · #45/108,NM,5,Trung
 CC-4454,Slowbro EX — Evolutions · #26/108,NM,4,Trung
 CC-4455,Arctovish V — Evolving Skies · #048/203,NM,2,Trung
 CC-4456,Aroma Lady (Full Art) — Evolving Skies · #199/203,NM,13,Trung
@@ -1931,9 +1931,9 @@ CC-4645,Alolan Vulpix VSTAR — Silver Tempest · #034/195,NM,3,Trung
 CC-4646,Alolan Vulpix VSTAR — Silver Tempest · #034/195,NM,3,Trung
 CC-4647,Alolan Vulpix VSTAR — Silver Tempest · #034/195,NM,3,Trung
 CC-4648,Chesnaught V — Silver Tempest · #015/195,NM,1,Trung
-CC-4651,Hisuian Arcanine V — Silver Tempest · #090/195,NM,1,Trung
-CC-4652,Hisuian Arcanine V — Silver Tempest · #090/195,NM,1,Trung
-CC-4653,Hisuian Arcanine V — Silver Tempest · #090/195,NM,1,Trung
+CC-4651,Hisuian Arcanine V — Silver Tempest · #090/195,NM,2,Trung
+CC-4652,Hisuian Arcanine V — Silver Tempest · #090/195,NM,2,Trung
+CC-4653,Hisuian Arcanine V — Silver Tempest · #090/195,NM,2,Trung
 CC-4655,Magearna V — Silver Tempest · #128/195,NM,1,Trung
 CC-4656,Mawile V — Silver Tempest · #070/195,NM,1,Trung
 CC-4657,Mawile V — Silver Tempest · #070/195,NM,1,Trung
@@ -1966,7 +1966,7 @@ CC-4712,Unown VSTAR — Silver Tempest · #066/195,NM,2,Trung
 CC-4713,Ursaluna V — Silver Tempest · #102/195,NM,1,Trung
 CC-4723,Raihan — Silver Tempest Trainer Gallery · #TG27/TG30,NM,4,Trung
 CC-4726,Sordward & Shielbert — Silver Tempest Trainer Gallery · #TG28/TG30,NM,2,Trung
-CC-4727,Steelix EX — Steam Siege · #67,NM,4,Trung
+CC-4727,Steelix EX — Steam Siege · #67,NM,3,Trung
 CC-4728,Volcanion EX — Steam Siege · #26,NM,3,Trung
 CC-4729,Gumshoos GX — Sun & Moon Base Set · #110,NM,1,Trung
 CC-4730,Incineroar GX — Sun & Moon Base Set · #27,NM,3,Trung
@@ -2015,7 +2015,7 @@ CC-4783,Regidrago V — Sword & Shield Promo · #SWSH281,NM,1,Trung
 CC-4784,Rillaboom V — Sword & Shield Promo · #SWSH014,NM,1,Trung
 CC-4785,Shadow Rider Calyrex V — Sword & Shield Promo · #SWSH131,NM,2,Trung
 CC-4786,Spark — Sword & Shield Promo · #SWSH226,NM,2,Trung
-CC-4788,Zacian V — Sword & Shield Promo · #SWSH018,NM,1,Trung
+CC-4788,Zacian V — Sword & Shield Promo · #SWSH018,NM,2,Trung
 CC-4789,Zamazenta V — Sword & Shield Promo · #SWSH019,NM,1,Trung
 CC-4790,Miraidon ex — Temporal Forces · #122/162,NM,1,Trung
 CC-4791,Hisuian Lilligant V (JP) — Time Gazer · #007/067,NM,2,Trung
@@ -2037,7 +2037,7 @@ CC-4808,Steelix V — Vivid Voltage · #115/185,NM,1,Trung
 CC-4809,Talonflame V — Vivid Voltage · #029/185,NM,1,Trung
 CC-4810,Togekiss VMAX — Vivid Voltage · #141/185,NM,2,Trung
 CC-4812,Zarude V — Vivid Voltage · #022/185,NM,1,Trung
-CC-4846,Budew — Ascended Heroes · #221/217,NM,6,Andy
+CC-4846,Budew — Ascended Heroes · #221/217,NM,7,Andy
 CC-4847,Heliolisk — Ascended Heroes · #229/217,NM,2,Andy
 CC-4849,Mawile — Ascended Heroes · #246/217,NM,5,Andy
 CC-4850,Darkrai VSTAR — Astral Radiance · #099/189,NM,3,Andy
@@ -2054,7 +2054,7 @@ CC-4861,Rattata — Base Set (1st Edition & Shadowless) · #61,MP,1,Andy
 CC-4862,Super Energy Removal — Base Set (1st Edition & Shadowless) · #79,MP,3,Andy
 CC-4863,Kangaskhan — Base Set 2 · #26,HP,2,Andy
 CC-4864,Pidgeotto — Base Set 2 · #28,LP,4,Andy
-CC-4865,Snorlax — Base Set 2 · #30,LP,17,Andy
+CC-4865,Snorlax — Base Set 2 · #30,LP,16,Andy
 CC-4866,Antique Cover Fossil (Poke Ball Pattern) — Black Bolt · #080/086,NM,1,Andy
 CC-4867,Reshiram - 017/094 (Cosmos Holo) — Blister Exclusives · #017/094,NM,6,Andy
 CC-4868,Arceus V — Brilliant Stars · #122/172,NM,3,Andy
@@ -2080,8 +2080,8 @@ CC-4894,Electivire ex — Destined Rivals · #069/182,NM,1,Andy
 CC-4895,Team Rocket's Persian ex — Destined Rivals · #150/182,NM,1,Andy
 CC-4896,Charmander — Evolutions · #9/108,NM,2,Andy
 CC-4897,Energy Search — Fossil · #59,LP,1,Andy
-CC-4898,Golem — Fossil · #36,LP,1,Andy
-CC-4899,Hypno (23) — Fossil · #23,LP,5,Andy
+CC-4898,Golem — Fossil · #36,LP,2,Andy
+CC-4899,Hypno (23) — Fossil · #23,LP,4,Andy
 CC-4900,Lapras (25) — Fossil · #25,LP,6,Andy
 CC-4901,Lapras (25) — Fossil · #25,D,2,Andy
 CC-4902,Tentacool — Fossil · #56,LP,2,Andy
@@ -2184,7 +2184,7 @@ CC-5031,Galarian Ponyta — Shining Fates: Shiny Vault · #SV047/SV122,NM,18,And
 CC-5033,Galarian Sirfetch'd — Shining Fates: Shiny Vault · #SV064/SV122,NM,2,Andy
 CC-5034,Hatenna — Shining Fates: Shiny Vault · #SV054/SV122,NM,4,Andy
 CC-5035,Impidimp — Shining Fates: Shiny Vault · #SV083/SV122,NM,3,Andy
-CC-5036,Orbeetle — Shining Fates: Shiny Vault · #SV009/SV122,NM,2,Andy
+CC-5036,Orbeetle — Shining Fates: Shiny Vault · #SV009/SV122,NM,3,Andy
 CC-5037,Rillaboom — Shining Fates: Shiny Vault · #SV006/SV122,NM,3,Andy
 CC-5038,Rolycoly — Shining Fates: Shiny Vault · #SV067/SV122,NM,2,Andy
 CC-5039,Rotom — Shining Fates: Shiny Vault · #SV038/SV122,NM,7,Andy
@@ -2210,7 +2210,7 @@ CC-5058,Radiant Tsareena — Silver Tempest · #016/195,NM,1,Andy
 CC-5059,Radiant Tsareena — Silver Tempest · #016/195,NM,1,Andy
 CC-5060,Radiant Tsareena — Silver Tempest · #016/195,NM,1,Andy
 CC-5061,Altaria — Silver Tempest Trainer Gallery · #TG11/TG30,NM,6,Andy
-CC-5062,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,6,Andy
+CC-5062,Braixen — Silver Tempest Trainer Gallery · #TG01/TG30,NM,5,Andy
 CC-5063,Druddigon — Silver Tempest Trainer Gallery · #TG09/TG30,NM,5,Andy
 CC-5064,Flaaffy — Silver Tempest Trainer Gallery · #TG03/TG30,NM,5,Andy
 CC-5068,Malamar — Silver Tempest Trainer Gallery · #TG06/TG30,NM,2,Andy
@@ -2219,16 +2219,16 @@ CC-5070,Malamar — Silver Tempest Trainer Gallery · #TG06/TG30,NM,2,Andy
 CC-5071,Passimian — Silver Tempest Trainer Gallery · #TG08/TG30,NM,2,Andy
 CC-5072,Passimian — Silver Tempest Trainer Gallery · #TG08/TG30,NM,2,Andy
 CC-5073,Zeraora V — Silver Tempest Trainer Gallery · #TG16/TG30,NM,15,Andy
-CC-5074,Zeraora — Stellar Crown · #151/142,NM,11,Andy
+CC-5074,Zeraora — Stellar Crown · #151/142,NM,10,Andy
 CC-5075,Solgaleo GX — Sun & Moon Base Set · #89,NM,4,Andy
 CC-5077,Lunala GX — Sun & Moon Promo · #SM17,NM,5,Andy
 CC-5078,Raichu GX — Sun & Moon Promo · #SM213,NM,3,Andy
-CC-5079,Alolan Dugtrio — Surging Sparks · #208/191,NM,8,Andy
+CC-5079,Alolan Dugtrio — Surging Sparks · #208/191,NM,7,Andy
 CC-5080,Brilliant Blender — Surging Sparks · #164/191,NM,1,Andy
 CC-5081,Surging Sparks Elite Trainer Box — Surging Sparks,UO,114,Andy
 CC-5082,Surging Sparks Elite Trainer Box — Surging Sparks,UO,114,Andy
-CC-5083,Psyduck — SV: 151 · #175/165,NM,51,Andy
-CC-5084,Venusaur ex — SV: 151 · #198/165,NM,86,Andy
+CC-5083,Psyduck — SV: 151 · #175/165,NM,49,Andy
+CC-5084,Venusaur ex — SV: 151 · #198/165,NM,88,Andy
 CC-5087,Deoxys V — Sword & Shield Promo · #SWSH266,NM,3,Andy
 CC-5088,Eevee — Sword & Shield Promo · #SWSH127,NM,4,Andy
 CC-5089,Eevee — Sword & Shield Promo · #SWSH127,NM,4,Andy
@@ -2253,7 +2253,7 @@ CC-5108,Scorbunny (Cosmos Holo) — Sword & Shield Promo · #SWSH244,NM,2,Andy
 CC-5110,Squirtle — Sword & Shield Promo · #SWSH233,NM,17,Andy
 CC-5111,Sylveon V — Sword & Shield Promo · #SWSH202,NM,5,Andy
 CC-5112,Zacian LV. X — Sword & Shield Promo · #SWSH135,NM,4,Andy
-CC-5114,Gastly — Temporal Forces · #177/162,NM,89,Andy
+CC-5114,Gastly — Temporal Forces · #177/162,NM,87,Andy
 CC-5115,Iron Thorns ex — Twilight Masquerade · #077/167,NM,1,Andy
 CC-5116,Celebi — Vivid Voltage · #009/185,NM,7,Andy
 CC-5117,Charizard — Vivid Voltage · #025/185,NM,5,Andy
@@ -2270,7 +2270,7 @@ CC-5134,Pikachu — Base Set (Unlimited) · #58,LP,5,Jordan and Marcus
 CC-5135,Raichu — Base Set (Unlimited) · #14,HP,24,Jordan and Marcus
 CC-5136,Noivern V (Alternate Full Art) — Evolving Skies · #196/203,NM,77,Jordan and Marcus
 CC-5140,Magneton (11) — Fossil · #11,HP,35,Jordan and Marcus
-CC-5141,Misty's Golduck — Gym Challenge · #12,MP,41,Jordan and Marcus
+CC-5141,Misty's Golduck — Gym Challenge · #12,MP,40,Jordan and Marcus
 CC-5142,Erika's Dragonair — Gym Heroes · #4,PSA 8,180,Jordan and Marcus
 CC-5143,Lt. Surge's Electabuzz — Gym Heroes · #6,MP,27,Jordan and Marcus
 CC-5144,Kangaskhan — Jungle · #5,LP,12,Jordan and Marcus
@@ -2282,7 +2282,7 @@ CC-5155,Steelix (JP) — Neo Genesis (Japanese) · #208,LP,20,Jordan and Marcus
 CC-5156,Mega Charizard X ex — Phantasmal Flames · #109/094,NM,21,Jordan and Marcus
 CC-5159,Dark Dragonite — Team Rocket · #5,PSA 5,363,Jordan and Marcus
 CC-5169,Espeon VMAX — Evolving Skies · #065/203,NM,16,Andy
-CC-5277,Mega Charizard X ex — Mega Evolution Promos · #023,NM,25,Andy
+CC-5277,Mega Charizard X ex — Mega Evolution Promos · #023,NM,26,Andy
 CC-5278,Mega Greninja ex — Mega Evolution Promos · #081,NM,1,Andy
 CC-5279,Oricorio ex — Mega Evolution Promos · #024,NM,8,Andy
 CC-5280,Chandelure — 30th Celebration · #137/128,NM,2,Andy
@@ -2306,7 +2306,7 @@ CC-5333,Mega Greninja ex — Chaos Rising · #022/086,NM,1,Andy
 CC-5334,Arceus & Dialga & Palkia GX — Cosmic Eclipse · #156/236,MP,19,Andy
 CC-5335,Misty's Psyduck — Destined Rivals · #193/182,NM,43,Andy
 CC-5336,Evolving Skies Sleeved Booster Pack — Evolving Skies,UO,58,Andy
-CC-5338,Genesect V (Alternate Full Art) — Fusion Strike · #255/264,NM,27,Andy
+CC-5338,Genesect V (Alternate Full Art) — Fusion Strike · #255/264,NM,26,Andy
 CC-5339,Furret — Journey Together · #168/159,NM,6,Andy
 CC-5340,Hop's Wooloo — Journey Together · #170/159,NM,4,Andy
 CC-5341,Helioptile — Mega Evolution · #143/132,NM,3,Andy
@@ -2347,7 +2347,7 @@ CC-5376,Armarouge — Pitch Black · #086/084,NM,3,Andy
 CC-5377,Armarouge — Pitch Black · #086/084,NM,3,Andy
 CC-5378,Terapagos ex — Prismatic Evolutions · #180/131,NM,9,Andy
 CC-5379,Roaring Skies Sleeved Booster Pack — Roaring Skies,UO,134,Andy
-CC-5380,Slowpoke — Scarlet & Violet Base Set · #204/198,NM,38,Andy
+CC-5380,Slowpoke — Scarlet & Violet Base Set · #204/198,NM,39,Andy
 CC-5381,N's Zorua — Scarlet & Violet Promo · #189,NM,9,Andy
 CC-5382,N's Zorua — Scarlet & Violet Promo · #189,NM,9,Andy
 CC-5383,N's Zorua — Scarlet & Violet Promo · #189,NM,9,Andy
@@ -2359,7 +2359,7 @@ CC-5388,Radiant Tsareena — Silver Tempest · #016/195,NM,1,Andy
 CC-5389,Rayquaza VMAX (Secret) — Silver Tempest Trainer Gallery · #TG29/TG30,NM,26,Andy
 CC-5390,Vibrava — Surging Sparks · #206/191,NM,3,Andy
 CC-5391,Gengar — SV: 151 · #094/165,NM,3,Andy
-CC-5392,Charizard V — Sword & Shield Promo · #SWSH260,NM,43,Andy
+CC-5392,Charizard V — Sword & Shield Promo · #SWSH260,NM,41,Andy
 CC-5393,Charizard VMAX — Sword & Shield Promo · #SWSH261,NM,40,Andy
 CC-5394,Lucario VSTAR — Sword & Shield Promo · #SWSH291,NM,9,Andy
 CC-5395,Unified Minds Sleeved Booster Pack — Unified Minds,UO,116,Andy
@@ -2367,8 +2367,8 @@ CC-5454,Canari — Ascended Heroes · #257/217,NM,3,Andy
 CC-5455,Mega Diancie ex — Ascended Heroes · #267/217,NM,5,Andy
 CC-5456,Mega Eelektross ex — Ascended Heroes · #266/217,NM,3,Andy
 CC-5457,Kyurem — Black and White Promos · #BW44,NM,8,Andy
-CC-5458,Gengar - 050/088 (Cosmos Holo) — Blister Exclusives · #050/088,NM,7,Andy
-CC-5459,Gengar - 050/088 (Cosmos Holo) — Blister Exclusives · #050/088,NM,7,Andy
+CC-5458,Gengar - 050/088 (Cosmos Holo) — Blister Exclusives · #050/088,NM,8,Andy
+CC-5459,Gengar - 050/088 (Cosmos Holo) — Blister Exclusives · #050/088,NM,8,Andy
 CC-5460,Marshadow - 040/084 (Cosmos Holo) — Blister Exclusives · #040/084,NM,1,Andy
 CC-5461,Marshadow - 040/084 (Cosmos Holo) — Blister Exclusives · #040/084,NM,1,Andy
 CC-5462,Team Rocket's Mimikyu - 097/217 (Cosmos Holo) — Blister Exclusives · #097/217,NM,1,Andy
@@ -2377,8 +2377,8 @@ CC-5464,Honchkrow V — Brilliant Stars · #088/172,NM,1,Andy
 CC-5465,Mewtwo — Brilliant Stars · #056/172,NM,2,Andy
 CC-5466,Dedenne — Brilliant Stars Trainer Gallery · #TG07/TG30,NM,7,Andy
 CC-5467,Machamp GX (Full Art) — Burning Shadows · #135/147,LP,6,Andy
-CC-5468,Hoopa V — Crown Zenith: Galarian Gallery · #GG53/GG70,NM,14,Andy
-CC-5469,Mareep — Crown Zenith: Galarian Gallery · #GG34/GG70,NM,9,Andy
+CC-5468,Hoopa V — Crown Zenith: Galarian Gallery · #GG53/GG70,NM,12,Andy
+CC-5469,Mareep — Crown Zenith: Galarian Gallery · #GG34/GG70,NM,10,Andy
 CC-5470,Miltank — Crown Zenith: Galarian Gallery · #GG24/GG70,NM,12,Andy
 CC-5471,Electivire ex — Destined Rivals · #069/182,NM,1,Andy
 CC-5472,Shaymin — Destined Rivals · #185/182,NM,12,Andy
@@ -2461,7 +2461,7 @@ CC-5629,Mega Hawlucha ex — Ascended Heroes · #116/217,NM,1,Andy
 CC-5630,Team Rocket's Mewtwo ex — Ascended Heroes · #079/217,NM,1,Andy
 CC-5631,Lillie's Clefairy ex — Journey Together · #173/159,NM,7,Andy
 CC-5632,Gwynn — Pitch Black · #119/084,NM,26,Andy
-CC-5633,Squirtle — SV: 151 · #170/165,NM,84,Andy
+CC-5633,Squirtle — SV: 151 · #170/165,NM,81,Andy
 CC-5634,Celebi & Venusaur GX — Team Up · #1,NM,65,Andy
 CC-5635,Rayquaza — XY Promos · #XY64,LP,24,Andy
-CC-5646,Eevee & Snorlax GX — Team Up · #120,NM,95,Andy
+CC-5646,Eevee & Snorlax GX — Team Up · #120,NM,96,Andy
