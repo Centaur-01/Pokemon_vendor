@@ -4,7 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Couples Collective TCG — Live Price Lookup</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>" />
+  <!-- PKM-027 (2026-11-20): the 夫婦集合 seal from Jack's ink-wash art; every size made by brand/make_brand.py -->
+  <link rel="icon" type="image/png" sizes="32x32" href="brand/seal-32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="brand/seal-48.png" />
+  <link rel="apple-touch-icon" href="brand/seal-180.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Couples Collective TCG" />
+  <meta property="og:title" content="Couples Collective TCG" />
+  <meta property="og:description" content="Pokémon singles and sealed, priced from real recent sales." />
+  <meta property="og:url" content="https://centaur-01.github.io/Pokemon_vendor/" />
+  <meta property="og:image" content="https://centaur-01.github.io/Pokemon_vendor/brand/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
@@ -62,6 +74,158 @@
       .slab .spark { animation:none; opacity:.9; transform:none; }
     }
   </style>
+  <!-- Dark-wood look (Jack 2026-11-20: "japanese influenced natural dark wood color scheme, dont change the
+       interface and UX, just the look" ... "the color is good"). Re-colours Tailwind's classes, so markup and
+       scripts are unchanged; a new colour class in the markup needs a line here too. Mockup history:
+       sandbox/wood-theme/ (PKM-027). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style id="theme-wood">
+:root {
+  --sumi: #120e0b;      /* deepest: page base, image wells */
+  --walnut: #1b1511;    /* header, inputs */
+  --wood: #241b15;      /* cards, modal */
+  --wood-hi: #2f241c;   /* hover / raised */
+  --line: #47382b;      /* borders */
+  --line-soft: #33271e;
+  --washi: #ede3d1;     /* main text */
+  --kinari: #c4b498;    /* secondary text */
+  --dim: #8c7a63;       /* tertiary text */
+  --kin: #d4ad66;       /* gold leaf */
+  --kin-deep: #a47c3c;
+  --shu: #b0412f;       /* vermilion */
+  --shu-hi: #c5533f;
+  --koke: #5c6b3c;      /* moss */
+  --koke-hi: #6f7f49;
+}
+
+/* ---- the room: dark plank wall, warm lamp from above ---------------------------------------- */
+html body {
+  background-color: var(--sumi) !important;
+  background-image:
+    radial-gradient(120% 60% at 50% -8%, rgba(212, 173, 102, .13), transparent 62%),
+    radial-gradient(90% 50% at 50% 115%, rgba(0, 0, 0, .55), transparent 70%),
+    repeating-linear-gradient(90deg, transparent 0 279px, rgba(0, 0, 0, .38) 279px 281px, rgba(255, 230, 200, .025) 281px 282px),
+    repeating-linear-gradient(91deg, rgba(255, 232, 205, .022) 0 1px, transparent 1px 7px, rgba(0, 0, 0, .10) 7px 8px, transparent 8px 19px),
+    linear-gradient(180deg, #1c1511, #110d0a) !important;
+  background-attachment: fixed !important;
+  color: var(--washi) !important;
+  font-family: "Zen Kaku Gothic New", ui-sans-serif, system-ui, sans-serif !important;
+}
+#bgart { display: none !important; }                       /* the pink Poke Ball backdrop */
+html body h1, html body h2, html body h3 { font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif !important; letter-spacing: .01em; }
+::-webkit-scrollbar-thumb { background: var(--line) !important; }
+::selection { background: rgba(176, 65, 47, .55); color: var(--washi); }
+
+/* every border with no colour class (Tailwind's default #e5e7eb) becomes a wood line */
+html body *, html body ::before, html body ::after { border-color: var(--line-soft); }
+
+/* ---- header + notice band + filter band ----------------------------------------------------- */
+html body #controls { background: rgba(27, 21, 17, .86) !important; border-color: rgba(212, 173, 102, .16) !important; }
+html body .focus\:border-rose-400:focus { border-color: var(--kin) !important; }
+html body .focus\:ring-rose-100:focus { --tw-ring-color: rgba(212, 173, 102, .22) !important; }
+html body header { background: rgba(22, 17, 13, .82) !important; border-color: rgba(212, 173, 102, .22) !important; }
+html body .gradient-text { background: linear-gradient(90deg, #e6c47f, var(--kin) 45%, #b98a46) !important;
+  -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important; }
+html body .bg-amber-50 { background: rgba(212, 173, 102, .07) !important; }
+html body .border-amber-200 { border-color: rgba(212, 173, 102, .22) !important; }
+html body .text-amber-800, html body .text-amber-700, html body .text-amber-700\/80 { color: #d9be8c !important; }
+html body .text-amber-600 { color: var(--kin) !important; }
+html body .bg-gradient-to-r.from-amber-50 { background-image: none !important; background-color: rgba(212, 173, 102, .07) !important; }
+
+/* ---- surfaces, text, lines (Tailwind re-coloured) ------------------------------------------- */
+html body .bg-white, html body .bg-white\/70 { background-color: var(--wood) !important; }
+html body .bg-gray-50 { background-color: var(--walnut) !important; }
+html body .bg-gray-100 { background-color: rgba(255, 240, 220, .06) !important; }
+html body .bg-gray-700 { background-color: #3a2d22 !important; }
+html body .bg-gray-900 { background-color: #0d0a08 !important; box-shadow: inset 0 0 0 1px rgba(212, 173, 102, .35) !important; }
+html body .bg-black\/60 { background-color: rgba(8, 6, 4, .78) !important; }
+html body .text-gray-900 { color: var(--washi) !important; }
+html body .text-gray-700, html body .text-gray-600 { color: var(--kinari) !important; }
+html body .text-gray-500, html body .text-gray-400 { color: var(--dim) !important; }
+html body .border-gray-100, html body .border-gray-200, html body .border-gray-200\/70 { border-color: var(--line-soft) !important; }
+html body .border-gray-300 { border-color: var(--line) !important; }
+html body .border-amber-300 { border-color: rgba(212, 173, 102, .45) !important; }
+html body .hover\:border-rose-400:hover, html body .border-rose-400 { border-color: var(--kin-deep) !important; }
+html body .text-purple-600, html body .text-purple-700 { color: #d99a86 !important; }
+html body .text-rose-600, html body .text-rose-500, html body .text-rose-700 { color: #e08872 !important; }
+html body .text-emerald-700, html body .text-emerald-800, html body .text-teal-700 { color: #a9b77e !important; }
+html body .border-emerald-300 { border-color: rgba(111, 127, 73, .6) !important; }
+
+/* ---- inputs ---------------------------------------------------------------------------------- */
+html body input, html body select, html body textarea {
+  background-color: var(--walnut) !important; color: var(--washi) !important; border-color: var(--line) !important; }
+html body input::placeholder, html body textarea::placeholder { color: var(--dim) !important; }
+html body select option { background: var(--walnut); color: var(--washi); }
+
+/* ---- pills: selected = the seal's vermilion, owners = moss --------------------------------- */
+html body .bg-gradient-to-r.from-rose-600.to-purple-600 {
+  background-image: linear-gradient(180deg, var(--shu-hi), var(--shu)) !important;
+  box-shadow: inset 0 0 0 1px rgba(237, 227, 209, .18), 0 2px 10px -2px rgba(176, 65, 47, .55) !important; }
+html body .bg-gradient-to-r.from-teal-600.to-emerald-600,
+html body .bg-gradient-to-r.from-emerald-600.to-teal-600,
+html body .bg-gradient-to-r.from-emerald-500.to-teal-500 {
+  background-image: linear-gradient(180deg, var(--koke-hi), var(--koke)) !important;
+  box-shadow: inset 0 0 0 1px rgba(237, 227, 209, .15), 0 2px 10px -2px rgba(92, 107, 60, .6) !important; }
+
+/* ---- buttons -------------------------------------------------------------------------------- */
+html body .bg-rose-600, html body .bg-rose-500, html body .hover\:bg-rose-500:hover { background-color: var(--shu) !important; }
+html body .bg-rose-100, html body .hover\:bg-rose-100:hover { background-color: rgba(176, 65, 47, .2) !important; }
+html body .hover\:text-rose-600:hover { color: #e08872 !important; }
+
+/* ---- cards ---------------------------------------------------------------------------------- */
+html body .card { background-color: var(--wood) !important;
+  background-image: linear-gradient(180deg, rgba(255, 235, 210, .025), transparent 40%) !important;
+  box-shadow: 0 1px 0 rgba(255, 230, 200, .04) inset, 0 6px 18px -8px rgba(0, 0, 0, .7) !important; }
+html body .card:hover { border-color: var(--kin-deep) !important; box-shadow: 0 10px 26px -10px rgba(0, 0, 0, .85), 0 0 0 1px rgba(212, 173, 102, .25) !important; }
+html body .card .bg-purple-100 { background-color: rgba(176, 65, 47, .2) !important; }
+html body .card .bg-teal-100 { background-color: rgba(92, 107, 60, .28) !important; }
+/* graded slab rim: gold leaf instead of the holo rainbow (kintsugi, not foil) */
+html body .slab-rim { background: linear-gradient(var(--wood), var(--wood)) padding-box,
+  linear-gradient(135deg, #e9cf8f, var(--kin-deep) 30%, #f3dfa8 52%, #8f6a32 74%, #d9b673) border-box !important; }
+html body .srcdot { box-shadow: 0 0 0 1.5px rgba(18, 14, 11, .85) !important; }
+
+/* ---- card page (modal) ---------------------------------------------------------------------- */
+html body #modalBody { background-color: var(--wood) !important; box-shadow: 0 30px 80px -20px #000, 0 0 0 1px rgba(212, 173, 102, .18) !important; }
+html body #modalBody .bg-gradient-to-r.from-emerald-600,
+html body #modalBody .bg-gradient-to-r.from-emerald-500 { background-image: linear-gradient(180deg, var(--koke-hi), var(--koke)) !important; }
+/* the QR must stay dark-on-light to scan: keep its well paper-white */
+html body #modalBody canvas, html body #modalBody img[alt*="QR" i], html body #modalBody svg[data-qr] { background: #f6efe2 !important; border-radius: 6px; }
+
+/* ---- panels the mockup didn't show: buy form, contact, sold page, misc accents ---------------- */
+html body .bg-emerald-50 { background-color: rgba(92, 107, 60, .14) !important; }
+html body .border-emerald-200 { border-color: rgba(111, 127, 73, .45) !important; }
+html body .bg-amber-100 { background-color: rgba(212, 173, 102, .14) !important; }
+html body .border-teal-400 { border-color: rgba(111, 127, 73, .7) !important; }
+html body .bg-purple-100 { background-color: rgba(176, 65, 47, .2) !important; }
+html body .bg-teal-100 { background-color: rgba(92, 107, 60, .28) !important; }
+
+html body .bg-emerald-600, html body .hover\:bg-emerald-700:hover { background-color: var(--koke) !important; }
+
+/* ---- phones: the card page's close button floats (Jack 2026-11-20: "make the X floating so it is in the
+   same spot even when you scroll to see the card details"). #modal is the scroll box, so a sticky child
+   of it stays in the corner for the whole page; the in-page X keeps its space but hides. ------------- */
+#modalX { display: none; }
+@media (max-width: 767px) {
+  #modalX { position: sticky; top: 10px; z-index: 5; display: grid; place-items: center; width: 44px; height: 44px;
+    margin: 0 4px -44px auto; border-radius: 999px; font-size: 28px; line-height: 1; color: var(--washi);
+    background: rgba(13, 10, 8, .84); border: 1px solid rgba(212, 173, 102, .5);
+    box-shadow: 0 6px 18px -6px rgba(0, 0, 0, .85); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+  #modalBody button[onclick="closeCard()"] { visibility: hidden; }
+}
+
+/* ---- the art, hung on the wall (PKM-027, Jack 2026-11-20: "we want the full picture, make it a
+   good size that we can actually see the details"). Tap = the full 1024 px picture. ---------- */
+#hero { position: relative; z-index: 1; display: flex; justify-content: center; padding: 26px 16px 22px; }
+#hero .hero-frame { display: block; width: min(400px, calc(100vw - 32px)); padding: 10px; background: #0d0a08;
+  border: 1px solid rgba(212, 173, 102, .55); border-radius: 2px;
+  box-shadow: 0 26px 60px -18px rgba(0, 0, 0, .9), inset 0 0 0 1px rgba(212, 173, 102, .14);
+  transition: transform .3s ease, box-shadow .3s ease; }
+#hero .hero-frame:hover { transform: translateY(-2px); box-shadow: 0 32px 70px -18px rgba(0, 0, 0, .95), inset 0 0 0 1px rgba(212, 173, 102, .25); }
+#hero img { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; }
+@media (prefers-reduced-motion: reduce) { #hero .hero-frame { transition: none; } }
+  </style>
 </head>
 <body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
 
@@ -85,12 +249,19 @@
     <rect width="100%" height="100%" fill="url(#kawaii)"/>
   </svg>
 
-  <!-- Hero -->
+  <!-- Hero: the full illustration, framed on the wood wall (PKM-027). Above the sticky bar so it scrolls away. -->
+  <section id="hero" aria-label="Couples Collective">
+    <a class="hero-frame" href="brand/art-1024.jpg" target="_blank" rel="noopener" title="See the full picture">
+      <img src="brand/art-640.jpg" srcset="brand/art-640.jpg 640w, brand/art-1024.jpg 1024w"
+           sizes="(min-width: 768px) 380px, calc(100vw - 52px)" width="640" height="640" decoding="async" fetchpriority="high"
+           alt="Ink-wash illustration of the Couples Collective couple with Mew, Houndoom, Growlithe and Mimikyu" />
+    </a>
+  </section>
   <div id="topbar" class="sticky top-0 z-30 transition-transform duration-300 will-change-transform">
   <header class="border-b border-gray-200/70 bg-white/70 backdrop-blur">
     <div class="max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-rose-600 to-purple-600 grid place-items-center text-white text-lg shadow">💎</div>
+        <img src="brand/seal-80.png" width="40" height="40" alt="Couples Collective" class="w-10 h-10 rounded-lg shadow" />
         <div>
           <h1 class="text-base md:text-lg font-bold leading-tight">Couples Collective <span class="gradient-text">TCG</span></h1>
           <p class="text-[11px] md:text-xs text-gray-500" id="tagline">Live price lookup</p>
@@ -163,6 +334,8 @@
 
   <!-- Card Modal -->
   <div id="modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm p-4 overflow-y-auto" onclick="if(event.target===this)closeCard()">
+    <!-- phones: a close button that floats in the corner while the card page scrolls (Jack 2026-11-20) -->
+    <button id="modalX" type="button" onclick="closeCard()" aria-label="Close">×</button>
     <div class="max-w-3xl mx-auto my-6 bg-white rounded-2xl overflow-hidden shadow-2xl" id="modalBody"></div>
   </div>
 
@@ -236,7 +409,8 @@ async function init(){
   let lastY = 0;
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    $('#topbar').style.transform = (y > lastY && y > 120) ? 'translateY(-100%)' : '';
+    // hide only once the bar is stuck: the hero sits above it (PKM-027, 2026-11-20)
+    $('#topbar').style.transform = (y > lastY && y > ($('#hero')?.offsetHeight || 0) + 120) ? 'translateY(-100%)' : '';
     lastY = y;
   }, { passive: true });
 
