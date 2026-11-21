@@ -33,7 +33,7 @@
     @keyframes bob { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(3px) rotate(3deg)} }
     .sleeper { display:inline-block; animation:bob 3s ease-in-out infinite; }
     #bgart { position:fixed; inset:0; width:100%; height:100%; z-index:0; opacity:.5; pointer-events:none; }
-    /* subtle price-source dot — decorative to the public, decodable by Jack+Andy */
+    /* subtle price-source dot (srcColor) */
     .srcdot { position:absolute; top:6px; right:6px; width:7px; height:7px; border-radius:50%;
               z-index:5; opacity:.7; box-shadow:0 0 0 1.5px rgba(255,255,255,.85); }
     .pokefly { position:fixed; z-index:60; font-size:26px; pointer-events:none; will-change:transform,opacity;
@@ -596,6 +596,7 @@ function openCard(id){
                    : `<div class="text-2xl font-bold text-amber-600">Price TBD</div>`}
           <span class="inline-block rounded-full" style="width:9px;height:9px;background:${srcColor(c)};box-shadow:0 0 0 1.5px rgba(0,0,0,.06)"></span>
         </div>
+        ${basisBox(c)}
         ${c.internal_id ? `<p class="text-[11px] text-gray-400 text-center mb-2">Item ID: <b class="text-gray-600">${c.internal_id}</b></p>` : ''}
         <button onclick="toggleBuy()" class="w-full mb-3 py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-base hover:from-emerald-500 hover:to-teal-500 transition shadow">🙋 I want this card</button>
         <div id="buyForm" class="hidden mb-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-3">
@@ -915,18 +916,67 @@ function printStickers(){
 }
 function printCard(id){ const c = ALL.find(x => x.id === id); if(c) makeStickerPdf([c], `sticker-${id}.pdf`); }
 
-// --- Price-source dot: decorative to public, decodable by Jack+Andy only ----
-// Decode key lives OFF-SITE (pokemon/SOURCE_DECODE.md). Never label it here.
+// --- Where a price comes from: the source dot (tiles + zoom) and source box (zoom) ---
+// Both read c.price_basis, the only pricing detail the inventory carries. No basis on a
+// priced card = the vendor's own price.
 function srcColor(c){
-  switch(c.price_source){
-    case 'tcg-last-sold':   return '#22c55e';   // green
-    case 'ebay-sold':       return '#14b8a6';   // teal
-    case 'tcgplayer':       return '#3b82f6';   // blue
-    case 'collectr-graded': return '#f59e0b';   // amber
-    case 'andy-override':
-    case 'override':        return '#a855f7';   // violet
-    default:                return '#94a3b8';   // slate (Collectr raw/JP)
-  }
+  const s = (c.price_basis || {}).source;
+  if(!s) return hasPrice(c) ? '#a855f7' : '#94a3b8';                      // violet / slate
+  return {'tcg-sales':'#22c55e', 'tcg-market':'#3b82f6',                   // green / blue
+          'collectr-graded':'#f59e0b', 'seller':'#b0412f'}[s] || '#94a3b8'; // amber / the seal's vermilion / slate
+}
+const BASIS_TITLE = {'tcg-sales': 'TCGplayer sales', 'tcg-market': 'TCGplayer market',
+                     'collectr': 'Collectr market', 'collectr-graded': 'Collectr market',
+                     'seller': 'Couples Collective price'};          // 2026-11-21 Jack + Andy: "transparency"
+// Why a price is Collectr's (2026-11-21, Jack: "put a line ... of why its collectr, ei no recent sales in X months")
+const BASIS_WHY = {'no-recent-sales': 'No TCGplayer sales like this one in the last 3 months',
+                   'no-match': 'Not matched to a TCGplayer listing yet',
+                   'printing': "TCGplayer's sales were for a different printing",
+                   'graded': 'No graded sales source yet'};
+const ICON_BARS = '<svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor" aria-hidden="true">'
+  + '<rect x="3" y="10" width="3.2" height="7" rx="1"/><rect x="8.4" y="6" width="3.2" height="11" rx="1"/>'
+  + '<rect x="13.8" y="3" width="3.2" height="14" rx="1"/></svg>';
+const ICON_CAL = '<svg viewBox="0 0 20 20" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">'
+  + '<rect x="3" y="4.5" width="14" height="12" rx="2"/><path d="M3 8.5h14M7 2.5v4M13 2.5v4"/></svg>';
+// A plain date ("2026-10-20") is a calendar day: build it in local time, never via UTC,
+// or US viewers see the day before.
+const localDay = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const DAY_FMT = new Intl.DateTimeFormat(undefined, {month:'short', day:'numeric'});
+const dayText = s => DAY_FMT.format(localDay(s));
+const dayRange = (a, b) => a === b ? dayText(a)                      // "Oct 4 – 6", in the viewer's locale
+  : (DAY_FMT.formatRange ? DAY_FMT.formatRange(localDay(a), localDay(b)) : `${dayText(a)}–${dayText(b)}`);
+// A fetch time shows in the VIEWER's time zone, with its name (CDT, PDT, ...).
+const whenText = s => s.includes('T')
+  ? new Date(s).toLocaleString(undefined, {month:'short', day:'numeric', hour:'numeric',
+                                           minute:'2-digit', timeZoneName:'short'})
+  : dayText(s);
+// The comp box under the price (Andy's mock, 2026-10-26): source, what it compares
+// (Raw + condition, the slab grade, or sealed), TCGplayer's 3-month sales count, latest
+// sale and update time. No provider logo, no last-sale price, no % vs market.
+function basisBox(c){
+  const b = c.price_basis, title = b && BASIS_TITLE[b.source];
+  if(!title || !hasPrice(c)) return '';
+  const cond = (c['Card Condition'] || '').trim();
+  const kind = b.source === 'seller' ? 'Set by the seller'
+    : !c['Card Number'] ? 'Sealed' : isGraded(c) ? gradeMark(c) : (cond ? `Raw · ${cond}` : 'Raw');
+  const why = BASIS_WHY[b.why] ? `<p class="text-xs text-gray-500 mt-0.5">${BASIS_WHY[b.why]}</p>` : '';
+  const count = b.sales_3mo
+    ? `<div class="text-right shrink-0"><p class="text-[10px] font-semibold tracking-wider uppercase text-gray-400">Sales · 3 mo</p>`
+      + `<p class="text-lg font-bold leading-tight text-gray-900">${b.sales_3mo.toLocaleString()}</p></div>` : '';
+  const foot = [];
+  if(b.last_sale) foot.push(`<span class="inline-flex items-center gap-1">${ICON_CAL}Last sale ${dayRange(...b.last_sale)}</span>`);
+  if(b.checked)   foot.push(`<span>Updated ${whenText(b.checked)}</span>`);
+  // one framed card (Jack 2026-10-26, round 3: "box them together, with a physical frame
+  // too ... a shade in the background color"): visible border, tinted fill, inset divider
+  // dark wood (2026-11-21): same frame and layout, re-coloured for the wood look: a darker panel, gold-leaf edge
+  return `<div class="-mt-2 mb-4 rounded-2xl shadow-sm" style="background:linear-gradient(180deg,rgba(255,235,210,.05),rgba(0,0,0,.18));border:1.5px solid rgba(212,173,102,.38)">
+      <div class="flex items-center gap-3 px-4 py-3.5">
+        <span class="grid place-items-center w-10 h-10 rounded-xl text-white shrink-0 shadow-sm" style="background:${srcColor(c)}">${ICON_BARS}</span>
+        <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-gray-900">${title}</p><p class="text-xs text-gray-500">${kind}</p>${why}</div>
+        ${count}
+      </div>`
+    + (foot.length ? `<div class="mx-4 flex flex-wrap justify-between gap-x-3 gap-y-1 py-2.5 text-[11px] text-gray-500" style="border-top:1px solid rgba(212,173,102,.2)">${foot.join('')}</div>` : '')
+    + `</div>`;
 }
 // --- Sticker cart: pick cards anywhere, print one batch (Andy's show flow) ---
 let cart = [];
