@@ -81,7 +81,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet" />
-  <style id="theme-wood">
+  <!-- 2026-11-21 (Jack: "make the classic.html background white to tell the difference easier"): the classic store
+       is now the plain white page, so it never looks like the new customer store. The wood theme stays below,
+       switched off by media="not all" (delete that attribute to bring it back). -->
+  <style id="theme-wood" media="not all">
 :root {
   --sumi: #120e0b;      /* deepest: page base, image wells */
   --walnut: #1b1511;    /* header, inputs */
@@ -227,7 +230,7 @@ html body .bg-emerald-600, html body .hover\:bg-emerald-700:hover { background-c
 @media (prefers-reduced-motion: reduce) { #hero .hero-frame { transition: none; } }
   </style>
 </head>
-<body class="bg-gradient-to-br from-white via-rose-50/40 to-purple-50/40 text-gray-900 min-h-screen">
+<body class="bg-white text-gray-900 min-h-screen">
 
   <!-- Dainty kawaii Pokémon line-art backdrop -->
   <svg id="bgart" aria-hidden="true">
