@@ -362,9 +362,9 @@ const $ = s => document.querySelector(s);
 let ALL = [], TOMBS = [], ALIASES = {}, view = [], shown = 0, PAGE = 60;
 const state = { region:'all', owner:'all', era:'all', q:'', sort:'price-desc' };
 
-const ERA_ORDER = ["Mega Evolution","Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White",
-  "HeartGold & SoulSilver","Platinum","Diamond & Pearl","EX","E-Card","Neo","Gym","Base",
-  "POP","NP","Other","Japanese"];
+// Era order = the inventory's era_order (tcg.ERA_ORDER, Jack's 12 eras, 2026-11-21); this list is only the fallback
+let ERA_ORDER = ["Mega Evolution","Scarlet & Violet","Sword & Shield","Sun & Moon","XY","Black & White","Call of Legends",
+  "HeartGold & SoulSilver","Platinum","Diamond & Pearl","EX","WotC","Other"];
 
 const money = n => '$' + (Number(n)||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
 const hasPrice = c => Number(c.sale_price) > 0;
@@ -384,6 +384,7 @@ async function init(){
     // portfolio to owner on 2026-09-18, so every earlier sticker points at an
     // old anchor; ALIASES maps those to where the card lives now.
     ALIASES = data.aliases || {};
+    if (Array.isArray(data.era_order)) ERA_ORDER = data.era_order;
     builtAt = data.built_at || '';
   } catch(e){ $('#count').textContent = 'Could not load inventory.json'; return; }
 
