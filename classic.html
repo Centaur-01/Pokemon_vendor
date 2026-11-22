@@ -466,7 +466,7 @@ function apply(){
     if(state.owner!=='all' && c.owner!==state.owner) return false;
     if(state.era!=='all' && c.era!==state.era) return false;
     if(state.q){
-      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']+' '+(c.internal_id||'')).toLowerCase();
+      const hay = (c['Product Name']+' '+c.Set+' '+c['Card Number']+' '+(c.internal_id||'')+(c.oversize?' oversize jumbo':'')).toLowerCase();
       if(!hay.includes(state.q)) return false;
     }
     return true;
@@ -542,6 +542,7 @@ function cardHTML(c){
       <div class="mt-1 flex gap-1 flex-wrap">
         ${c.Rarity?`<span class="text-[9px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded">${c.Rarity}</span>`:''}
         ${c.Variance && c.Variance !== 'Normal'?`<span class="text-[9px] bg-purple-100 text-purple-700 font-semibold px-1.5 py-0.5 rounded">${c.Variance}</span>`:''}
+        ${c.oversize?'<span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1.5 py-0.5 rounded" title="Oversize (jumbo) card">Oversize</span>':''}
         ${c.owner_code && c.owner_code !== 'A'?`<span class="text-[9px] bg-teal-100 text-teal-700 font-bold px-1.5 py-0.5 rounded" title="Consigned — ${c.owner}">${c.owner_code}</span>`:''}
       </div>
       <div class="mt-auto pt-2 flex items-end justify-between gap-1">
@@ -640,6 +641,7 @@ function openCard(id){
           ${row('Variant', c.Variance||'—')}
           ${row('Rarity', c.Rarity||'—')}
           ${row('Era', c.era||'—')}
+          ${c.oversize ? row('Size', 'Oversize (jumbo)') : ''}
           ${row('Qty available', c.quantity)}
         </div>
         <div class="mt-4 flex items-center gap-3 rounded-xl border border-gray-200 bg-gray-50 p-3">
