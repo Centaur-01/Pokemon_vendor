@@ -494,11 +494,16 @@ function render(){
   $('#empty').classList.toggle('hidden', view.length !== 0);
 }
 
+// OVERSIZE band (2026-11-21, Jack: "make it like a 'holo' badge but really big"): across the picture, tiles and zoom
+function osBand(c, big){
+  return c.oversize ? `<span class="absolute inset-x-1.5 ${big?'bottom-9 text-2xl py-2.5':'bottom-7 text-[13px] py-1'} text-center font-black uppercase tracking-[.18em] rounded-lg bg-amber-400 text-amber-950 shadow-lg ring-2 ring-white/70">Oversize</span>` : '';
+}
 function imgBlock(c, big){
   if(c.Image_URL) return `
     <div class="relative ${big?'':'aspect-[3/4]'} bg-gray-100 overflow-hidden">
       <img src="${c.Image_URL}" alt="${c['Product Name']}" loading="lazy"
            class="card-img w-full ${big?'h-auto':'h-full object-cover'}" />
+      ${osBand(c, big)}
       <span class="absolute bottom-1.5 left-1.5 bg-black/55 text-white text-[9px] px-1.5 py-0.5 rounded">REF IMG</span>
     </div>`;
   return `<div class="${big?'h-80':'aspect-[3/4]'} bg-gradient-to-br from-amber-50 to-yellow-100 grid place-items-center text-center relative overflow-hidden">
